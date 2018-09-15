@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorAccent"
+    tools:context=".fragment.HomeLeftFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle_margin">
+
+            <TextView
+                android:id="@+id/tv_fragment_home_left_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/middle_margin"
+                android:textColor="@android:color/white"
+                android:text="郑州大学 - 眉湖"
+                android:textSize="@dimen/common_text_size_small" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/small_margin"
+                android:layout_toStartOf="@id/tv_fragment_home_left_pos"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_location_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="@dimen/middle_margin"
+                android:layout_toStartOf="@id/tv_fragment_home_left_pos"
+                android:text="@string/campus_tiny_guide"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/home_page_title_size_large" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/middle_margin"
+            android:layout_marginStart="@dimen/middle_margin"
+            android:layout_marginTop="@dimen/large_margin"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="@drawable/shape_home_left_search_white"
+            android:orientation="horizontal"
+            android:padding="@dimen/small_margin">
+
+            <ImageButton
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="@dimen/small_margin"
+                android:background="@null"
+                android:contentDescription="@string/app_name"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_search_glass_accent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/middle_margin"
+                android:layout_weight="1"
+                android:hint="@string/search_hint"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/common_text_size_middle" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/home_page_margin_middle"
+            android:background="@drawable/shape_home_left_white_bg"
+            android:orientation="vertical">
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="35dp"
+                android:columnCount="2"
+                android:rowCount="2">
+
+                <com.zzued.campustravel.view.CustomHomeLeftGridItem
+                    style="@style/HomeLeftGridItemStyle"
+                    app:img_src_home_grid="@drawable/ic_home_map_accent"
+                    app:text_main_home_grid="@string/scenic_map"
+                    app:text_sub_home_grid="@string/map" />
+
+                <com.zzued.campustravel.view.CustomHomeLeftGridItem
+                    style="@style/HomeLeftGridItemStyle"
+                    app:img_src_home_grid="@drawable/ic_walk_accent"
+                    app:text_main_home_grid="@string/travel_route"
+                    app:text_sub_home_grid="@string/route" />
+
+                <com.zzued.campustravel.view.CustomHomeLeftGridItem
+                    style="@style/HomeLeftGridItemStyle"
+                    android:layout_marginTop="@dimen/home_page_margin_small"
+                    app:img_src_home_grid="@drawable/ic_voice_inter_accent"
+                    app:text_main_home_grid="@string/voice_interactive"
+                    app:text_sub_home_grid="@string/voice" />
+
+                <com.zzued.campustravel.view.CustomHomeLeftGridItem
+                    style="@style/HomeLeftGridItemStyle"
+                    android:layout_marginTop="@dimen/home_page_margin_small"
+                    app:img_src_home_grid="@drawable/ic_book_accent"
+                    app:text_main_home_grid="@string/scenic_introduction"
+                    app:text_sub_home_grid="@string/information" />
+
+            </GridLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/middle_margin"
+                android:layout_marginStart="@dimen/middle_margin"
+                android:layout_marginTop="@dimen/home_page_margin_middle"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/scenic_nearby_list"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/common_text_size_large" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/click_to_search"
+                    android:textSize="@dimen/common_text_size_small" />
+            </LinearLayout>
+
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/large_margin">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/middle_margin"
+                        app:img_src_home_left_scroll_item="@drawable/southern_gate"
+                        app:text_home_left_scroll_item="郑州大学南门" />
+
+                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_margin"
+                        app:img_src_home_left_scroll_item="@drawable/zzu_lib"
+                        app:text_home_left_scroll_item="郑州大学图书馆" />
+                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/small_margin"
+                        app:img_src_home_left_scroll_item="@drawable/core_teaching_building"
+                        app:text_home_left_scroll_item="核心教学区" />
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v4.widget.NestedScrollView>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.HomePageActivity">
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_home_page"
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="10dp"
+        android:background="@color/colorLight"
+        android:orientation="horizontal">
+        <com.zzued.campustravel.view.CustomHomeBtmNavi
+            android:id="@+id/hbn_home_left"
+            style="@style/HomeBtmNaviStyle"
+            app:checked_home_btm_nav="true"
+            app:img_src_unchecked_home_btm_nav="@drawable/ic_home_left_gray"
+            app:img_src_checked_home_btm_nav="@drawable/ic_home_left_accent"
+            app:text_home_btm_nav="@string/campus_tiny_guide"/>
+        <com.zzued.campustravel.view.CustomHomeBtmNavi
+            android:id="@+id/hbn_home_middle"
+            style="@style/HomeBtmNaviStyle"
+            app:checked_home_btm_nav="false"
+            app:img_src_unchecked_home_btm_nav="@drawable/ic_home_mid_gray"
+            app:img_src_checked_home_btm_nav="@drawable/ic_home_mid_accent"
+            app:text_home_btm_nav="@string/daily_message"/>
+        <com.zzued.campustravel.view.CustomHomeBtmNavi
+            android:id="@+id/hbn_home_right"
+            style="@style/HomeBtmNaviStyle"
+            app:checked_home_btm_nav="false"
+            app:img_src_unchecked_home_btm_nav="@drawable/ic_home_right_gray"
+            app:img_src_checked_home_btm_nav="@drawable/ic_home_right_accent"
+            app:text_home_btm_nav="@string/me_center"/>
+    </LinearLayout>
+</LinearLayout>

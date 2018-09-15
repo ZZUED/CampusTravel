@@ -1,6 +1,43 @@
 <resources>
     <string name="app_name">CampusTravel</string>
     <string name="app_name_zhCN">校园自由行</string>
+
+    <!--login and register-->
     <string name="login">登录</string>
     <string name="register">注册</string>
+    <string name="account">账号</string>
+    <string name="password">密码</string>
+    <string name="phone_num">手机号</string>
+    <string name="account_phone_num">账号/手机号</string>
+    <string name="verify_code">验证码</string>
+    <string name="finish">完成</string>
+    <string name="account_must">账号（必填）</string>
+    <string name="phone_num_must">手机号（必填）</string>
+    <string name="gender">性别</string>
+    <string name="male">男</string>
+    <string name="female">女</string>
+    <string name="birthday">出生日期</string>
+    <string name="birthday_example">1997/02/05</string>
+    <string name="confirm_password">确认密码</string>
+    <string name="obey_protocol">我已同意并愿意遵守相应的</string>
+    <string name="articles_of_agreement">协议条款</string>
+
+    <!--home page-->
+    <string name="campus_tiny_guide">校园微导</string>
+    <string name="search_hint">输入你想去的景区/景点</string>
+    <string name="scenic_map">景区地图</string>
+    <string name="map">Map</string>
+    <string name="travel_route">旅游路线</string>
+    <string name="route">Route</string>
+    <string name="voice_interactive">语音交互</string>
+    <string name="voice">Voice</string>
+    <string name="scenic_introduction">景区介绍</string>
+    <string name="information">Information</string>
+    <string name="scenic_nearby_list">附近景点列表 ></string>
+    <string name="click_to_search">点击搜索</string>
+    <string name="daily_message">每日推送</string>
+    <string name="me_center">个人中心</string>
+
+    
+
 </resources>
