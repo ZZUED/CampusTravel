@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.FlatMapActivity;
@@ -44,6 +45,15 @@ public class HomeLeftFragment extends Fragment {
      * @param view 布局 view
      */
     private void initListener(View view) {
+        // another search
+        TextView tvSearch = view.findViewById(R.id.tv_home_left_nearby_search);
+        tvSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), SearchActivity.class));
+                getActivity().overridePendingTransition(Animation.ABSOLUTE, android.R.anim.fade_out);
+            }
+        });
         // search listener
         LinearLayout llSearchHolder = view.findViewById(R.id.ll_home_left_search_holder);
         llSearchHolder.setOnClickListener(new View.OnClickListener() {

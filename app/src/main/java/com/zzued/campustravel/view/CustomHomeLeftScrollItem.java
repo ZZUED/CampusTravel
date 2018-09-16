@@ -23,6 +23,8 @@ public class CustomHomeLeftScrollItem extends LinearLayout {
     public CustomHomeLeftScrollItem(Context context){
         super(context);
         LayoutInflater.from(context).inflate(R.layout.ll_custom_home_left_scroll_item, this);
+        textView = findViewById(R.id.tv_home_left_scroll_item);
+        imageView = findViewById(R.id.iv_home_left_scroll_item);
     }
 
     public CustomHomeLeftScrollItem(Context context, @Nullable AttributeSet attrs) {
@@ -56,5 +58,9 @@ public class CustomHomeLeftScrollItem extends LinearLayout {
      */
     public void setImage(Bitmap bitmap) {
         imageView.setImageBitmap(bitmap);
+    }
+
+    public void setImageResource(int res){
+        imageView.setImageResource(res);
     }
 }

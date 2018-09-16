@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.ScenicSpotIntroActivity">
+    <com.zzued.campustravel.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:text_color_title_bar="@android:color/white"
+        app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"
+        app:title_title_bar="@string/scenic_spot_detail_intro"/>
+    <!-- include for resuing -->
+    <include layout="@layout/ll_scenic_intro_area_spot"/>
+</LinearLayout>

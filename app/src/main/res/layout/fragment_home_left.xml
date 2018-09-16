@@ -153,8 +153,9 @@
                     android:textSize="@dimen/common_text_size_small" />
             </LinearLayout>
 
-            <android.support.v4.widget.NestedScrollView
+            <HorizontalScrollView
                 android:id="@+id/nsv_home_left"
+                android:scrollbars="none"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginTop="@dimen/large_margin">
@@ -184,7 +185,7 @@
                         app:img_src_home_left_scroll_item="@drawable/img_core_teaching_building"
                         app:text_home_left_scroll_item="核心教学区" />
                 </LinearLayout>
-            </android.support.v4.widget.NestedScrollView>
+            </HorizontalScrollView>
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

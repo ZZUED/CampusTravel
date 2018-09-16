@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="180dp"
     android:layout_height="140dp"
-    android:padding="@dimen/middle_margin"
+    android:padding="@dimen/small_margin"
     android:background="@drawable/shape_home_bottom_scroll_gray_border"
     android:orientation="vertical">
     <ImageView

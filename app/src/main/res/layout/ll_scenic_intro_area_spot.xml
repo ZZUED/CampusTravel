@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.youth.banner.Banner
+            android:id="@+id/banner_scenic_area_spot"
+            android:layout_width="match_parent"
+            android:layout_height="180dp" />
+
+        <ImageButton
+            android:id="@+id/img_btn_scenic_area_spot_play"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/middle_margin"
+            android:layout_marginTop="@dimen/middle_margin"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_rcv_home_mid_play" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_scenic_area_spot_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/middle_margin"
+        android:text="郑州大学"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/home_page_title_size_middle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/middle_margin"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_scenic_area_spot_eng_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Zhengzhou University"
+            android:textSize="@dimen/home_page_title_size_small" />
+
+        <TextView
+            android:id="@+id/tv_scenic_area_spot_comment_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:drawablePadding="@dimen/small_margin"
+            android:drawableStart="@drawable/ic_scenic_area_comment_small"
+            android:gravity="center_vertical"
+            android:text="@string/total_num_comments" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_margin="@dimen/middle_margin"
+        android:background="@color/colorGray" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/middle_margin"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <RatingBar
+            android:id="@+id/rtb_scenic_area_spot_rate"
+            style="?attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="4.9" />
+
+        <TextView
+            android:id="@+id/tv_scenic_area_spot_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="4.6" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/small_margin"
+            android:text="@string/score_total" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_scenic_area_spot_intro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/middle_margin"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:text="@string/zzu_intro"
+        android:textSize="@dimen/common_text_size_large" />
+</LinearLayout>

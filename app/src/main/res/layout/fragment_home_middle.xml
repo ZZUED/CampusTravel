@@ -6,41 +6,30 @@
     android:orientation="vertical"
     android:background="@color/colorAccent"
     tools:context=".fragment.HomeMiddleFragment">
-    <TextView
-        android:layout_marginTop="@dimen/middle_margin"
-        android:layout_marginStart="@dimen/middle_margin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="@dimen/home_page_title_size_large"
-        android:textColor="@android:color/white"
-        android:text="@string/daily_poi_recommend"/>
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/large_margin"
-        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/middle_margin"
         android:gravity="center_vertical"
         android:orientation="horizontal">
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_mid_calendar"/>
         <TextView
-            android:layout_gravity="center_vertical"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_width="wrap_content"
+            android:layout_marginStart="@dimen/middle_margin"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/common_text_size_large"
+            android:textSize="@dimen/home_page_title_size_large"
             android:textColor="@android:color/white"
-            android:text="@string/today_is"/>
+            android:text="@string/daily_poi_recommend"/>
         <TextView
             android:id="@+id/tv_home_mid_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:textSize="@dimen/common_text_size_large"
+            android:layout_marginEnd="@dimen/middle_margin"
+            android:layout_marginStart="@dimen/small_margin"
+            android:gravity="center_vertical"
+            android:drawableStart="@drawable/ic_home_mid_calendar_small"
+            android:text="2018/05/25"
+            android:textSize="@dimen/common_text_size_small"
             android:textColor="@android:color/white"/>
     </LinearLayout>
     <LinearLayout
