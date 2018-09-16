@@ -1,13 +1,26 @@
 package com.zzued.campustravel.fragment;
 
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.widget.LinearLayout;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.activity.FlatMapActivity;
+import com.zzued.campustravel.activity.RouteRecommendActivity;
+import com.zzued.campustravel.activity.ScenicIntroActivity;
+import com.zzued.campustravel.activity.SearchActivity;
+import com.zzued.campustravel.activity.ThermalMapActivity;
+import com.zzued.campustravel.activity.VoiceAssistActivity;
+import com.zzued.campustravel.activity.VoiceInteractActivity;
+import com.zzued.campustravel.view.CustomHomeLeftGridItem;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,12 +28,103 @@ import com.zzued.campustravel.R;
  */
 public class HomeLeftFragment extends Fragment {
 
-    public HomeLeftFragment() { }
+    public HomeLeftFragment() {
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_home_left, container, false);
+        View view = inflater.inflate(R.layout.fragment_home_left, container, false);
+        initListener(view);
+        return view;
     }
 
+    /**
+     * 初始化
+     * @param view 布局 view
+     */
+    private void initListener(View view) {
+        // search listener
+        LinearLayout llSearchHolder = view.findViewById(R.id.ll_home_left_search_holder);
+        llSearchHolder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // start search activity
+                startActivity(new Intent(getContext(), SearchActivity.class));
+                getActivity().overridePendingTransition(Animation.ABSOLUTE, android.R.anim.fade_out);
+            }
+        });
+
+        // map type
+        CustomHomeLeftGridItem mapItem = view.findViewById(R.id.gi_home_left_map);
+        mapItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buildDialog(new String[]{getString(R.string.see_thermal_map), getString(R.string.see_flat_map)},
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) {
+                                    // see thermal map
+                                    startActivity(new Intent(getContext(), ThermalMapActivity.class));
+                                } else {
+                                    // see flat map
+                                    startActivity(new Intent(getContext(), FlatMapActivity.class));
+                                }
+                            }
+                        });
+            }
+        });
+
+        // route recommend
+        CustomHomeLeftGridItem routeItem = view.findViewById(R.id.gi_home_left_route);
+        routeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), RouteRecommendActivity.class));
+            }
+        });
+
+        // voice introduction
+        CustomHomeLeftGridItem voiceItem = view.findViewById(R.id.gi_home_left_voice);
+        voiceItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                buildDialog(new String[]{getString(R.string.voice_introduction), getString(R.string.voice_assistance)},
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                if (which == 0) {
+                                    // start voice introduction
+                                    startActivity(new Intent(getContext(), VoiceInteractActivity.class));
+                                } else {
+                                    // start voice assist
+                                    startActivity(new Intent(getContext(), VoiceAssistActivity.class));
+                                }
+                            }
+                        });
+            }
+        });
+
+        // scenic introduction
+        CustomHomeLeftGridItem introItem = view.findViewById(R.id.gi_home_left_scenic_intro);
+        introItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ScenicIntroActivity.class));
+            }
+        });
+    }
+
+    /**
+     * 启动一个带有取消按钮的列表对话框
+     *
+     * @param items    列表项
+     * @param listener 列表项的监听器
+     */
+    private void buildDialog(String[] items, DialogInterface.OnClickListener listener) {
+        new AlertDialog.Builder(getContext())
+                .setItems(items, listener)
+                .show();
+    }
 }

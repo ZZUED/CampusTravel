@@ -48,4 +48,28 @@ public class BaseActivity extends AppCompatActivity {
         }
     }
 
+    public void setStatusBarColor(int statusBarColor, boolean statusBarLight){
+
+    }
+
+    /**
+     * 判断x y是否在指定的控件view内部
+     * @param view 指定的控件
+     * @param x x
+     * @param y y
+     * @return x，y是否在控件内部
+     */
+    public static boolean isTouchPointInView(View view, int x, int y) {
+        if (view == null)
+            return false;
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        int left = location[0];
+        int top = location[1];
+        int right = left + view.getMeasuredWidth();
+        int bottom = top + view.getMeasuredHeight();
+        return y >= top && y <= bottom && x >= left
+                && x <= right;
+    }
+
 }

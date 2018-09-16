@@ -22,7 +22,7 @@
     <string name="obey_protocol">我已同意并愿意遵守相应的</string>
     <string name="articles_of_agreement">协议条款</string>
 
-    <!--home page-->
+    <!--first home page-->
     <string name="campus_tiny_guide">校园微导</string>
     <string name="search_hint">输入你想去的景区/景点</string>
     <string name="scenic_map">景区地图</string>
@@ -36,8 +36,32 @@
     <string name="scenic_nearby_list">附近景点列表 ></string>
     <string name="click_to_search">点击搜索</string>
     <string name="daily_message">每日推送</string>
-    <string name="me_center">个人中心</string>
+    <string name="see_thermal_map">查看当前景区热力图</string>
+    <string name="see_flat_map">查看当前景区平面图</string>
+    <string name="cancel">取消</string>
+    <string name="voice_introduction">语音讲解</string>
+    <string name="voice_assistance">语音助手</string>
 
-    
+    <!--second home page-->
+    <string name="daily_poi_recommend">每日兴趣点推荐</string>
+    <string name="today_is">今天是： </string>
+    <string name="your_current_pos">您目前所处的位置为：</string>
+    <string name="open_time_table">开放时间 </string>
+    <string name="score_with_plus">k+  评分</string>
+
+    <!--third home page-->
+    <string name="me_center">个人中心</string>
+    <string name="setting">设置</string>
+    <string name="coupon">优惠券</string>
+    <string name="browse_history">浏览历史</string>
+    <string name="account_with_colon">账号:</string>
+
+    <!--search activity-->
+    <string name="search_scenic_spot">景点搜索</string>
+    <string name="search_scenic_area">景区搜素</string>
+    <string name="search">搜索</string>
+
+    <!--thermal map-->
+    <string name="back_to_my_pos">回到当前位置</string>
 
 </resources>

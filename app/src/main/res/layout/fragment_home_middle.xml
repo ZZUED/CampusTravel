@@ -1,9 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/colorAccent"
     tools:context=".fragment.HomeMiddleFragment">
-
-
-</FrameLayout>
+    <TextView
+        android:layout_marginTop="@dimen/middle_margin"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/home_page_title_size_large"
+        android:textColor="@android:color/white"
+        android:text="@string/daily_poi_recommend"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:scaleType="fitCenter"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_home_mid_calendar"/>
+        <TextView
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/common_text_size_large"
+            android:textColor="@android:color/white"
+            android:text="@string/today_is"/>
+        <TextView
+            android:id="@+id/tv_home_mid_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textSize="@dimen/common_text_size_large"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/large_margin"
+        android:gravity="center_vertical"
+        tools:ignore="UseCompoundDrawables">
+        <ImageView
+            android:contentDescription="@string/app_name"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_location_white"/>
+        <TextView
+            android:layout_marginStart="@dimen/small_margin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/common_text_size_large"
+            android:textColor="@android:color/white"
+            android:text="@string/your_current_pos"/>
+        <TextView
+            android:id="@+id/tv_home_mid_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/common_text_size_large"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_home_mid_poi"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"/>
+</LinearLayout>

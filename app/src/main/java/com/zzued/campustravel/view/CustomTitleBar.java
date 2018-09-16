@@ -29,8 +29,7 @@ public class CustomTitleBar extends RelativeLayout {
         rightTextView = findViewById(R.id.tv_view_title_right_text);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomTitleBar);
 
-        imgBtn.setImageResource(typedArray.getResourceId
-                (R.styleable.CustomTitleBar_img_btn_src_title_bar, R.drawable.selector_view_back_gray_white));
+        imgBtn.setImageDrawable(typedArray.getDrawable(R.styleable.CustomTitleBar_img_btn_src_title_bar));
         imgBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

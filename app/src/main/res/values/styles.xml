@@ -13,7 +13,7 @@
     </style>
     <style name="SplashTheme" parent="WindowFullScreen">
         <item name="android:windowIsTranslucent">true</item>
-        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:windowBackground">@drawable/img_splash_bg</item>
         <item name="android:windowNoTitle">true</item>
     </style>
     <style name="LoginETTheme" parent="Theme.AppCompat.Light">

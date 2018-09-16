@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="img_btn_title_bar_size">25dp</dimen>
+    <dimen name="img_btn_title_bar_size">20dp</dimen>
     <dimen name="small_margin">5dp</dimen>
     <dimen name="middle_margin">10dp</dimen>
     <dimen name="large_margin">15dp</dimen>
@@ -9,6 +9,7 @@
     <dimen name="common_text_size_small">14sp</dimen>
     <dimen name="common_text_size_middle">16sp</dimen>
     <dimen name="common_text_size_large">18sp</dimen>
+    <dimen name="common_text_size_x_small">12sp</dimen>
     <dimen name="home_page_title_size_large">28sp</dimen>
     <dimen name="home_page_title_size_middle">25sp</dimen>
     <dimen name="home_page_title_size_small">21sp</dimen>
