@@ -1,6 +1,5 @@
 package com.zzued.campustravel.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 
 import com.zzued.campustravel.R;

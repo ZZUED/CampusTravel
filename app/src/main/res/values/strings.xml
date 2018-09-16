@@ -61,7 +61,25 @@
     <string name="search_scenic_area">景区搜素</string>
     <string name="search">搜索</string>
 
-    <!--thermal map-->
+    <!--thermal flat map-->
     <string name="back_to_my_pos">回到当前位置</string>
+    <string name="scenic_thermal_map">景区热力图</string>
+    <string name="scenic_flat_map">景区平面图</string>
+
+    <!--route recommend-->
+    <string name="travel_route_recommend">游览路线推荐</string>
+    <string name="start_recommend">开始推荐</string>
+    <string name="click_and_pick_scenic_spot">点击勾选你想去的所有景点</string>
+    <string name="your_current_scenic_spot">您所处的景区为：</string>
+    <string name="please_pick_scenic_spot">请勾选你想去的所有景点</string>
+    <string name="ok">确定</string>
+
+    <!--scenic intro-->
+    <string name="scenic_detail_intro">景区详情介绍</string>
+    <string name="total_num_comments">共%d条评论</string>
+    <string name="score_total"> | 综合评分</string>
+    <string name="see_scenic_map">查看景区地图</string>
+    <string name="scenic_spot_list_in_area">景区景点列表</string>
+    <string name="available_spot_num">%d个可游览景点</string>
 
 </resources>

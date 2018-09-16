@@ -8,7 +8,8 @@
     tools:context=".activity.RegisterActivity">
     <com.zzued.campustravel.view.CustomTitleBar
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:img_btn_src_title_bar="@drawable/selector_view_back_gray_white"/>
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"

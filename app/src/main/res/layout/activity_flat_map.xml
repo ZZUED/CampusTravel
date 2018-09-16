@@ -1,9 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.FlatMapActivity">
-
-</android.support.constraint.ConstraintLayout>
+    tools:context=".activity.ThermalMapActivity">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:text="this is a map"/>
+    <com.zzued.campustravel.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:text_color_title_bar="@android:color/white"
+        app:title_title_bar="@string/scenic_flat_map"
+        app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"/>
+    <Button
+        android:id="@+id/btn_flat_back_to_my_pos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="260dp"
+        android:minHeight="40dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="@dimen/middle_margin"
+        android:background="@drawable/ripple_start_button"
+        android:textColor="@android:color/white"
+        android:text="@string/back_to_my_pos" />
+</FrameLayout>

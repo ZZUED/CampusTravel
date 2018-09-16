@@ -30,7 +30,7 @@
         <activity android:name=".activity.RouteRecommendActivity" />
         <activity android:name=".activity.VoiceInteractActivity" />
         <activity android:name=".activity.VoiceAssistActivity" />
-        <activity android:name=".activity.ScenicIntroActivity"></activity>
+        <activity android:name=".activity.ScenicAreaIntroActivity"></activity>
     </application>
 
 </manifest>

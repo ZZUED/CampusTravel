@@ -15,7 +15,7 @@ import android.widget.LinearLayout;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.FlatMapActivity;
 import com.zzued.campustravel.activity.RouteRecommendActivity;
-import com.zzued.campustravel.activity.ScenicIntroActivity;
+import com.zzued.campustravel.activity.ScenicAreaIntroActivity;
 import com.zzued.campustravel.activity.SearchActivity;
 import com.zzued.campustravel.activity.ThermalMapActivity;
 import com.zzued.campustravel.activity.VoiceAssistActivity;
@@ -111,7 +111,7 @@ public class HomeLeftFragment extends Fragment {
         introItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ScenicIntroActivity.class));
+                startActivity(new Intent(getContext(), ScenicAreaIntroActivity.class));
             }
         });
     }
