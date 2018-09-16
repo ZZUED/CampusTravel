@@ -16,4 +16,7 @@
     <dimen name="home_page_margin_small">25dp</dimen>
     <dimen name="home_page_margin_middle">35dp</dimen>
     <dimen name="home_page_margin_large">45dp</dimen>
+    <dimen name="home_right_setting_view_marginTop">20dp</dimen>
+    <dimen name="home_right_setting_view_model_marginTop">45dp</dimen>
+    <dimen name="home_right_setting_view_model_image_marginTop">20dp</dimen>
 </resources>

@@ -89,4 +89,13 @@
     </string>
     <string name="scenic_spot_detail_intro">景点详情介绍</string>
 
+    <!--setting page-->
+    <string name="title">设置</string>
+    <string name="one">修改个人信息</string>
+    <string name="two">修改密码</string>
+    <string name="three">消息通知</string>
+    <string name="four">帮助与反馈</string>
+    <string name="five">关于校园微导</string>
+    <string name="back_login_button">退出登录</string>
+
 </resources>

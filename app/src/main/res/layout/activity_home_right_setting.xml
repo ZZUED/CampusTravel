@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.zzued.campustravel.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_title_bar="@string/me_center"
+        app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"
+        app:text_color_title_bar="@android:color/white"
+        android:background="@color/colorAccent"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"
+        android:layout_marginTop="@dimen/home_right_setting_view_marginTop"></View>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/one"
+            layout="@layout/activity_home_right_setting_model"
+            />
+        <include
+            android:id="@+id/two"
+            layout="@layout/activity_home_right_setting_model"
+            />
+        <include
+            android:id="@+id/three"
+            layout="@layout/activity_home_right_setting_model"
+            />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/home_right_setting_view_marginTop"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorGray"></View>
+
+        <include
+            android:id="@+id/four"
+            layout="@layout/activity_home_right_setting_model"
+            />
+        <include
+            android:id="@+id/five"
+            layout="@layout/activity_home_right_setting_model2"
+            />
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_back_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginTop="@dimen/home_right_setting_view_marginTop"
+        android:minWidth="260dp"
+        android:minHeight="40dp"
+        android:background="@drawable/ripple_start_button"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/common_text_size_middle"
+        android:text="@string/back_login_button"
+        />
+
+</LinearLayout>

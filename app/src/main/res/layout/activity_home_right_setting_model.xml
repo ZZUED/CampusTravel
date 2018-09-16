@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/one_to_four"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/action_of_one_to_four"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/home_right_setting_view_model_marginTop"
+            android:layout_weight="5"
+            android:layout_marginLeft="10dp"
+            android:text="aaaaaaaa"
+            android:textSize="20dp"
+            android:gravity="center|left" />
+        <ImageView
+            android:id="@+id/back_to_rightpage_onetofour"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/home_right_setting_view_model_image_marginTop"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:src="@drawable/ic_view_go_gray"
+            />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"></View>
+
+
+</LinearLayout>
