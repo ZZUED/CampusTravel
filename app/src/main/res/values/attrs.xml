@@ -5,6 +5,7 @@
         <attr name="img_btn_src_title_bar" format="reference"/>
         <attr name="right_text_title_bar" format="string"/>
         <attr name="text_color_title_bar" format="color"/>
+        <attr name="right_text_color_title_bar" format="color"/>
     </declare-styleable>
     <declare-styleable name="CustomHomeLeftGridItem">
         <attr name="img_src_home_grid" format="reference"/>
@@ -16,9 +17,5 @@
         <attr name="img_src_unchecked_home_btm_nav" format="reference"/>
         <attr name="img_src_checked_home_btm_nav" format="reference"/>
         <attr name="checked_home_btm_nav" format="boolean"/>
-    </declare-styleable>
-    <declare-styleable name="CustomHomeLeftScrollItem">
-        <attr name="img_src_home_left_scroll_item" format="reference"/>
-        <attr name="text_home_left_scroll_item" format="string"/>
     </declare-styleable>
 </resources>

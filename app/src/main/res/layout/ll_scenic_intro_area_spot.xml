@@ -22,6 +22,7 @@
             android:layout_marginTop="@dimen/middle_margin"
             android:background="@null"
             android:contentDescription="@string/app_name"
+            android:visibility="gone"
             android:scaleType="centerInside"
             android:src="@drawable/ic_rcv_home_mid_play" />
     </RelativeLayout>
@@ -64,7 +65,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.1dp"
         android:layout_margin="@dimen/middle_margin"
         android:background="@color/colorGray" />
 
@@ -104,6 +105,7 @@
         android:layout_marginEnd="@dimen/middle_margin"
         android:layout_marginStart="@dimen/middle_margin"
         android:layout_marginTop="@dimen/middle_margin"
+        android:lineSpacingExtra="@dimen/small_margin"
         android:text="@string/zzu_intro"
         android:textSize="@dimen/common_text_size_large" />
 </LinearLayout>

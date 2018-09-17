@@ -42,7 +42,7 @@ public class SearchActivity extends BaseActivity {
         // todo set adapter for rcv
         RecyclerView rcv = findViewById(R.id.rcv_search_result);
         rcv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        rcv.setAdapter(new HomeMidRcvAdapter());
+        rcv.setAdapter(new HomeMidRcvAdapter(this));
 
     }
 }

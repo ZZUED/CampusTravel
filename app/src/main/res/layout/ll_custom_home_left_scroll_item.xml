@@ -3,17 +3,19 @@
     android:layout_width="180dp"
     android:layout_height="140dp"
     android:padding="@dimen/small_margin"
+    android:clickable="true"
+    android:focusable="true"
     android:background="@drawable/shape_home_bottom_scroll_gray_border"
     android:orientation="vertical">
     <ImageView
-        android:id="@+id/iv_home_left_scroll_item"
+        android:id="@+id/iv_spot_list_item"
         android:layout_width="match_parent"
         android:layout_weight="1"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:contentDescription="@string/app_name"/>
     <TextView
-        android:id="@+id/tv_home_left_scroll_item"
+        android:id="@+id/tv_spot_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/middle_margin"

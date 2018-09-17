@@ -13,6 +13,7 @@
         app:right_text_title_bar="@string/setting"
         app:img_btn_src_title_bar="@null"
         app:text_color_title_bar="@android:color/white"
+        app:right_text_color_title_bar="@drawable/selector_home_right_text_white_accent"
         android:background="@color/colorAccent"/>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -29,7 +30,7 @@
             android:layout_marginEnd="@dimen/middle_margin"
             android:contentDescription="@string/app_name"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_home_right_me_accent"/>
+            android:src="@drawable/ic_home_right_me_accent_fill"/>
         <TextView
             android:id="@+id/tv_home_right_name"
             android:layout_toEndOf="@id/iv_home_right_me"

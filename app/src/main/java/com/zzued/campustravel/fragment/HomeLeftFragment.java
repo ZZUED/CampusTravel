@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.zzued.campustravel.activity.SearchActivity;
 import com.zzued.campustravel.activity.ThermalMapActivity;
 import com.zzued.campustravel.activity.VoiceAssistActivity;
 import com.zzued.campustravel.activity.VoiceInteractActivity;
+import com.zzued.campustravel.adapter.SpotListAdapter;
 import com.zzued.campustravel.view.CustomHomeLeftGridItem;
 
 /**
@@ -37,6 +40,12 @@ public class HomeLeftFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
         initListener(view);
+
+        // todo set data of rcv
+        RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);
+        rcvSpotList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
+        rcvSpotList.setAdapter(new SpotListAdapter(getContext()));
+
         return view;
     }
 

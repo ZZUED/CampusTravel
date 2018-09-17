@@ -1,9 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".activity.VoiceAssistActivity">
-
-</android.support.constraint.ConstraintLayout>
+    <com.zzued.campustravel.view.CustomTitleBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:img_btn_src_title_bar="@drawable/selector_view_back_gray_white"/>
+    <TextView
+        android:id="@+id/tv_voice_assist_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/home_page_title_size_large"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        android:text="@string/anything_i_can_do"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/large_margin"
+        android:layout_marginEnd="@dimen/large_margin"
+        android:layout_marginTop="@dimen/small_margin"
+        android:gravity="center"
+        android:textSize="@dimen/common_text_size_middle"
+        android:text="@string/voice_assist_hint"/>
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="0dp">
+        <ImageView
+            android:id="@+id/iv_voice_assist_micro_phone"
+            android:layout_width="120dp"
+            android:layout_height="140dp"
+            android:scaleType="fitXY"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_voice_assist_micro_phone"/>
+    </LinearLayout>
+    <Button
+        android:id="@+id/btn_voice_assist_speak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="260dp"
+        android:layout_marginBottom="@dimen/middle_margin"
+        android:background="@drawable/ripple_start_button"
+        android:textColor="@android:color/white"
+        android:text="@string/press_and_say_sth"/>
+</LinearLayout>

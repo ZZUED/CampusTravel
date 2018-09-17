@@ -98,4 +98,19 @@
     <string name="five">关于校园微导</string>
     <string name="back_login_button">退出登录</string>
 
+    <!--voice interact-->
+    <string name="voice_introducing_now">正在进行语音讲解</string>
+    <string name="voice_introduce_hint">请打开定位，调节音量至合适大小，并保持网络通畅</string>
+    <string name="stop_introducing">停止讲解</string>
+    <string name="go_on_introducing">继续讲解</string>
+    <string name="voice_introducing_paused">已暂停语音讲解</string>
+
+    <!--voice assistant-->
+    <string name="anything_i_can_do">有什么我能为您效劳的</string>
+    <string name="voice_assist_hint">请打开麦克风设备，并保持网络通畅</string>
+    <string name="press_and_say_sth">请按住说话</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>

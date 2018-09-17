@@ -153,39 +153,16 @@
                     android:textSize="@dimen/common_text_size_small" />
             </LinearLayout>
 
-            <HorizontalScrollView
-                android:id="@+id/nsv_home_left"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rcv_home_left_spot"
                 android:scrollbars="none"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
+                android:paddingStart="@dimen/small_margin"
+                android:paddingEnd="@dimen/small_margin"
                 android:layout_marginTop="@dimen/large_margin">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/middle_margin"
-                        app:img_src_home_left_scroll_item="@drawable/img_southern_gate"
-                        app:text_home_left_scroll_item="郑州大学南门" />
-
-                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/middle_margin"
-                        app:img_src_home_left_scroll_item="@drawable/img_zzu_lib"
-                        app:text_home_left_scroll_item="郑州大学图书馆" />
-                    <com.zzued.campustravel.view.CustomHomeLeftScrollItem
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/middle_margin"
-                        app:img_src_home_left_scroll_item="@drawable/img_core_teaching_building"
-                        app:text_home_left_scroll_item="核心教学区" />
-                </LinearLayout>
-            </HorizontalScrollView>
+            </android.support.v7.widget.RecyclerView>
         </LinearLayout>
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

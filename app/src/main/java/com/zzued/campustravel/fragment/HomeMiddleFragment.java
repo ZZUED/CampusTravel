@@ -40,7 +40,7 @@ public class HomeMiddleFragment extends Fragment {
 
         RecyclerView poiRcv = view.findViewById(R.id.rcv_home_mid_poi);
         poiRcv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        poiRcv.setAdapter(new HomeMidRcvAdapter());
+        poiRcv.setAdapter(new HomeMidRcvAdapter(getContext()));
         return view;
     }
 }

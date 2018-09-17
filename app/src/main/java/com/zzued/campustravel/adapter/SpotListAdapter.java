@@ -6,32 +6,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.ScenicSpotIntroActivity;
 
-/**
- * HomePage 兴趣点推荐页 RecyclerView 的 Adapter
- */
-public class HomeMidRcvAdapter extends RecyclerView.Adapter<HomeMidRcvAdapter.ViewHolder> {
-    // todo 为适配器设置数据，根据数据设置 ViewHolder 内容 以及 监听器
+public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.ViewHolder> {
     private Context context;
 
-    public HomeMidRcvAdapter(Context context){
+    public SpotListAdapter(Context context){
         this.context = context;
     }
+
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.ll_rcv_home_mid_poi_item, parent, false));
+        View view = LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.ll_custom_home_left_scroll_item, parent, false);
+        RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
+        params.setMarginStart(15);
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.iv.setImageResource(R.drawable.img_boat_along_mei_lake);
+        holder.tv.setText("眉湖");
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo add intent data
+                // todo add spot info
                 context.startActivity(new Intent(context, ScenicSpotIntroActivity.class));
             }
         });
@@ -39,13 +43,16 @@ public class HomeMidRcvAdapter extends RecyclerView.Adapter<HomeMidRcvAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 6;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-
+        ImageView iv;
+        TextView tv;
         ViewHolder(View itemView) {
             super(itemView);
+            iv = itemView.findViewById(R.id.iv_spot_list_item);
+            tv = itemView.findViewById(R.id.tv_spot_list_item);
         }
     }
 }

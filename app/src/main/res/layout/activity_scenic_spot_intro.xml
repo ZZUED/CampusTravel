@@ -13,6 +13,10 @@
         app:text_color_title_bar="@android:color/white"
         app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"
         app:title_title_bar="@string/scenic_spot_detail_intro"/>
-    <!-- include for resuing -->
-    <include layout="@layout/ll_scenic_intro_area_spot"/>
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!-- include for resuing -->
+        <include layout="@layout/ll_scenic_intro_area_spot"/>
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -31,7 +31,8 @@
         <activity android:name=".activity.VoiceInteractActivity" />
         <activity android:name=".activity.VoiceAssistActivity" />
         <activity android:name=".activity.ScenicAreaIntroActivity" />
-        <activity android:name=".activity.ScenicSpotIntroActivity"></activity>
+        <activity android:name=".activity.ScenicSpotIntroActivity" />
+        <activity android:name=".activity.CommentActivity"></activity>
     </application>
 
 </manifest>

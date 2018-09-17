@@ -2,6 +2,7 @@ package com.zzued.campustravel.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
@@ -40,8 +41,13 @@ public class CustomTitleBar extends RelativeLayout {
         titleView.setText(typedArray.getText(R.styleable.CustomTitleBar_title_title_bar));
         rightTextView.setText(typedArray.getText(R.styleable.CustomTitleBar_right_text_title_bar));
 
-        titleView.setTextColor(typedArray.getColor(R.styleable.CustomTitleBar_text_color_title_bar, Color.BLACK));
-        rightTextView.setTextColor(typedArray.getColor(R.styleable.CustomTitleBar_text_color_title_bar, Color.BLACK));
+        int textColor = typedArray.getColor(R.styleable.CustomTitleBar_text_color_title_bar, Color.BLACK);
+        titleView.setTextColor(textColor);
+        rightTextView.setTextColor(textColor);
+
+        ColorStateList stateList = typedArray.getColorStateList(R.styleable.CustomTitleBar_right_text_color_title_bar);
+        if (stateList != null)
+            rightTextView.setTextColor(stateList);
         typedArray.recycle();
     }
 

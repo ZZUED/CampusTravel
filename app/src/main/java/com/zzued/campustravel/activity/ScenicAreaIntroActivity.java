@@ -4,16 +4,16 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.view.CustomHomeLeftScrollItem;
+import com.zzued.campustravel.adapter.SpotListAdapter;
 
 import java.util.ArrayList;
 
@@ -61,58 +61,14 @@ public class ScenicAreaIntroActivity extends BaseActivity {
         tvComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo show comment, dialog ? or a new view?
+                // todo show comment, dialog? or a new view? or nothing...
             }
         });
 
-        // todo remove
-        // Test data to show how to add view into scroll view dynamic
-        LinearLayout llSpotList = findViewById(R.id.ll_nsv_scenic_area_spot_list);
-
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        params.setMarginStart(10);
-        CustomHomeLeftScrollItem item = new CustomHomeLeftScrollItem(this);
-        item.setClickable(true);
-        item.setFocusable(true);
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ScenicAreaIntroActivity.this, ScenicSpotIntroActivity.class));
-            }
-        });
-        item.setLayoutParams(params);
-        item.setImageResource(R.drawable.img_boat_along_mei_lake);
-        item.setText("郑州大学眉湖");
-        llSpotList.addView(item);
-
-        item = new CustomHomeLeftScrollItem(this);
-        item.setClickable(true);
-        item.setFocusable(true);
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ScenicAreaIntroActivity.this, ScenicSpotIntroActivity.class));
-            }
-        });
-        item.setLayoutParams(new LinearLayout.LayoutParams(params));
-        item.setImageResource(R.drawable.img_boat_along_mei_lake);
-        item.setText("郑州大学眉湖");
-        llSpotList.addView(item);
-
-        item = new CustomHomeLeftScrollItem(this);
-        item.setClickable(true);
-        item.setFocusable(true);
-        item.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ScenicAreaIntroActivity.this, ScenicSpotIntroActivity.class));
-            }
-        });
-        item.setLayoutParams(new LinearLayout.LayoutParams(params));
-        item.setImageResource(R.drawable.img_boat_along_mei_lake);
-        item.setText("郑州大学眉湖");
-        llSpotList.addView(item);
+        // todo set data
+        RecyclerView rcvSpotList = findViewById(R.id.rcv_scenic_area_spot_list);
+        rcvSpotList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        rcvSpotList.setAdapter(new SpotListAdapter(this));
 
     }
 }
