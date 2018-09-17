@@ -22,7 +22,7 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.ViewHo
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).
-                inflate(R.layout.ll_custom_home_left_scroll_item, parent, false);
+                inflate(R.layout.ll_rcv_spot_list_item, parent, false);
         RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) view.getLayoutParams();
         params.setMarginStart(15);
         return new ViewHolder(view);

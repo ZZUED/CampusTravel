@@ -15,7 +15,8 @@
         app:title_title_bar="@string/scenic_spot_detail_intro"/>
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/middle_margin">
         <!-- include for resuing -->
         <include layout="@layout/ll_scenic_intro_area_spot"/>
     </android.support.v4.widget.NestedScrollView>

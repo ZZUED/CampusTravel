@@ -48,6 +48,7 @@
             android:layout_marginTop="@dimen/middle_margin"
             android:layout_marginEnd="@dimen/middle_margin"
             android:contentDescription="@string/app_name"
+            android:visibility="gone"
             android:background="@null"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_rcv_home_mid_play"/>
