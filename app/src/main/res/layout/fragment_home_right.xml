@@ -16,12 +16,13 @@
         app:right_text_color_title_bar="@drawable/selector_home_right_text_white_accent"
         android:background="@color/colorAccent"/>
     <RelativeLayout
+        android:id="@+id/rl_home_right_me"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/middle_margin"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/ripple_home_left_grid_item_bg">
+        android:background="?attr/selectableItemBackground">
         <ImageView
             android:id="@+id/iv_home_right_me"
             android:layout_width="60dp"
@@ -75,12 +76,13 @@
         android:layout_height="15dp"
         android:background="@color/colorLight"/>
     <LinearLayout
+        android:id="@+id/ll_home_right_coupon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/middle_margin"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/ripple_home_left_grid_item_bg"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <ImageView
@@ -102,12 +104,13 @@
             android:src="@drawable/ic_home_right_arrow_gray"/>
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/ll_home_right_browse_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/middle_margin"
         android:clickable="true"
         android:focusable="true"
-        android:background="@drawable/ripple_home_left_grid_item_bg"
+        android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
         android:orientation="horizontal">
         <ImageView

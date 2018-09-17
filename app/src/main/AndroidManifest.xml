@@ -32,7 +32,11 @@
         <activity android:name=".activity.VoiceAssistActivity" />
         <activity android:name=".activity.ScenicAreaIntroActivity" />
         <activity android:name=".activity.ScenicSpotIntroActivity" />
-        <activity android:name=".activity.CommentActivity"></activity>
+        <activity android:name=".activity.CommentActivity" />
+        <activity android:name=".activity.BrowseHistoryActivity" />
+        <activity
+            android:name=".activity.WalletCouponActivity"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

@@ -113,4 +113,10 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <!--coupon list-->
+    <string name="my_coupon">我的优惠券</string>
+    <string name="please_input_coupon_code">请输入券码</string>
+
+    <!--browse history-->
+
 </resources>

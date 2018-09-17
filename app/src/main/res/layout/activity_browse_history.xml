@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.BrowseHistoryActivity">
+    <com.zzued.campustravel.view.CustomTitleBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorAccent"
+        app:title_title_bar="@string/browse_history"
+        app:text_color_title_bar="@android:color/white"
+        app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"/>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcv_browse_history_items"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
