@@ -3,6 +3,8 @@
     <string name="app_name_zhCN">校园自由行</string>
 
     <!--login and register-->
+    <string name="user_name">用户名</string>
+    <string name="head">头像</string>
     <string name="login">登录</string>
     <string name="register">注册</string>
     <string name="account">账号</string>
@@ -21,6 +23,7 @@
     <string name="confirm_password">确认密码</string>
     <string name="obey_protocol">我已同意并愿意遵守相应的</string>
     <string name="articles_of_agreement">协议条款</string>
+    <string name="my_profile">个人信息</string>
 
     <!--first home page-->
     <string name="campus_tiny_guide">校园微导</string>
@@ -91,12 +94,12 @@
 
     <!--setting page-->
     <string name="title">设置</string>
-    <string name="one">修改个人信息</string>
-    <string name="two">修改密码</string>
-    <string name="three">消息通知</string>
-    <string name="four">帮助与反馈</string>
-    <string name="five">关于校园微导</string>
-    <string name="back_login_button">退出登录</string>
+    <string name="modify_profile">修改个人信息</string>
+    <string name="modify_password">修改密码</string>
+    <string name="message_notify">消息通知</string>
+    <string name="help_and_feedback">帮助与反馈</string>
+    <string name="about">关于校园微导</string>
+    <string name="exit_login_button">退出登录</string>
 
     <!--voice interact-->
     <string name="voice_introducing_now">正在进行语音讲解</string>
@@ -110,13 +113,18 @@
     <string name="voice_assist_hint">请打开麦克风设备，并保持网络通畅</string>
     <string name="press_and_say_sth">请按住说话</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--coupon list-->
     <string name="my_coupon">我的优惠券</string>
     <string name="please_input_coupon_code">请输入券码</string>
 
     <!--browse history-->
+
+    <!--modify password-->
+    <string name="no_idea">设置微信密码后可以通过账号/手机号+密码短信登录</string>
+    <string name="old_password">旧密码</string>
+    <string name="new_password">新密码</string>
+    <string name="repeat_new_password">重复新密码</string>
+    <string name="password_request">密码必须不少于8个字符，而且同时包含字母和数字</string>
+    <string name="forget_password">忘记密码？</string>
 
 </resources>

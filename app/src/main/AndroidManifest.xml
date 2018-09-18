@@ -40,6 +40,10 @@
         <activity
             android:name=".activity.WalletCouponActivity"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.ModifyPasswordActivity" />
+        <activity android:name=".activity.ModifyProfileActivity" />
+        <activity android:name=".activity.SeeProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -1,134 +1,153 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.HomeRightFragment">
+
     <com.zzued.campustravel.view.CustomTitleBar
+        android:id="@+id/title_home_right"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_title_bar="@string/me_center"
-        app:right_text_title_bar="@string/setting"
+        android:background="@color/colorAccent"
         app:img_btn_src_title_bar="@null"
-        app:text_color_title_bar="@android:color/white"
         app:right_text_color_title_bar="@drawable/selector_home_right_text_white_accent"
-        android:background="@color/colorAccent"/>
+        app:right_text_title_bar="@string/setting"
+        app:text_color_title_bar="@android:color/white"
+        app:title_title_bar="@string/me_center" />
+
     <RelativeLayout
         android:id="@+id/rl_home_right_me"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/middle_margin"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/selectableItemBackground">
+        android:padding="@dimen/middle_margin">
+
         <ImageView
             android:id="@+id/iv_home_right_me"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:padding="@dimen/small_margin"
             android:layout_marginEnd="@dimen/middle_margin"
             android:contentDescription="@string/app_name"
+            android:padding="@dimen/small_margin"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_home_right_me_accent_fill"/>
+            android:src="@drawable/ic_home_right_me_accent_fill" />
+
         <TextView
             android:id="@+id/tv_home_right_name"
-            android:layout_toEndOf="@id/iv_home_right_me"
-            android:layout_marginTop="@dimen/middle_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/middle_margin"
+            android:layout_toEndOf="@id/iv_home_right_me"
+            android:text="Amy"
             android:textColor="@android:color/black"
             android:textSize="@dimen/common_text_size_middle"
-            android:text="Amy"
             tools:ignore="RelativeOverlap" />
+
         <TextView
             android:id="@+id/tv_home_right_account_label"
-            android:layout_toEndOf="@id/iv_home_right_me"
-            android:layout_below="@id/tv_home_right_name"
-            android:layout_marginTop="@dimen/small_margin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:text="@string/account_with_colon"/>
+            android:layout_below="@id/tv_home_right_name"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_toEndOf="@id/iv_home_right_me"
+            android:text="@string/account_with_colon"
+            android:textColor="@android:color/black" />
+
         <TextView
             android:id="@+id/tv_home_right_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
             android:layout_alignTop="@id/tv_home_right_account_label"
+            android:layout_marginStart="@dimen/small_margin"
             android:layout_toEndOf="@id/tv_home_right_account_label"
-            android:textColor="@android:color/black"
-            android:text="123456"/>
+            android:text="123456"
+            android:textColor="@android:color/black" />
+
         <ImageButton
             android:id="@+id/iv_home_right_detail"
-            android:contentDescription="@string/app_name"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_home_right_arrow_gray"/>
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:contentDescription="@string/app_name"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_home_right_arrow_gray" />
     </RelativeLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:background="@color/colorLight"/>
+        android:background="@color/colorLight" />
+
     <LinearLayout
         android:id="@+id/ll_home_right_coupon"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/middle_margin"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/middle_margin">
+
         <ImageView
-            android:contentDescription="@string/app_name"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/ic_home_right_coupon_accent"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_home_right_coupon_accent" />
+
         <TextView
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:textSize="@dimen/common_text_size_middle"
-            android:text="@string/coupon"/>
+            android:layout_weight="1"
+            android:text="@string/coupon"
+            android:textSize="@dimen/common_text_size_middle" />
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_right_arrow_gray"/>
+            android:src="@drawable/ic_home_right_arrow_gray" />
     </LinearLayout>
+
+    <View style="@style/SplitLineViewStyle" />
+
     <LinearLayout
         android:id="@+id/ll_home_right_browse_history"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/middle_margin"
+        android:background="?attr/selectableItemBackground"
         android:clickable="true"
         android:focusable="true"
-        android:background="?attr/selectableItemBackground"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/middle_margin">
+
         <ImageView
-            android:contentDescription="@string/app_name"
             android:layout_width="25dp"
             android:layout_height="25dp"
-            android:src="@drawable/ic_home_right_eye_accent"/>
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_home_right_eye_accent" />
+
         <TextView
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/small_margin"
-            android:textSize="@dimen/common_text_size_middle"
-            android:text="@string/browse_history"/>
+            android:layout_weight="1"
+            android:text="@string/browse_history"
+            android:textSize="@dimen/common_text_size_middle" />
+
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_right_arrow_gray"/>
+            android:src="@drawable/ic_home_right_arrow_gray" />
     </LinearLayout>
 </LinearLayout>
