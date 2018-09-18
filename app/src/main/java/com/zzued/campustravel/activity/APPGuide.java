@@ -64,7 +64,7 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
         switch (v.getId()) {
             //开始体验的按钮
             case R.id.btnStart:
-                Intent intent=new Intent(this, SplashActivity.class);
+                Intent intent=new Intent(this, StartActivity.class);
                 startActivity(intent);
                 this.finish();
                 break;

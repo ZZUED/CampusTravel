@@ -32,13 +32,7 @@
         android:layout_marginTop="@dimen/middle_margin"
         android:hint="@string/password"
         />
-    <EditText
-        android:id="@+id/et_login_verify_code"
-        style="@style/LoginEditTextStyle"
-        android:inputType="textCapCharacters"
-        android:layout_marginTop="@dimen/middle_margin"
-        android:hint="@string/verify_code"
-        />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

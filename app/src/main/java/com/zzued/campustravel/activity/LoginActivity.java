@@ -17,7 +17,7 @@ import com.zzued.campustravel.util.ActivityCollector;
 public class LoginActivity extends BaseActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private EditText etAccount, etPassword, etVerifyCode;
+    private EditText etAccount, etPassword;
     private Button btnLogin;
     private CheckBox rememberPass;
 
@@ -31,7 +31,6 @@ public class LoginActivity extends BaseActivity {
 
         etAccount = findViewById(R.id.et_login_account);
         etPassword = findViewById(R.id.et_login_password);
-        etVerifyCode = findViewById(R.id.et_login_verify_code);
         rememberPass = findViewById(R.id.remember_pass);
         btnLogin = findViewById(R.id.btn_login_login);
 
@@ -41,10 +40,8 @@ public class LoginActivity extends BaseActivity {
             //账号和密码设置到文本框中
             String account = pref.getString("account","");
             String password = pref.getString("password","");
-            String verifycode = pref.getString("verifycode","");
             etAccount.setText(account);
             etPassword.setText(password);
-            etVerifyCode.setText(verifycode);
             rememberPass.setChecked(true);
         }
 
@@ -53,17 +50,15 @@ public class LoginActivity extends BaseActivity {
             public void onClick(View v) {
                 String account = etAccount.getText().toString();
                 String password = etPassword.getText().toString();
-                String verifycode = etVerifyCode.getText().toString();
 
                 //假设账号为admin，密码为123456，验证码为try
-                if (account.equals("admin")&&password.equals("123456")&&verifycode.equals("try")){
+                if (account.equals("admin")&&password.equals("123456")){
                     editor = pref.edit();
                     if(rememberPass.isChecked()){//检查复选框是否被选中,选中的话就把账号密码保存下来
                         //验证码暂时先保存，到时候再改
                         editor.putBoolean("remember_password",true);
                         editor.putString("account",account);
                         editor.putString("password",password);
-                        editor.putString("verifycode",verifycode);
                     }else{
                         editor.clear();
                     }
@@ -74,7 +69,7 @@ public class LoginActivity extends BaseActivity {
                     finish();
                 }else{
                     Toast.makeText(LoginActivity.this,
-                            "account or password or verifycode is not invalid",Toast.LENGTH_LONG).show();
+                            "account or password is not invalid",Toast.LENGTH_LONG).show();
                 }
             }
         });

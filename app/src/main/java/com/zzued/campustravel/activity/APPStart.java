@@ -19,8 +19,6 @@ public class APPStart extends BaseActivity{
         //取消状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-        setContentView(R.layout.app_start);
         firstRun();
 
     }
@@ -37,7 +35,7 @@ public class APPStart extends BaseActivity{
         }
         else {
             Toast.makeText(this,"不是第一次", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(APPStart.this, SplashActivity.class);
+            Intent intent = new Intent(APPStart.this, StartActivity.class);
             startActivity(intent);
             this.finish();
         }

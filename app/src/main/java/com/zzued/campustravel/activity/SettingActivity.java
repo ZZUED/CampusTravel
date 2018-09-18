@@ -58,6 +58,7 @@ public class SettingActivity extends BaseActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 int sz = ActivityCollector.size();
                                 startActivity(new Intent(SettingActivity.this, StartActivity.class));
+                                //Todo 记得清除缓存的密码
                                 ActivityCollector.finishFromStart(sz);
                             }
                         })
