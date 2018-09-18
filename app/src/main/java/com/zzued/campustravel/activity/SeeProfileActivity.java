@@ -10,5 +10,6 @@ public class SeeProfileActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_profile);
+        setStatusBarColor(getResources().getColor(R.color.colorAccent));
     }
 }
