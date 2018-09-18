@@ -79,4 +79,12 @@ public class CustomTitleBar extends RelativeLayout {
         rightTextView.setText(text);
         rightTextView.setOnClickListener(clickListener);
     }
+
+    /**
+     * 设置标题栏右侧文字监听器
+     * @param clickListener 监听器
+     */
+    public void setRightTextListener(OnClickListener clickListener){
+        rightTextView.setOnClickListener(clickListener);
+    }
 }

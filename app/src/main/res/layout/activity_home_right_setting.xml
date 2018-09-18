@@ -72,7 +72,7 @@
         android:background="@drawable/ripple_start_button"
         android:textColor="@android:color/white"
         android:textSize="@dimen/common_text_size_middle"
-        android:text="@string/back_login_button"
+        android:text="@string/exit_login_button"
         />
 
 </LinearLayout>
