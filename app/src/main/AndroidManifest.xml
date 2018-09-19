@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zzued.campustravel">
 
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,13 +14,11 @@
         <activity
             android:name=".activity.StartActivity"
             android:theme="@style/WindowFullScreen" />
-        <activity
-            android:name=".activity.SplashActivity"
-            android:theme="@style/SplashTheme">
-        </activity>
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.APPGuide" />
-        <activity android:name=".activity.APPStart">
+        <activity
+            android:name=".activity.APPStart"
+            android:theme="@style/WindowFullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +43,7 @@
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.ModifyPasswordActivity" />
         <activity android:name=".activity.ModifyProfileActivity" />
-        <activity android:name=".activity.SeeProfileActivity"></activity>
+        <activity android:name=".activity.SeeProfileActivity"/>
     </application>
 
 </manifest>
