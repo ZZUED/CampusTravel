@@ -48,7 +48,7 @@ public class HomeLeftFragment extends Fragment {
             @Override
             protected Integer doInBackground(Integer... integers) {
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(3000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

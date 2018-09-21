@@ -46,7 +46,8 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:textSize="18dp"
-            android:text="Remember password"/>
+            android:text="@string/rememberpassword"
+            android:layout_gravity="center"/>
     </LinearLayout>
 
     <Button

@@ -3,7 +3,6 @@ package com.zzued.campustravel.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -73,7 +72,27 @@ public class ModifyProfileActivity extends BaseActivity {
         llName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fireDialog(0);
+                View view = LayoutInflater.from(ModifyProfileActivity.this).inflate(R.layout.ll_modify_profile_dialog_et, null);
+                final EditText editText = view.findViewById(R.id.et_modify_profile_dialog_content);
+                TextView titleView = view.findViewById(R.id.tv_modify_profile_dialog_title);
+                editText.setInputType(InputType.TYPE_CLASS_TEXT);
+                editText.setHint(tvName.getText());
+                titleView.setText("修改用户名");
+                new AlertDialog.Builder(ModifyProfileActivity.this)
+                        .setView(view)
+                        .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                tvName.setText(editText.getText());
+                            }
+                        })
+                        .show();
             }
         });
 
@@ -90,7 +109,7 @@ public class ModifyProfileActivity extends BaseActivity {
                         cury = calendar.get(Calendar.YEAR);
                         curm = calendar.get(Calendar.MONTH);
                         curd = calendar.get(Calendar.DAY_OF_MONTH);
-                        if (year > cury || (year <= cury && month > curm) || (year <= cury && month <= curm && dayOfMonth > curd)){
+                        if (year > cury || (year <= cury && month > curm) || (year <= cury && month <= curm && dayOfMonth > curd)) {
                             Toast.makeText(ModifyProfileActivity.this, "请选择合适的日期", Toast.LENGTH_SHORT).show();
                             return;
                         }
@@ -100,47 +119,59 @@ public class ModifyProfileActivity extends BaseActivity {
             }
         });
 
+        llHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIvHead();
+            }
+        });
+        ivHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIvHead();
+            }
+        });
     }
 
-    /**
-     * 启动一个布局为一个 title+editText 的对话框
-     * 用户通过此对话框更改姓名或手机号
-     *
-     * @param who 表示对话框由哪个对象启动
-     *            0：修改名字，1：修改手机号
-     */
-    private void fireDialog(final int who) {
-        final View view = LayoutInflater.from(this).inflate(R.layout.ll_modify_profile_dialog_et, null);
-        final EditText editText = view.findViewById(R.id.et_modify_profile_dialog_content);
-        TextView titleView = view.findViewById(R.id.tv_modify_profile_dialog_title);
-        switch (who) {
-            case 0:
-                editText.setInputType(InputType.TYPE_CLASS_TEXT);
-                editText.setHint(tvName.getText());
-                titleView.setText("修改用户名");
-                break;
-            case 1:
-                editText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                editText.setHint(tvPhone.getText());
-                titleView.setText("修改手机号");
-        }
-        new AlertDialog.Builder(this)
-                .setView(view)
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (who == 0)
-                            tvName.setText(editText.getText());
-                        else if (who == 1)
-                            tvPhone.setText(editText.getText());
-                    }
-                })
-                .show();
+
+    public void setIvHead() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ModifyProfileActivity.this);
+        builder.setIcon(R.drawable.ic_home_mid_gray);
+        builder.setTitle("头像flag");
+        builder.setMessage("请选择你要的头像的flag");
+        View view = LayoutInflater.from(this).inflate(R.layout.iv_head, null);
+        //	第一个按钮
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        ImageView iv1 = view.findViewById(R.id.imageone);
+        iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image1);
+                dialog.dismiss();
+            }
+        });
+
+        ImageView iv2 = view.findViewById(R.id.imagetwo);
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image2);
+                dialog.dismiss();
+            }
+        });
+
+        ImageView iv3 = view.findViewById(R.id.imagethree);
+        iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image3);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+
     }
 }

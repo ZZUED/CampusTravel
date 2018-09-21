@@ -25,6 +25,7 @@ public class RegisterActivity extends BaseActivity {
     private EditText mEtAccount, mEtPhone, mEtPassowrd, mEtPasswordConfirm;
     private RadioGroup mRgGender;
     private Button mBtnReg;
+    private Button mGetCertifyCode;
     private int year, month, day;
 
     @Override
@@ -79,6 +80,21 @@ public class RegisterActivity extends BaseActivity {
             }
         });
 
+        mGetCertifyCode = findViewById(R.id.get_certify_code);
+        mGetCertifyCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(), "获取验证码", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        mTvArticle = findViewById(R.id.tv_reg_article);
+        mTvArticle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // todo show 协议条款 协议条款可以打开 web view 从服务器获取条款的网页
+            }
+        });
     }
 
 }
