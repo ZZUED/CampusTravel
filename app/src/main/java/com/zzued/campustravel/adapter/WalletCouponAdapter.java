@@ -22,11 +22,14 @@ public class WalletCouponAdapter extends RecyclerView.Adapter<WalletCouponAdapte
         view.setClickable(true);
         view.setFocusable(true);
         view.setBackground(parent.getContext().getResources().getDrawable(R.drawable.shape_wallet_coupon_rect_radius_bg_light));
-        return new ViewHolder(view);
+
+        ViewHolder holder = new ViewHolder(view);
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+
     }
 
     @Override
@@ -38,6 +41,9 @@ public class WalletCouponAdapter extends RecyclerView.Adapter<WalletCouponAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
+        }
+        void setCouponText(){
+            //传入
         }
     }
 }

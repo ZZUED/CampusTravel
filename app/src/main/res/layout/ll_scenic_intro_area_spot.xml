@@ -47,6 +47,7 @@
         <TextView
             android:id="@+id/tv_scenic_area_spot_eng_name"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Zhengzhou University"
@@ -60,6 +61,7 @@
             android:drawablePadding="@dimen/small_margin"
             android:drawableStart="@drawable/ic_scenic_area_comment_small"
             android:gravity="center_vertical"
+            android:visibility="gone"
             android:text="@string/total_num_comments" />
     </LinearLayout>
 
@@ -75,6 +77,7 @@
         android:layout_marginEnd="@dimen/middle_margin"
         android:layout_marginStart="@dimen/middle_margin"
         android:gravity="center_vertical"
+        android:visibility="gone"
         android:orientation="horizontal">
 
         <RatingBar

@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.view.CustomTitleBar;
@@ -92,12 +93,97 @@ public class ModifyProfileActivity extends BaseActivity {
             }
         });
 
+        ivHead.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setIvHead(v);
+            }
+        });
         llPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 fireDialog(1);
             }
         });
+    }
+
+
+    public void setIvHead(View v){
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(ModifyProfileActivity.this);
+        builder.setIcon(R.drawable.ic_home_mid_gray);
+        builder.setTitle("头像flag");
+        builder.setMessage("请选择你要的头像的flag");
+        View view = LayoutInflater.from(this).inflate(R.layout.iv_head, null);
+        //	第一个按钮
+        builder.setView(view);
+        final AlertDialog dialog = builder.create();
+        ImageView iv1 = view.findViewById(R.id.imageone);
+        iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image1);
+                dialog.dismiss();
+            }
+        });
+
+        ImageView iv2 = view.findViewById(R.id.imagetwo);
+        iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image2);
+                dialog.dismiss();
+            }
+        });
+
+        ImageView iv3 = view.findViewById(R.id.imagethree);
+        iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ivHead.setImageResource(R.drawable.image3);
+                dialog.dismiss();
+            }
+        });
+
+        dialog.show();
+        /*builder.setPositiveButton("flag1", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                ivHead.setImageResource(R.drawable.image1);
+                //	提示信息
+                Toast toast = Toast.makeText(getApplicationContext(), "你选择了覆盖", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        //	中间的按钮
+        builder.setNeutralButton("flag2", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                ivHead.setImageResource(R.drawable.image2);
+                //	提示信息
+                Toast toast = Toast.makeText(getApplicationContext(), "你选择了跳过", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        //	第三个按钮
+        builder.setNegativeButton("flag3", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                // TODO Auto-generated method stub
+                ivHead.setImageResource(R.drawable.image3);
+                //	提示信息
+                Toast toast = Toast.makeText(getApplicationContext(), "你选择了取消", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+
+        //	Diglog的显示*/
+        //builder.create().show();
     }
 
     /**

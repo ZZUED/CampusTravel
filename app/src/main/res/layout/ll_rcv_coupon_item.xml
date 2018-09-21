@@ -64,5 +64,6 @@
         android:background="@drawable/shape_wallet_coupon_radius_bg_accent"
         android:textColor="@android:color/white"
         android:textSize="@dimen/common_text_size_large"
-        android:text="满100元可用，限新用户客户端使用"/>
+        android:gravity="center"
+        android:text="在相应的商店出示即可"/>
 </LinearLayout>

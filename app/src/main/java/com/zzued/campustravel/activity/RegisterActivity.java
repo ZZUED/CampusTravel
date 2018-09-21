@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.ActivityCollector;
@@ -24,6 +25,7 @@ public class RegisterActivity extends BaseActivity {
     private EditText mEtAccount, mEtPhone, mEtPassowrd, mEtPasswordConfirm;
     private RadioGroup mRgGender;
     private Button mBtnReg;
+    private Button mGetCertifyCode;
     private int year, month, day;
 
     private DatePickerDialog.OnDateSetListener dateSetListener;
@@ -65,6 +67,14 @@ public class RegisterActivity extends BaseActivity {
             }
         });
 
+        mGetCertifyCode = findViewById(R.id.get_certify_code);
+        mGetCertifyCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "获取验证码", Toast.LENGTH_SHORT);
+            }
+        });
+
         mTvArticle = findViewById(R.id.tv_reg_article);
         mTvArticle.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -92,4 +102,6 @@ public class RegisterActivity extends BaseActivity {
             }
         };
     }
+
+
 }
