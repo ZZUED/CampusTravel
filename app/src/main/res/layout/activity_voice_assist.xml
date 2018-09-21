@@ -37,11 +37,12 @@
         android:layout_height="0dp">
         <ImageView
             android:id="@+id/iv_voice_assist_micro_phone"
-            android:layout_width="120dp"
-            android:layout_height="140dp"
-            android:scaleType="fitXY"
             android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_voice_assist_micro_phone"/>
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/large_margin"
+            android:scaleType="fitCenter"
+            android:src="@drawable/clip_voice_assist_mic"/>
     </LinearLayout>
     <Button
         android:id="@+id/btn_voice_assist_speak"
@@ -51,5 +52,5 @@
         android:layout_marginBottom="@dimen/middle_margin"
         android:background="@drawable/ripple_start_button"
         android:textColor="@android:color/white"
-        android:text="@string/press_and_say_sth"/>
+        android:text="@string/click_and_speak"/>
 </LinearLayout>
