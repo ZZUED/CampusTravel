@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.view.CustomTitleBar;
@@ -48,10 +49,8 @@ public class ModifyProfileActivity extends BaseActivity {
         llHead = findViewById(R.id.ll_modify_profile_head);
         llName = findViewById(R.id.ll_modify_profile_user_name);
         llBirth = findViewById(R.id.ll_modify_profile_birthday);
-        llPhone = findViewById(R.id.ll_modify_profile_phone);
         ivHead = findViewById(R.id.iv_modify_profile_head);
         tvName = findViewById(R.id.tv_modify_profile_name);
-        tvPhone = findViewById(R.id.tv_modify_profile_phone);
         tvBirth = findViewById(R.id.tv_modify_profile_birthday);
         genderGroup = findViewById(R.id.rdgrp_modify_profile_gender);
 
@@ -86,18 +85,21 @@ public class ModifyProfileActivity extends BaseActivity {
                         ModifyProfileActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                        GregorianCalendar calendar = new GregorianCalendar();
+                        int cury, curm, curd;
+                        cury = calendar.get(Calendar.YEAR);
+                        curm = calendar.get(Calendar.MONTH);
+                        curd = calendar.get(Calendar.DAY_OF_MONTH);
+                        if (year > cury || (year <= cury && month > curm) || (year <= cury && month <= curm && dayOfMonth > curd)){
+                            Toast.makeText(ModifyProfileActivity.this, "请选择合适的日期", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
                         tvBirth.setText(String.format(Locale.CHINA, "%4d-%02d-%02d", year, month, dayOfMonth));
                     }
                 }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
 
-        llPhone.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fireDialog(1);
-            }
-        });
     }
 
     /**

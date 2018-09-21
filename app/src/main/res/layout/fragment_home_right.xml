@@ -14,7 +14,6 @@
         android:background="@color/colorAccent"
         app:img_btn_src_title_bar="@null"
         app:right_text_color_title_bar="@drawable/selector_home_right_text_white_accent"
-        app:right_text_title_bar="@string/setting"
         app:text_color_title_bar="@android:color/white"
         app:title_title_bar="@string/me_center" />
 
@@ -43,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/middle_margin"
             android:layout_toEndOf="@id/iv_home_right_me"
-            android:text="Amy"
+            android:text="ericjeffrey"
             android:textColor="@android:color/black"
             android:textSize="@dimen/common_text_size_middle"
             tools:ignore="RelativeOverlap" />
@@ -55,7 +54,7 @@
             android:layout_below="@id/tv_home_right_name"
             android:layout_marginTop="@dimen/small_margin"
             android:layout_toEndOf="@id/iv_home_right_me"
-            android:text="@string/account_with_colon"
+            android:text="@string/email"
             android:textColor="@android:color/black" />
 
         <TextView
@@ -65,7 +64,7 @@
             android:layout_alignTop="@id/tv_home_right_account_label"
             android:layout_marginStart="@dimen/small_margin"
             android:layout_toEndOf="@id/tv_home_right_account_label"
-            android:text="123456"
+            android:text="1719937412@qq.com"
             android:textColor="@android:color/black" />
 
         <ImageButton
@@ -85,40 +84,47 @@
         android:layout_height="15dp"
         android:background="@color/colorLight" />
 
-    <LinearLayout
-        android:id="@+id/ll_home_right_coupon"
+    <TextView
+        android:id="@+id/tv_home_right_coupon"
+        style="@style/SettingItemStyle"
+        android:text="@string/coupon"/>
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?attr/selectableItemBackground"
-        android:clickable="true"
-        android:focusable="true"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:padding="@dimen/middle_margin">
+        android:layout_height="15dp"
+        android:background="@color/colorLight" />
 
-        <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_right_coupon_accent" />
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/small_margin"
-            android:layout_weight="1"
-            android:text="@string/coupon"
-            android:textSize="@dimen/common_text_size_middle" />
-
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_right_arrow_gray" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_home_right_modify_profile"
+        style="@style/SettingItemStyle"
+        android:text="@string/modify_profile" />
 
     <View style="@style/SplitLineViewStyle" />
 
+    <TextView
+        android:id="@+id/tv_home_right_modify_password"
+        style="@style/SettingItemStyle"
+        android:text="@string/modify_password" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/colorLight" />
+
+    <TextView
+        android:id="@+id/tv_home_right_about"
+        style="@style/SettingItemStyle"
+        android:text="@string/about" />
+
+    <View style="@style/SplitLineViewStyle" />
+
+    <TextView
+        android:id="@+id/tv_home_right_exit_login"
+        style="@style/SettingItemStyle"
+        android:text="@string/exit_login_button" />
+
+    <!--browse history-->
     <LinearLayout
         android:id="@+id/ll_home_right_browse_history"
         android:layout_width="match_parent"
@@ -128,6 +134,7 @@
         android:focusable="true"
         android:gravity="center_vertical"
         android:orientation="horizontal"
+        android:visibility="gone"
         android:padding="@dimen/middle_margin">
 
         <ImageView

@@ -26,27 +26,6 @@ public class ScenicAreaIntroActivity extends BaseActivity {
         setContentView(R.layout.activity_scenic_area_intro);
         setStatusBarColor(getResources().getColor(R.color.colorAccent));
 
-        Banner banner = findViewById(R.id.banner_scenic_area_spot);
-        banner.setImageLoader(new ImageLoader() {
-            @Override
-            public void displayImage(Context context, Object path, ImageView imageView) {
-                imageView.setImageResource((Integer) path);
-            }
-
-            @Override
-            public ImageView createImageView(Context context) {
-                ImageView view = super.createImageView(context);
-                view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                return view;
-            }
-        });
-        ArrayList<Integer> imgs = new ArrayList<>(4);
-        imgs.add(R.drawable.img_boat_along_mei_lake);
-        imgs.add(R.drawable.img_core_teaching_building);
-        imgs.add(R.drawable.img_southern_gate);
-        imgs.add(R.drawable.img_zzu_lib);
-        banner.setImages(imgs);
-        banner.start();
 
         TextView tvSeeScenicMap = findViewById(R.id.tv_scenic_area_see_map);
         tvSeeScenicMap.setOnClickListener(new View.OnClickListener() {

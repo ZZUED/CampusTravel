@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"
-        app:right_text_title_bar="@string/finish"
         app:right_text_color_title_bar="@drawable/selector_home_right_text_white_accent"
+        app:right_text_title_bar="@string/finish"
         app:text_color_title_bar="@android:color/white"
         app:title_title_bar="@string/modify_profile" />
 
@@ -112,23 +112,4 @@
     </LinearLayout>
 
     <View style="@style/SplitLineViewStyle" />
-
-    <LinearLayout
-        android:id="@+id/ll_modify_profile_phone"
-        style="@style/ModifyProfileItemStyle">
-
-        <TextView
-            style="@style/ModifyProfileItemTextStyle"
-            android:text="@string/phone_num" />
-
-        <TextView
-            android:id="@+id/tv_modify_profile_phone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/middle_margin"
-            android:textSize="@dimen/common_text_size_middle" />
-    </LinearLayout>
-
-    <View style="@style/SplitLineViewStyle" />
-
 </LinearLayout>

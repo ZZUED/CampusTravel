@@ -8,10 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.youth.banner.Banner
-            android:id="@+id/banner_scenic_area_spot"
+        <ImageView
+            android:id="@+id/iv_scenic_area_spot"
+            android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
-            android:layout_height="180dp" />
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_zzu_lib"/>
 
         <ImageButton
             android:id="@+id/img_btn_scenic_area_spot_play"

@@ -4,8 +4,10 @@ package com.zzued.campustravel.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zzued.campustravel.R;
@@ -32,14 +35,32 @@ import com.zzued.campustravel.view.CustomHomeLeftGridItem;
  */
 public class HomeLeftFragment extends Fragment {
 
-    public HomeLeftFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
         initListener(view);
+
+        final NestedScrollView holder =view.findViewById(R.id.ll_home_left_scroll_holder);
+        holder.setVisibility(View.GONE);
+        final ProgressBar progress = view.findViewById(R.id.progress_home_left);
+        new AsyncTask<Integer, Integer, Integer>() {
+            @Override
+            protected Integer doInBackground(Integer... integers) {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Integer integer) {
+                progress.setVisibility(View.GONE);
+                holder.setVisibility(View.VISIBLE);
+            }
+        }.execute(0, 0, 0);
 
         // todo set data of rcv
         RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);

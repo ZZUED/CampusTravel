@@ -6,50 +6,43 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.SeeProfileActivity">
+
     <com.zzued.campustravel.view.CustomTitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
-        app:text_color_title_bar="@android:color/white"
         app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"
-        app:title_title_bar="@string/my_profile"/>
+        app:text_color_title_bar="@android:color/white"
+        app:title_title_bar="@string/my_profile" />
 
     <LinearLayout
-        android:id="@+id/ll_modify_profile_head"
-        style="@style/ModifyProfileItemStyle">
+        style="@style/ModifyProfileItemStyle"
+        tools:ignore="UseCompoundDrawables">
 
         <TextView
             style="@style/ModifyProfileItemTextStyle"
             android:text="@string/head" />
 
         <ImageView
-            android:id="@+id/iv_modify_profile_head"
+            android:id="@+id/iv_see_profile_head"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="@dimen/small_margin"
             android:contentDescription="@string/app_name"
             android:src="@drawable/ic_home_right_me_accent_fill" />
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_marginStart="@dimen/middle_margin"
-            android:contentDescription="@string/app_name"
-            android:src="@drawable/ic_home_right_arrow_gray" />
     </LinearLayout>
 
     <View style="@style/SplitLineViewStyle" />
 
-    <LinearLayout
-        android:id="@+id/ll_modify_profile_user_name"
-        style="@style/ModifyProfileItemStyle">
+    <LinearLayout style="@style/ModifyProfileItemStyle">
 
         <TextView
             style="@style/ModifyProfileItemTextStyle"
             android:text="@string/user_name" />
 
         <TextView
-            android:id="@+id/tv_modify_profile_name"
+            android:id="@+id/tv_see_profile_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_margin"
@@ -65,63 +58,48 @@
             style="@style/ModifyProfileItemTextStyle"
             android:text="@string/gender" />
 
-        <RadioGroup
-            android:id="@+id/rdgrp_modify_profile_gender"
+        <TextView
+            android:id="@+id/tv_see_profile_sex"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/middle_margin"
-            android:orientation="horizontal">
-
-            <RadioButton
-                android:id="@+id/radio_btn_female"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="@string/male" />
-
-            <RadioButton
-                android:id="@+id/radio_btn_male"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/middle_margin"
-                android:text="@string/female" />
-        </RadioGroup>
-    </LinearLayout>
-
-    <View style="@style/SplitLineViewStyle" />
-
-    <LinearLayout
-        android:id="@+id/ll_modify_profile_birthday"
-        style="@style/ModifyProfileItemStyle">
-
-        <TextView
-            style="@style/ModifyProfileItemTextStyle"
-            android:text="@string/birthday" />
-
-        <TextView
-            android:id="@+id/tv_modify_profile_birthday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/middle_margin"
+            android:text="@string/male"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/common_text_size_middle" />
     </LinearLayout>
 
     <View style="@style/SplitLineViewStyle" />
 
-    <LinearLayout
-        android:id="@+id/ll_modify_profile_phone"
-        style="@style/ModifyProfileItemStyle">
+    <LinearLayout style="@style/ModifyProfileItemStyle">
 
         <TextView
             style="@style/ModifyProfileItemTextStyle"
-            android:text="@string/phone_num" />
+            android:text="@string/birthday" />
 
         <TextView
-            android:id="@+id/tv_modify_profile_phone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/middle_margin"
+            android:text="1997-03-05"
+            android:textColor="@color/colorAccent"
             android:textSize="@dimen/common_text_size_middle" />
     </LinearLayout>
+
+    <View style="@style/SplitLineViewStyle" />
+
+    <LinearLayout style="@style/ModifyProfileItemStyle">
+
+        <TextView
+            style="@style/ModifyProfileItemTextStyle"
+            android:text="@string/email" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/middle_margin"
+            android:text="1719937412@qq.com"
+            android:textSize="@dimen/common_text_size_middle" />
+    </LinearLayout>
+
+    <View style="@style/SplitLineViewStyle" />
 </LinearLayout>

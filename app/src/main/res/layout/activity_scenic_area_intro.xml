@@ -82,6 +82,17 @@
                     android:textSize="@dimen/common_text_size_middle" />
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_scenic_area_loading"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:gravity="center"
+                android:padding="@dimen/large_margin"
+                android:layout_marginStart="@dimen/middle_margin"
+                android:layout_marginTop="@dimen/large_margin"
+                android:layout_marginBottom="@dimen/small_margin"
+                android:background="@drawable/shape_home_bottom_scroll_gray_border"
+                android:text="正在加载" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rcv_scenic_area_spot_list"
                 android:layout_width="wrap_content"

@@ -10,6 +10,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.ActivityCollector;
@@ -25,8 +26,6 @@ public class RegisterActivity extends BaseActivity {
     private RadioGroup mRgGender;
     private Button mBtnReg;
     private int year, month, day;
-
-    private DatePickerDialog.OnDateSetListener dateSetListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,41 +54,31 @@ public class RegisterActivity extends BaseActivity {
         mTvBirth.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (dateSetListener == null)
-                    initListener();
                 GregorianCalendar calendar = new GregorianCalendar();
-                year = calendar.get(Calendar.YEAR) - 20;
+                year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
-                new DatePickerDialog(RegisterActivity.this, dateSetListener, year, month, day).show();
+                new DatePickerDialog(RegisterActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int y, int m, int d) {
+                        GregorianCalendar calendar = new GregorianCalendar();
+                        int cury, curm, curd;
+                        cury = calendar.get(Calendar.YEAR);
+                        curm = calendar.get(Calendar.MONTH);
+                        curd = calendar.get(Calendar.DAY_OF_MONTH);
+                        if (y > cury || (y <= cury && m > curm) || (y <= cury && m <= curm && d > curd)){
+                            Toast.makeText(RegisterActivity.this, "请选择合适的日期", Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                        year = y;
+                        month = m;
+                        day = d;
+                        mTvBirth.setText(String.format(Locale.CHINA, "%04d-%02d-%02d", year, month + 1, day));
+                    }
+                }, year, month, day).show();
             }
         });
 
-        mTvArticle = findViewById(R.id.tv_reg_article);
-        mTvArticle.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo show 协议条款 协议条款可以打开 web view 从服务器获取条款的网页
-            }
-        });
     }
 
-    /**
-     * 初始化监听器
-     * 此方法可以在匿名内部类对象中调用
-     * 在{@link #onCreate(Bundle)}函数中调用方法可能消耗活动的加载时间
-     */
-    private void initListener() {
-        dateSetListener = new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int y, int m, int d) {
-                if (mTvBirth == null)
-                    mTvBirth = findViewById(R.id.tv_reg_birth);
-                year = y;
-                month = m;
-                day = d;
-                mTvBirth.setText(String.format(Locale.CHINA, "%4d/%2d/%2d", year, month + 1, day));
-            }
-        };
-    }
 }

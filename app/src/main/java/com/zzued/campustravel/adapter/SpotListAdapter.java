@@ -43,7 +43,7 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-        return 6;
+        return 0;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
