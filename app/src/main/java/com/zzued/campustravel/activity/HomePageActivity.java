@@ -27,6 +27,8 @@ public class HomePageActivity extends BaseActivity {
 
         init();
 
+        //toget authority
+
         viewPager = findViewById(R.id.vp_home_page);
         viewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

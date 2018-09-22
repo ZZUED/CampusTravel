@@ -95,7 +95,7 @@ public class RegisterActivity extends BaseActivity {
                                     Response response = client.newCall(request).execute();
                                     String ss = response.body().string();
                                     int num = ActivityCollector.size();
-                                    startActivity(new Intent(RegisterActivity.this, HomePageActivity.class));
+                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                     ActivityCollector.finishFromStart(num);
                                 }catch (Exception e){
                                     e.printStackTrace();
