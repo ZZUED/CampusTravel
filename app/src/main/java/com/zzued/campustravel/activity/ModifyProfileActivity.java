@@ -140,7 +140,7 @@ public class ModifyProfileActivity extends BaseActivity {
         builder.setIcon(R.drawable.ic_home_mid_gray);
         builder.setTitle("头像flag");
         builder.setMessage("请选择你要的头像的flag");
-        View view = LayoutInflater.from(this).inflate(R.layout.iv_head, null);
+        View view = LayoutInflater.from(this).inflate(R.layout.ll_modify_profile_iv_head, null);
         //	第一个按钮
         builder.setView(view);
         final AlertDialog dialog = builder.create();
@@ -148,7 +148,7 @@ public class ModifyProfileActivity extends BaseActivity {
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivHead.setImageResource(R.drawable.image1);
+                ivHead.setImageResource(R.drawable.img_modify_profile_head_1);
                 dialog.dismiss();
             }
         });
@@ -157,7 +157,7 @@ public class ModifyProfileActivity extends BaseActivity {
         iv2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivHead.setImageResource(R.drawable.image2);
+                ivHead.setImageResource(R.drawable.img_modify_profile_head_2);
                 dialog.dismiss();
             }
         });
@@ -166,7 +166,7 @@ public class ModifyProfileActivity extends BaseActivity {
         iv3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ivHead.setImageResource(R.drawable.image3);
+                ivHead.setImageResource(R.drawable.img_modify_profile_head_3);
                 dialog.dismiss();
             }
         });

@@ -5,16 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.ThermalMapActivity">
-    <TextView
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_flat_map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white"
-        android:gravity="center"
-        android:text="this is a map"/>
+        android:gravity="center"/>
     <com.zzued.campustravel.view.CustomTitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorBtnBgStart"
         app:text_color_title_bar="@android:color/white"
         app:title_title_bar="@string/scenic_flat_map"
         app:img_btn_src_title_bar="@drawable/selector_view_title_back_white_gray"/>

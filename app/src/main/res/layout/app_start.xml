@@ -7,7 +7,7 @@
         android:layout_gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/startone"
+        android:src="@drawable/img_guide_startone"
         android:scaleType="centerCrop"/>
 
 </LinearLayout>

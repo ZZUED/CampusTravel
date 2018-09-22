@@ -24,28 +24,28 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/love" />
+            android:src="@drawable/ic_guide_love" />
         <ImageView
             android:id="@+id/guidedot_2"
             android:padding="15dip"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/love" />
+            android:src="@drawable/ic_guide_love" />
         <ImageView
             android:id="@+id/guidedot_3"
             android:padding="15dip"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/love" />
+            android:src="@drawable/ic_guide_love" />
         <ImageView
             android:id="@+id/guidedot_4"
             android:padding="15dip"
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/love" />
+            android:src="@drawable/ic_guide_love" />
     </LinearLayout>
     <Button
         android:id="@+id/btnStart"

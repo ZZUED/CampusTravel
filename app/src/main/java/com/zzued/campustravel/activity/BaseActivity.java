@@ -12,6 +12,8 @@ import android.view.WindowManager;
 import com.zzued.campustravel.util.ActivityCollector;
 
 public class BaseActivity extends AppCompatActivity {
+    public static boolean DEBUG = true;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

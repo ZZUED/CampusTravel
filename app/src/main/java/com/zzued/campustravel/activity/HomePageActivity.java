@@ -1,21 +1,48 @@
 package com.zzued.campustravel.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps.AMap;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.HomePagerAdapter;
+import com.zzued.campustravel.util.MyApplication;
+import com.zzued.campustravel.util.PermissionHelper;
 import com.zzued.campustravel.view.CustomHomeBtmNavi;
-import com.zzued.campustravel.view.CustomViewpager;
 
 import java.util.ArrayList;
 
 public class HomePageActivity extends BaseActivity {
+    // 权限相关变量
+    private boolean permissionLocation;
+    private boolean permissionStorage;
+
+    /**
+     * 此对象为定位后的回调对象，通过 {@link #getMyLocation()} 方法访问
+     * MY_LOCATION.getLatitude();//获取纬度
+     * MY_LOCATION.getLongitude();//获取经度
+     *
+     * PS:需要与 fragment 以通信更新数据
+     */
+    private static AMapLocation MY_LOCATION;
+
+    //声明AMapLocationClient类对象
+    public AMapLocationClient mLocationClient;
+    //声明定位回调监听器
+    public AMapLocationListener mLocationListener;
+    //声明AMapLocationClientOption对象
+    public AMapLocationClientOption mLocationOption = null;
+
     private static final String TAG = "HomePageActivity";
+
     private ArrayList<CustomHomeBtmNavi> btmNavis;
     private ViewPager viewPager;
 
@@ -25,17 +52,68 @@ public class HomePageActivity extends BaseActivity {
         setContentView(R.layout.activity_home_page);
         setStatusBarColor(getResources().getColor(R.color.colorAccent));
 
-        init();
+        initPagerBtmNavi();
 
-        //toget authority
+        permissionLocation = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_LOCATION);
+        if (!permissionLocation)
+            return;
+        permissionStorage = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_STORAGE);
+        if (!permissionStorage)
+            return;
 
+        startLocate();
+    }
+
+    /**
+     * 开启定位
+     */
+    private void startLocate() {
+        Toast.makeText(this, "正在定位", Toast.LENGTH_SHORT).show();
+
+        //初始化定位
+        mLocationClient = new AMapLocationClient(MyApplication.getContext());
+
+        mLocationListener = new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation amapLocation) {
+                if (amapLocation == null || amapLocation.getErrorCode() != 0) {
+                    Log.e(TAG, "onLocationChanged: " + (amapLocation != null ? amapLocation.getErrorCode() : "null"));
+                    Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                Toast.makeText(HomePageActivity.this, "经纬度：" +
+                        amapLocation.getLatitude() + ", " + amapLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                setMyLocation(amapLocation);
+            }
+        };
+        //设置定位回调监听
+        mLocationClient.setLocationListener(mLocationListener);
+
+        //初始化AMapLocationClientOption对象
+        mLocationOption = new AMapLocationClientOption();
+
+        mLocationOption.setInterval(30000);
+
+        //设置定位模式为AMapLocationMode.High_Accuracy，高精度模式。
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+    }
+
+    /**
+     * 联动 viewpager 与 底部按钮
+     */
+    private void initPagerBtmNavi() {
         viewPager = findViewById(R.id.vp_home_page);
         viewPager.setAdapter(new HomePagerAdapter(getSupportFragmentManager()));
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 if (btmNavis == null)
-                    init();
+                    initPagerBtmNavi();
                 for (int i = 0; i < btmNavis.size(); i++) {
                     if (i == position)
                         btmNavis.get(i).setChecked();
@@ -44,9 +122,7 @@ public class HomePageActivity extends BaseActivity {
                 }
             }
         });
-    }
 
-    private void init() {
         btmNavis = new ArrayList<>(3);
         btmNavis.add((CustomHomeBtmNavi) findViewById(R.id.hbn_home_left));
         btmNavis.add((CustomHomeBtmNavi) findViewById(R.id.hbn_home_middle));
@@ -60,6 +136,53 @@ public class HomePageActivity extends BaseActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 获取定位后的位置信息
+     * @return 位置信息
+     */
+    public static AMapLocation getMyLocation() {
+        return MY_LOCATION;
+    }
+
+    public static void setMyLocation(AMapLocation myLocation) {
+        MY_LOCATION = myLocation;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        int res = PermissionHelper.isPermissionGranted(this, requestCode, permissions, grantResults);
+        switch (res) {
+            case PermissionHelper.DENIED_LOCATION:
+                Toast.makeText(this, "请授予地理位置权限", Toast.LENGTH_SHORT).show();
+                PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_LOCATION);
+                break;
+            case PermissionHelper.DENIED_STORAGE:
+                Toast.makeText(this, "请授予存储权限", Toast.LENGTH_SHORT).show();
+                PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_STORAGE);
+                break;
+            case PermissionHelper.FOREVER_DENIED_LOCATION:
+                Toast.makeText(this, "没权限没法玩老铁，设置->权限->打开 谢谢:-)", Toast.LENGTH_SHORT).show();
+                break;
+            case PermissionHelper.FOREVER_DENIED_STORAGE:
+                Toast.makeText(this, "没权限没法玩老铁，设置->权限->打开 谢谢:-)", Toast.LENGTH_SHORT).show();
+                break;
+            case PermissionHelper.GRANTED_LOCATION:
+                permissionLocation = true;
+                if (!permissionStorage)
+                    permissionStorage = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_STORAGE);
+                break;
+            case PermissionHelper.GRANTED_STORAGE:
+                permissionStorage = true;
+                if (!permissionLocation)
+                    permissionLocation = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_LOCATION);
+                break;
+            default:
+                break;
+        }
+        if (permissionStorage && permissionLocation)
+            startLocate();
     }
 
 }

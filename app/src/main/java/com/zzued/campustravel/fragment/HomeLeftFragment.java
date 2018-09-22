@@ -4,10 +4,8 @@ package com.zzued.campustravel.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.zzued.campustravel.R;
@@ -41,27 +38,6 @@ public class HomeLeftFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
         initListener(view);
 
-        final NestedScrollView holder =view.findViewById(R.id.ll_home_left_scroll_holder);
-        holder.setVisibility(View.GONE);
-        final ProgressBar progress = view.findViewById(R.id.progress_home_left);
-        new AsyncTask<Integer, Integer, Integer>() {
-            @Override
-            protected Integer doInBackground(Integer... integers) {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Integer integer) {
-                progress.setVisibility(View.GONE);
-                holder.setVisibility(View.VISIBLE);
-            }
-        }.execute(0, 0, 0);
-
         // todo set data of rcv
         RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);
         rcvSpotList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
@@ -72,6 +48,7 @@ public class HomeLeftFragment extends Fragment {
 
     /**
      * 初始化
+     *
      * @param view 布局 view
      */
     private void initListener(View view) {
@@ -89,7 +66,6 @@ public class HomeLeftFragment extends Fragment {
         llSearchHolder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // start search activity
                 startActivity(new Intent(getContext(), SearchActivity.class));
                 getActivity().overridePendingTransition(Animation.ABSOLUTE, android.R.anim.fade_out);
             }
@@ -100,17 +76,15 @@ public class HomeLeftFragment extends Fragment {
         mapItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildDialog(new String[]{getString(R.string.see_thermal_map), getString(R.string.see_flat_map)},
+                fireDialog(new String[]{getString(R.string.see_flat_map), getString(R.string.see_thermal_map)},
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                if (which == 0) {
-                                    // see thermal map
-                                    startActivity(new Intent(getContext(), ThermalMapActivity.class));
-                                } else {
-                                    // see flat map
+                                if (which == 0)
                                     startActivity(new Intent(getContext(), FlatMapActivity.class));
-                                }
+                                else
+                                    startActivity(new Intent(getContext(), ThermalMapActivity.class));
+
                             }
                         });
             }
@@ -130,7 +104,7 @@ public class HomeLeftFragment extends Fragment {
         voiceItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buildDialog(new String[]{getString(R.string.voice_introduction), getString(R.string.voice_assistance)},
+                fireDialog(new String[]{getString(R.string.voice_introduction), getString(R.string.voice_assistance)},
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
@@ -162,7 +136,7 @@ public class HomeLeftFragment extends Fragment {
      * @param items    列表项
      * @param listener 列表项的监听器
      */
-    private void buildDialog(String[] items, DialogInterface.OnClickListener listener) {
+    private void fireDialog(String[] items, DialogInterface.OnClickListener listener) {
         new AlertDialog.Builder(getContext())
                 .setItems(items, listener)
                 .show();

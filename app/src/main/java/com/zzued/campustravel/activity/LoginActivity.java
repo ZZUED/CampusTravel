@@ -25,21 +25,25 @@ import okhttp3.Response;
 public class LoginActivity extends BaseActivity {
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private EditText etAccount, etPassword;
+
+    private EditText etAccount;
+    private EditText etPassword;
     private Button btnLogin;
     private CheckBox rememberPass;
-    Handler handler = new Handler(){
+
+    Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
-            if (msg.obj.equals("1")){
-                Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
-            }else if (msg.obj.equals("2")){
-                Toast.makeText(getApplicationContext(),"账号不存在或错误",Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_SHORT).show();
+        public boolean handleMessage(Message msg) {
+            if (msg.obj.equals("1")) {
+                Toast.makeText(getApplicationContext(), "登陆成功", Toast.LENGTH_SHORT).show();
+            } else if (msg.obj.equals("2")) {
+                Toast.makeText(getApplicationContext(), "账号不存在或错误", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getApplicationContext(), "密码错误", Toast.LENGTH_SHORT).show();
             }
+            return true;
         }
-    };
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,12 +58,11 @@ public class LoginActivity extends BaseActivity {
         rememberPass = findViewById(R.id.remember_pass);
         btnLogin = findViewById(R.id.btn_login_login);
 
-        boolean isRemember = pref.getBoolean("remember_password",false);
-        if(isRemember)
-        {
+        boolean isRemember = pref.getBoolean("remember_password", false);
+        if (isRemember) {
             //账号和密码设置到文本框中
-            String account = pref.getString("account","");
-            String password = pref.getString("password","");
+            String account = pref.getString("account", "");
+            String password = pref.getString("password", "");
             etAccount.setText(account);
             etPassword.setText(password);
             rememberPass.setChecked(true);
@@ -68,6 +71,12 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (DEBUG){
+                    int sz = ActivityCollector.size();
+                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+                    ActivityCollector.finishFromStart(sz);
+                    return;
+                }
                 final String account = etAccount.getText().toString();
                 final String password = etPassword.getText().toString();
 
@@ -77,8 +86,8 @@ public class LoginActivity extends BaseActivity {
                         try {
                             OkHttpClient client = new OkHttpClient();
                             RequestBody requestBody = new FormBody.Builder()
-                                    .add("emailAddress",account)
-                                    .add("password",password)
+                                    .add("emailAddress", account)
+                                    .add("password", password)
                                     .build();
                             Request request = new Request.Builder()
                                     .url("http://maxerwinsmith.qicp.io:49291/login")
@@ -89,31 +98,35 @@ public class LoginActivity extends BaseActivity {
                             Message msg = new Message();
                             msg.obj = ss;
                             handler.sendMessage(msg);
-                            if (ss.equals("1")){
-                                //Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
-                                editor = pref.edit();
-                                if(rememberPass.isChecked()){//检查复选框是否被选中,选中的话就把账号密码保存下来
-                                    //验证码暂时先保存，到时候再改
-                                    editor.putBoolean("remember_password",true);
-                                    editor.putString("account",account);
-                                    editor.putString("password",password);
-                                }else{
-                                    editor.clear();
-                                }
-                                editor.apply();
-                                int num = ActivityCollector.size();
-                                startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-                                ActivityCollector.finishFromStart(num);
-                                finish();
-                            }else if(ss.equals("2")){
-                                //Toast.makeText(getApplicationContext(),"账号不存在或错误",Toast.LENGTH_SHORT).show();
-                                etAccount.setText("");
-                            }else{
-                                //Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_SHORT).show();
-                                etPassword.setText("");
+                            switch (ss) {
+                                case "1":
+                                    //Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
+                                    editor = pref.edit();
+                                    if (rememberPass.isChecked()) {//检查复选框是否被选中,选中的话就把账号密码保存下来
+                                        //验证码暂时先保存，到时候再改
+                                        editor.putBoolean("remember_password", true);
+                                        editor.putString("account", account);
+                                        editor.putString("password", password);
+                                    } else {
+                                        editor.clear();
+                                    }
+                                    editor.apply();
+                                    int num = ActivityCollector.size();
+                                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+                                    ActivityCollector.finishFromStart(num);
+                                    finish();
+                                    break;
+                                case "2":
+                                    //Toast.makeText(getApplicationContext(),"账号不存在或错误",Toast.LENGTH_SHORT).show();
+                                    etAccount.setText("");
+                                    break;
+                                default:
+                                    //Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_SHORT).show();
+                                    etPassword.setText("");
+                                    break;
                             }
 
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }

@@ -13,6 +13,6 @@ import com.zzued.campustravel.R;
 public class GuideFragment3 extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.guide_fragment3, container, false);
+        return inflater.inflate(R.layout.fragment_guide_3, container, false);
     }
 }

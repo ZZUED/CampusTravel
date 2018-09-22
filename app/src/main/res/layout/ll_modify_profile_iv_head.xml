@@ -11,7 +11,7 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/image1" />
+        android:src="@drawable/img_modify_profile_head_1" />
     <ImageView
         android:id="@+id/imagetwo"
         android:layout_width="80dp"
@@ -19,7 +19,7 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/image2"/>
+        android:src="@drawable/img_modify_profile_head_2"/>
     <ImageView
         android:id="@+id/imagethree"
         android:layout_width="80dp"
@@ -27,6 +27,6 @@
         android:layout_weight="1"
         android:clickable="true"
         android:focusable="true"
-        android:src="@drawable/image3"/>
+        android:src="@drawable/img_modify_profile_head_3"/>
 
 </LinearLayout>
