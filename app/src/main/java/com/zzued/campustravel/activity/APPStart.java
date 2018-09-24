@@ -1,5 +1,6 @@
 package com.zzued.campustravel.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 
 public class APPStart extends BaseActivity{
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +20,6 @@ public class APPStart extends BaseActivity{
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         firstRun();
-
     }
 
     private void firstRun() {
@@ -32,10 +33,22 @@ public class APPStart extends BaseActivity{
             this.finish();
         }
         else {
-            Toast.makeText(this,"不是第一次", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(APPStart.this, StartActivity.class);
-            startActivity(intent);
-            this.finish();
+            SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
+            String account= fromLogin.getString("emailAddress", "null");
+            String pass_word= fromLogin.getString("password", "null");
+
+            //如果读到了账号密码不是“null”，那么直接登录
+            if ((!account.equals("null"))&&(!pass_word.equals("null"))){
+                Toast.makeText(this,"不是第一次使用APP，有账号密码", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(APPStart.this, HomePageActivity.class);
+                startActivity(intent);
+                this.finish();
+            }else{
+                Toast.makeText(this,"不是第一次使用APP，无账号密码", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(APPStart.this, StartActivity.class);
+                startActivity(intent);
+                this.finish();
+            }
         }
     }
 }

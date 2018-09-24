@@ -1,5 +1,6 @@
 package com.zzued.campustravel.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -24,7 +25,7 @@ import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity {
     private SharedPreferences pref;
-    private SharedPreferences.Editor editor;
+    private SharedPreferences.Editor editor ;
 
     private EditText etAccount;
     private EditText etPassword;
@@ -71,14 +72,15 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DEBUG){
-                    int sz = ActivityCollector.size();
-                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-                    ActivityCollector.finishFromStart(sz);
-                    return;
-                }
+//                if (DEBUG){
+//                    int sz = ActivityCollector.size();
+//                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+//                    ActivityCollector.finishFromStart(sz);
+//                    return;
+//                }
                 final String account = etAccount.getText().toString();
                 final String password = etPassword.getText().toString();
+
 
                 new Thread(new Runnable() {
                     @Override
@@ -100,28 +102,34 @@ public class LoginActivity extends BaseActivity {
                             handler.sendMessage(msg);
                             switch (ss) {
                                 case "1":
-                                    //Toast.makeText(getApplicationContext(),"登陆成功",Toast.LENGTH_SHORT).show();
+                                    //登陆成功
                                     editor = pref.edit();
-                                    if (rememberPass.isChecked()) {//检查复选框是否被选中,选中的话就把账号密码保存下来
-                                        //验证码暂时先保存，到时候再改
+                                    if (rememberPass.isChecked()) {
                                         editor.putBoolean("remember_password", true);
-                                        editor.putString("account", account);
+                                        editor.putString("emailAddress", account);
                                         editor.putString("password", password);
                                     } else {
                                         editor.clear();
                                     }
                                     editor.apply();
+
+                                    SharedPreferences.Editor acc_pass = getSharedPreferences("AccountAndPassWord",
+                                            MODE_PRIVATE).edit();
+                                    acc_pass.putString("emailAddress", account);
+                                    acc_pass.putString("password", password);
+                                    acc_pass.apply();
+
                                     int num = ActivityCollector.size();
                                     startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
                                     ActivityCollector.finishFromStart(num);
                                     finish();
                                     break;
                                 case "2":
-                                    //Toast.makeText(getApplicationContext(),"账号不存在或错误",Toast.LENGTH_SHORT).show();
+                                    //账号不存在或错误
                                     etAccount.setText("");
                                     break;
                                 default:
-                                    //Toast.makeText(getApplicationContext(),"密码错误",Toast.LENGTH_SHORT).show();
+                                    //密码错误
                                     etPassword.setText("");
                                     break;
                             }
@@ -131,27 +139,6 @@ public class LoginActivity extends BaseActivity {
                         }
                     }
                 }).start();
-
-                //假设账号为admin，密码为123456，验证码为try
-                /*if (account.equals("admin")&&password.equals("123456")){
-                    editor = pref.edit();
-                    if(rememberPass.isChecked()){//检查复选框是否被选中,选中的话就把账号密码保存下来
-                        //验证码暂时先保存，到时候再改
-                        editor.putBoolean("remember_password",true);
-                        editor.putString("account",account);
-                        editor.putString("password",password);
-                    }else{
-                        editor.clear();
-                    }
-                    editor.apply();
-                    int num = ActivityCollector.size();
-                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-                    ActivityCollector.finishFromStart(num);
-                    finish();
-                }else{
-                    Toast.makeText(LoginActivity.this,
-                            "account or password is not invalid",Toast.LENGTH_LONG).show();
-                }*/
             }
         });
     }
