@@ -8,6 +8,8 @@ import android.widget.Button;
 
 import com.zzued.campustravel.R;
 
+import java.util.ArrayList;
+
 public class StartActivity extends BaseActivity {
 
     @Override

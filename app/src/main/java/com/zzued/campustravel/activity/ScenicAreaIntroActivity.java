@@ -1,21 +1,15 @@
 package com.zzued.campustravel.activity;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.SpotListAdapter;
-
-import java.util.ArrayList;
 
 public class ScenicAreaIntroActivity extends BaseActivity {
 

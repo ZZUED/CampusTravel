@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.HeatmapTileProvider;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
@@ -57,7 +58,9 @@ public class ThermalMapActivity extends BaseActivity {
         aMap.setMyLocationStyle(myLocationStyle);
 
         // 设置默认定位按钮是否显示，非必需设置。
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setRotateGesturesEnabled(false);
+        uiSettings.setMyLocationButtonEnabled(true);
 
         // 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         aMap.setMyLocationEnabled(false);

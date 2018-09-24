@@ -1,22 +1,15 @@
 package com.zzued.campustravel.activity;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.widget.Toast;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationClientOption;
-import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.util.PermissionHelper;
 
 public class FlatMapActivity extends BaseActivity {
     private MapView mapView;
@@ -61,7 +54,9 @@ public class FlatMapActivity extends BaseActivity {
         aMap.setMyLocationStyle(myLocationStyle);
 
         // 设置默认定位按钮是否显示，非必需设置。
-        aMap.getUiSettings().setMyLocationButtonEnabled(true);
+        UiSettings uiSettings = aMap.getUiSettings();
+        uiSettings.setRotateGesturesEnabled(false);
+        uiSettings.setMyLocationButtonEnabled(false);
 
         // 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         aMap.setMyLocationEnabled(true);
@@ -81,7 +76,6 @@ public class FlatMapActivity extends BaseActivity {
         LatLng libLL = new LatLng(34.817186, 113.538692), bellLL = new LatLng(34.817109, 113.537297);
         aMap.addMarker(new MarkerOptions().position(libLL).title("图书馆").snippet("郑州大学图书馆"));
         aMap.addMarker(new MarkerOptions().position(bellLL).title("钟楼").snippet("郑大第一高度 - 钟楼"));
-
     }
 
     @Override

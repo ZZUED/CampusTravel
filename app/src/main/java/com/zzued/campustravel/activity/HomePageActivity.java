@@ -81,8 +81,7 @@ public class HomePageActivity extends BaseActivity {
                     Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(HomePageActivity.this, "经纬度：" +
-                        amapLocation.getLatitude() + ", " + amapLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
                 setMyLocation(amapLocation);
             }
         };

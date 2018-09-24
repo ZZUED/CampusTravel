@@ -10,15 +10,19 @@ import android.support.v4.content.ContextCompat;
 public class PermissionHelper {
     public final static int REQUEST_CODE_LOCATION = 10;
     public final static int REQUEST_CODE_STORAGE = 11;
+    public final static int REQUEST_CODE_PHONE_STATE = 12;
 
     public static final int GRANTED_LOCATION = 20;
     public static final int GRANTED_STORAGE = 21;
+    public static final int GRANTED_PHONE_STATE = 22;
 
     public static final int DENIED_LOCATION = 30;
     public static final int DENIED_STORAGE = 31;
+    public static final int DENIED_PHONE_STATE = 32;
 
     public final static int FOREVER_DENIED_LOCATION = 40;
     public final static int FOREVER_DENIED_STORAGE = 41;
+    public final static int FOREVER_DENIED_PHONE_STATE = 42;
 
     private static int GRANTED = PackageManager.PERMISSION_GRANTED;
     private static int DENIED = PackageManager.PERMISSION_DENIED;
@@ -41,6 +45,11 @@ public class PermissionHelper {
                 if (ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == GRANTED)
                     return true;
                 ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, which);
+                return false;
+            case REQUEST_CODE_PHONE_STATE:
+                if (ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_PHONE_STATE) == GRANTED)
+                    return true;
+                ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.READ_PHONE_STATE}, which);
                 return false;
             default:
                 break;
@@ -73,6 +82,12 @@ public class PermissionHelper {
                     return DENIED_STORAGE;
                 }
                 return GRANTED_STORAGE;
+            case REQUEST_CODE_PHONE_STATE:
+                if (grantResults.length <= 0 || grantResults[0] == DENIED){
+                    if (!ActivityCompat.shouldShowRequestPermissionRationale(activity, Manifest.permission.READ_PHONE_STATE))
+                        return FOREVER_DENIED_PHONE_STATE;
+                    return DENIED_PHONE_STATE;
+                }
             default:
                 break;
         }

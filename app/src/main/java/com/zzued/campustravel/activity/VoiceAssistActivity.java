@@ -4,42 +4,32 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.alibaba.idst.nls.NlsListener;
+import com.alibaba.idst.nls.StageListener;
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.util.AudioRecorder;
+import com.zzued.campustravel.util.AudioSoundRecognizer;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class VoiceAssistActivity extends BaseActivity {
     private static final String TAG = "VoiceAssistActivity";
+    private static final int LEVEL_INIT = 4000;
 
     private Button btnSpeak;
     private Drawable micDrawable;
-    private boolean recording = false;
 
-    private Handler handler = new Handler(new Handler.Callback() {
-        @Override
-        public boolean handleMessage(Message msg) {
-            switch (msg.what) {
-                case AudioRecorder.RECORD_STOP:
-                    micDrawable.setLevel(0);
-                    break;
-                case AudioRecorder.VOICE_VOLUME:
-                    micDrawable.setLevel(msg.arg1);
-                    break;
-                default:
-                    break;
-            }
-            return true;
-        }
-    });
+    private boolean recording = false;
+    private AudioSoundRecognizer recognizer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,15 +52,40 @@ public class VoiceAssistActivity extends BaseActivity {
                     stopRecorder();
             }
         });
+
+        recognizer = new AudioSoundRecognizer(
+                this,
+                new NlsListener() {
+                    @Override
+                    public void onRecognizingResult(int i, RecognizedResult recognizedResult) {
+                        if (i == 0)
+                            try {
+                                JSONObject jsonObject = new JSONObject(recognizedResult.asr_out);
+                                Toast.makeText(VoiceAssistActivity.this,
+                                        jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        else
+                            Log.e(TAG, "onRecognizingResult: error: " + i);
+                    }
+                },
+                new StageListener() {
+                    @Override
+                    public void onVoiceVolume(int i) {
+                        micDrawable.setLevel(i * 60 + LEVEL_INIT);
+                    }
+                });
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {
             if (grantResults.length <= 0 || grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                Toast.makeText(this, "不能录音玩个鬼？！！！", Toast.LENGTH_SHORT).show();
                 if (!ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.RECORD_AUDIO))
                     Toast.makeText(this, "你就是头猪！", Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(this, "不能录音玩个鬼？！！！", Toast.LENGTH_SHORT).show();
             } else if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 startRecorder();
             }
@@ -80,15 +95,18 @@ public class VoiceAssistActivity extends BaseActivity {
     private void startRecorder() {
         Toast.makeText(VoiceAssistActivity.this, "正在录音", Toast.LENGTH_SHORT).show();
         btnSpeak.setText(getResources().getString(R.string.click_to_stop));
-        AudioRecorder.getInstance().start(handler);
         recording = !recording;
+        micDrawable.setLevel(LEVEL_INIT);
+
+        recognizer.startRecognize();
     }
 
     private void stopRecorder() {
-        Toast.makeText(VoiceAssistActivity.this, "已停止录音", Toast.LENGTH_SHORT).show();
         btnSpeak.setText(getResources().getString(R.string.click_and_speak));
-        AudioRecorder.getInstance().stop();
         recording = !recording;
+        micDrawable.setLevel(0);
+
+        recognizer.stopRecognize();
     }
 
 

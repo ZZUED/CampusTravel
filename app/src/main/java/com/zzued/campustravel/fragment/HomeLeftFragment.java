@@ -22,7 +22,7 @@ import com.zzued.campustravel.activity.ScenicAreaIntroActivity;
 import com.zzued.campustravel.activity.SearchActivity;
 import com.zzued.campustravel.activity.ThermalMapActivity;
 import com.zzued.campustravel.activity.VoiceAssistActivity;
-import com.zzued.campustravel.activity.VoiceInteractActivity;
+import com.zzued.campustravel.activity.VoiceIntroActivity;
 import com.zzued.campustravel.adapter.SpotListAdapter;
 import com.zzued.campustravel.view.CustomHomeLeftGridItem;
 
@@ -110,7 +110,7 @@ public class HomeLeftFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
                                     // start voice introduction
-                                    startActivity(new Intent(getContext(), VoiceInteractActivity.class));
+                                    startActivity(new Intent(getContext(), VoiceIntroActivity.class));
                                 } else {
                                     // start voice assist
                                     startActivity(new Intent(getContext(), VoiceAssistActivity.class));
