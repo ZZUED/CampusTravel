@@ -68,48 +68,56 @@ public class RegisterActivity extends BaseActivity {
                 mEtPasswordConfirmContent = mEtPasswordConfirm.getText().toString();
                 mTvBirthContent = mTvBirth.getText().toString().replace("/","-");
 
-                if (mEtAccountContent!= null &&
-                        mEtCertifyCodeContent!= null &&
-                        mEtPasswordContent!= null &&
-                        mEtPasswordConfirmContent!= null &&
-                        mTvBirthContent!= null&&
-                        radioButtonContent!=null) {
-                    if(isPasswordSame(mEtPassowrd.getText().toString(), mEtPasswordConfirm.getText().toString())){
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    OkHttpClient client = new OkHttpClient();
-                                    RequestBody requestBody = new FormBody.Builder()
-                                            .add("emailAddress",mEtAccountContent)
-                                            .add("password",mEtPasswordContent)
-                                            .add("confirmPassword",mEtPasswordConfirmContent)
-                                            .add("token",mEtCertifyCodeContent)
-                                            .add("birthday",mTvBirthContent)
-                                            .add("sex",radioButtonContent)
-                                            .build();
-                                    Request request = new Request.Builder()
-                                            .url("http://maxerwinsmith.qicp.io:49291/registerWithEmailAddress")
-                                            .post(requestBody)
-                                            .build();
-                                    Response response = client.newCall(request).execute();
-                                    String ss = response.body().string();
-                                    int num = ActivityCollector.size();
-                                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
-                                    ActivityCollector.finishFromStart(num);
-                                }catch (Exception e){
-                                    e.printStackTrace();
+                if (DEBUG){
+                    int num = ActivityCollector.size();
+                    startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                    ActivityCollector.finishFromStart(num);
+                    return;
+                }else {
+                    if (mEtAccountContent!= null &&
+                            mEtCertifyCodeContent!= null &&
+                            mEtPasswordContent!= null &&
+                            mEtPasswordConfirmContent!= null &&
+                            mTvBirthContent!= null&&
+                            radioButtonContent!=null) {
+                        if(isPasswordSame(mEtPassowrd.getText().toString(), mEtPasswordConfirm.getText().toString())){
+                            new Thread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    try {
+                                        OkHttpClient client = new OkHttpClient();
+                                        RequestBody requestBody = new FormBody.Builder()
+                                                .add("emailAddress",mEtAccountContent)
+                                                .add("password",mEtPasswordContent)
+                                                .add("confirmPassword",mEtPasswordConfirmContent)
+                                                .add("token",mEtCertifyCodeContent)
+                                                .add("birthday",mTvBirthContent)
+                                                .add("sex",radioButtonContent)
+                                                .build();
+                                        Request request = new Request.Builder()
+                                                .url("http://maxerwinsmith.qicp.io:49291/registerWithEmailAddress")
+                                                .post(requestBody)
+                                                .build();
+                                        Response response = client.newCall(request).execute();
+                                        String ss = response.body().string();
+                                        int num = ActivityCollector.size();
+                                        startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
+                                        ActivityCollector.finishFromStart(num);
+                                    }catch (Exception e){
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        }).start();
-                    }else{
-                        Toast.makeText(getApplicationContext(),"两个密码不一致",Toast.LENGTH_SHORT).show();
-                        mEtPasswordConfirm.setText("");
-                    }
+                            }).start();
+                        }else{
+                            Toast.makeText(getApplicationContext(),"两个密码不一致",Toast.LENGTH_SHORT).show();
+                            mEtPasswordConfirm.setText("");
+                        }
 
-                }else{
-                    Toast.makeText(getApplicationContext(),"有内容未填写",Toast.LENGTH_SHORT).show();
+                    }else{
+                        Toast.makeText(getApplicationContext(),"有内容未填写",Toast.LENGTH_SHORT).show();
+                    }
                 }
+
             }
         });
 

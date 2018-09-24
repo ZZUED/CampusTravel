@@ -72,73 +72,75 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (DEBUG){
-//                    int sz = ActivityCollector.size();
-//                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-//                    ActivityCollector.finishFromStart(sz);
-//                    return;
-//                }
-                final String account = etAccount.getText().toString();
-                final String password = etPassword.getText().toString();
+                if (DEBUG){
+                    int sz = ActivityCollector.size();
+                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+                    ActivityCollector.finishFromStart(sz);
+                    return;
+                }else {
+                    final String account = etAccount.getText().toString();
+                    final String password = etPassword.getText().toString();
 
 
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            OkHttpClient client = new OkHttpClient();
-                            RequestBody requestBody = new FormBody.Builder()
-                                    .add("emailAddress", account)
-                                    .add("password", password)
-                                    .build();
-                            Request request = new Request.Builder()
-                                    .url("http://maxerwinsmith.qicp.io:49291/login")
-                                    .post(requestBody)
-                                    .build();
-                            Response response = client.newCall(request).execute();
-                            String ss = response.body().string();
-                            Message msg = new Message();
-                            msg.obj = ss;
-                            handler.sendMessage(msg);
-                            switch (ss) {
-                                case "1":
-                                    //登陆成功
-                                    editor = pref.edit();
-                                    if (rememberPass.isChecked()) {
-                                        editor.putBoolean("remember_password", true);
-                                        editor.putString("emailAddress", account);
-                                        editor.putString("password", password);
-                                    } else {
-                                        editor.clear();
-                                    }
-                                    editor.apply();
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                OkHttpClient client = new OkHttpClient();
+                                RequestBody requestBody = new FormBody.Builder()
+                                        .add("emailAddress", account)
+                                        .add("password", password)
+                                        .build();
+                                Request request = new Request.Builder()
+                                        .url("http://maxerwinsmith.qicp.io:49291/login")
+                                        .post(requestBody)
+                                        .build();
+                                Response response = client.newCall(request).execute();
+                                String ss = response.body().string();
+                                Message msg = new Message();
+                                msg.obj = ss;
+                                handler.sendMessage(msg);
+                                switch (ss) {
+                                    case "1":
+                                        //登陆成功
+                                        editor = pref.edit();
+                                        if (rememberPass.isChecked()) {
+                                            editor.putBoolean("remember_password", true);
+                                            editor.putString("emailAddress", account);
+                                            editor.putString("password", password);
+                                        } else {
+                                            editor.clear();
+                                        }
+                                        editor.apply();
 
-                                    SharedPreferences.Editor acc_pass = getSharedPreferences("AccountAndPassWord",
-                                            MODE_PRIVATE).edit();
-                                    acc_pass.putString("emailAddress", account);
-                                    acc_pass.putString("password", password);
-                                    acc_pass.apply();
+                                        SharedPreferences.Editor acc_pass = getSharedPreferences("AccountAndPassWord",
+                                                MODE_PRIVATE).edit();
+                                        acc_pass.putString("emailAddress", account);
+                                        acc_pass.putString("password", password);
+                                        acc_pass.apply();
 
-                                    int num = ActivityCollector.size();
-                                    startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
-                                    ActivityCollector.finishFromStart(num);
-                                    finish();
-                                    break;
-                                case "2":
-                                    //账号不存在或错误
-                                    etAccount.setText("");
-                                    break;
-                                default:
-                                    //密码错误
-                                    etPassword.setText("");
-                                    break;
+                                        int num = ActivityCollector.size();
+                                        startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
+                                        ActivityCollector.finishFromStart(num);
+                                        finish();
+                                        break;
+                                    case "2":
+                                        //账号不存在或错误
+                                        etAccount.setText("");
+                                        break;
+                                    default:
+                                        //密码错误
+                                        etPassword.setText("");
+                                        break;
+                                }
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
                             }
-
-                        } catch (Exception e) {
-                            e.printStackTrace();
                         }
-                    }
-                }).start();
+                    }).start();
+                }
+
             }
         });
     }
