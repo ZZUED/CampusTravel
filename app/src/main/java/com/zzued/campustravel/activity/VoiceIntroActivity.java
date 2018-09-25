@@ -63,6 +63,12 @@ public class VoiceIntroActivity extends BaseActivity {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        tts.onDestroy();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         tts.onDestroy();

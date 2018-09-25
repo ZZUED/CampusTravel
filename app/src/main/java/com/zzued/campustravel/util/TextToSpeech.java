@@ -29,6 +29,9 @@ public class TextToSpeech {
     private static final String id = "LTAIHlDsOl6n7enI";
     private static final String secret = "YTpJe5bEwX15vLKvZmy3P7qWmL5oMk";
 
+    private Context context;
+
+    private NlsListener nlsListener;
     private NlsClient mNlsClient;
     private NlsRequest mNlsRequest;
     private static int iMinBufSize = AudioTrack.getMinBufferSize(
@@ -55,6 +58,7 @@ public class TextToSpeech {
      *                 否则，回调此对象
      */
     public TextToSpeech(Context context, NlsListener listener) {
+        this.context = context;
         audioTrack = new AudioTrack(
                 AudioManager.STREAM_MUSIC,
                 8000,
@@ -70,14 +74,15 @@ public class TextToSpeech {
         NlsClient.openLog(true);
         NlsClient.configure(context.getApplicationContext()); //全局配置
         if (listener != null)
-            mNlsClient = NlsClient.newInstance(context, listener, null, mNlsRequest);
+            this.nlsListener = listener;
         else
-            mNlsClient = NlsClient.newInstance(context, new NlsListener() {
+            this.nlsListener = new NlsListener() {
                 @Override
                 public void onTtsResult(int status, byte[] ttsResult) {
                     switch (status) {
                         case NlsClient.ErrorCode.TTS_BEGIN:
                             // start audio track then add data into queue
+                            Log.e(TAG, "onTtsResult: begin");
                             startAudioTrack();
                             addDataToAudioQueue(ttsResult, ttsResult.length);
                             break;
@@ -85,7 +90,7 @@ public class TextToSpeech {
                             // transferring data, add data to the queue
                             Log.e(TAG, "onTtsResult: transferring");
                             if (!isPlaying)
-                                startAudioTrack();
+                                return;
                             addDataToAudioQueue(ttsResult, ttsResult.length);
                             break;
                         case NlsClient.ErrorCode.TTS_OVER:
@@ -96,7 +101,7 @@ public class TextToSpeech {
                             break;
                     }
                 }
-            }, null, mNlsRequest);
+            };
     }
 
     /**
@@ -109,11 +114,15 @@ public class TextToSpeech {
             Log.e(TAG, "start: audio is running, not able to start client again");
             return;
         }
-        mNlsRequest.authorize(id, secret);       //请替换为用户申请到的数加认证key和密钥
-        mNlsRequest.setTtsEncodeType("pcm"); //返回语音数据格式，支持pcm,wav.alaw
-        mNlsRequest.setTtsVolume(50);   //音量大小默认50，阈值0-100
-        mNlsRequest.setTtsSpeechRate(0);//语速，阈值-500~500
-        mNlsClient.PostTtsRequest(input); //用户输入文本
+        mNlsClient = NlsClient.newInstance(context, nlsListener, null, mNlsRequest);
+
+        mNlsRequest.authorize(id, secret);      //请替换为用户申请到的数加认证key和密钥
+        mNlsRequest.setTtsEncodeType("pcm");    //返回语音数据格式，支持pcm,wav.alaw
+        mNlsRequest.setTtsVolume(50);           //音量大小默认50，阈值0-100
+        mNlsRequest.setTtsSpeechRate(0);        //语速，阈值-500~500
+
+        mNlsClient.checkService();
+        mNlsClient.PostTtsRequest(input);       //用户输入文本
     }
 
     /**
@@ -122,8 +131,10 @@ public class TextToSpeech {
      * 执行此操作之后再向播放器写入数据将不会有任何效果
      */
     public void stop() {
-        mNlsClient.stop();
         stopAudioTrack(false);
+        mNlsClient.cancel();
+        mNlsClient.stop();
+        isPlaying = false;
     }
 
     /**

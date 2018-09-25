@@ -20,12 +20,13 @@ import com.zzued.campustravel.fragment.GuideFragment4;
 import java.util.ArrayList;
 import java.util.List;
 
-public class APPGuide extends FragmentActivity implements View.OnClickListener,ViewPager.OnPageChangeListener {
+public class APPGuide extends FragmentActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
     private Button btnStart;
     private ViewPager viewPager;
     private GuideFragmentAdapter guideFragmentAdapter;
     private List<Fragment> fragmentList;
-    private ImageView[] imageViews=new ImageView[4];
+    private ImageView[] imageViews = new ImageView[4];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,9 +35,9 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
         //initView
-        btnStart=(Button) findViewById(R.id.btnStart);
-        viewPager=(ViewPager) findViewById(R.id.viewPager);
-        fragmentList=new ArrayList<Fragment>();
+        btnStart = (Button) findViewById(R.id.btnStart);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        fragmentList = new ArrayList<Fragment>();
 
         //这么说吧，类似List<String> data--------这是准备数据源
         fragmentList.add(new GuideFragment1());
@@ -44,13 +45,13 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
         fragmentList.add(new GuideFragment3());
         fragmentList.add(new GuideFragment4());
         //-----------------
-        imageViews[0]= (ImageView) findViewById(R.id.guidedot_1);
-        imageViews[1]= (ImageView) findViewById(R.id.guidedot_2);
-        imageViews[2]= (ImageView) findViewById(R.id.guidedot_3);
-        imageViews[3]= (ImageView) findViewById(R.id.guidedot_4);
+        imageViews[0] = (ImageView) findViewById(R.id.guidedot_1);
+        imageViews[1] = (ImageView) findViewById(R.id.guidedot_2);
+        imageViews[2] = (ImageView) findViewById(R.id.guidedot_3);
+        imageViews[3] = (ImageView) findViewById(R.id.guidedot_4);
 
         //创建适配器
-        guideFragmentAdapter=new GuideFragmentAdapter(getSupportFragmentManager(), fragmentList);
+        guideFragmentAdapter = new GuideFragmentAdapter(getSupportFragmentManager(), fragmentList);
         //视图加载适配器
         viewPager.setAdapter(guideFragmentAdapter);
         //事件
@@ -64,7 +65,7 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
         switch (v.getId()) {
             //开始体验的按钮
             case R.id.btnStart:
-                Intent intent=new Intent(this, StartActivity.class);
+                Intent intent = new Intent(this, StartActivity.class);
                 startActivity(intent);
                 this.finish();
                 break;
@@ -74,6 +75,7 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
         }
 
     }
+
     @Override
     public void onPageScrollStateChanged(int arg0) {
 
@@ -83,15 +85,15 @@ public class APPGuide extends FragmentActivity implements View.OnClickListener,V
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
         //如果滑动到最后一页，则把“开始体验”显示出来
-        if(position==fragmentList.size()-1){
+        if (position == fragmentList.size() - 1) {
             btnStart.setVisibility(View.VISIBLE);
-        }else {
+        } else {
             btnStart.setVisibility(View.GONE);
         }
-        for(int i=0;i<4;i++){
-            if(i==position){
+        for (int i = 0; i < 4; i++) {
+            if (i == position) {
                 imageViews[i].setSelected(true);
-            }else {
+            } else {
                 imageViews[i].setSelected(false);
             }
         }

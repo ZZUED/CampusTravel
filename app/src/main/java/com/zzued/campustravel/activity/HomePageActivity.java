@@ -82,6 +82,10 @@ public class HomePageActivity extends BaseActivity {
                     return;
                 }
                 Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
+                if (MyApplication.DEBUG){
+                    Log.e(TAG, "onLocationChanged: debugging now, send no location info");
+                    return;
+                }
                 setMyLocation(amapLocation);
             }
         };

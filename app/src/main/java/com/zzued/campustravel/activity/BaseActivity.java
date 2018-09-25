@@ -12,7 +12,6 @@ import android.view.WindowManager;
 import com.zzued.campustravel.util.ActivityCollector;
 
 public class BaseActivity extends AppCompatActivity {
-    public static boolean DEBUG = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
