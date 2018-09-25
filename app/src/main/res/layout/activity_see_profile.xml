@@ -77,10 +77,11 @@
             android:text="@string/birthday" />
 
         <TextView
+            android:id="@+id/tv_see_profile_data"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/middle_margin"
-            android:text="1997-03-05"
+            android:text="年-月-日"
             android:textColor="@color/colorAccent"
             android:textSize="@dimen/common_text_size_middle" />
     </LinearLayout>
@@ -94,10 +95,11 @@
             android:text="@string/email" />
 
         <TextView
+            android:id="@+id/tv_see_profile_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/middle_margin"
-            android:text="1719937412@qq.com"
+            android:text="邮箱"
             android:textSize="@dimen/common_text_size_middle" />
     </LinearLayout>
 

@@ -14,11 +14,14 @@ import com.youth.banner.Banner;
 import com.youth.banner.loader.ImageLoader;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.SpotListAdapter;
+import com.zzued.campustravel.modelclass.Spot;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ScenicAreaIntroActivity extends BaseActivity {
 
+    private List<Spot> spotList = new ArrayList<>();
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +50,7 @@ public class ScenicAreaIntroActivity extends BaseActivity {
         // todo set data
         RecyclerView rcvSpotList = findViewById(R.id.rcv_scenic_area_spot_list);
         rcvSpotList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        rcvSpotList.setAdapter(new SpotListAdapter(this));
+        rcvSpotList.setAdapter(new SpotListAdapter(this, new ArrayList<Spot>(2)));
 
     }
 }

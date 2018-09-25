@@ -2,28 +2,34 @@ package com.zzued.campustravel.fragment;
 
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.activity.BrowseHistoryActivity;
+
 import com.zzued.campustravel.activity.ModifyPasswordActivity;
 import com.zzued.campustravel.activity.ModifyProfileActivity;
 import com.zzued.campustravel.activity.SeeProfileActivity;
-import com.zzued.campustravel.activity.SettingActivity;
+
 import com.zzued.campustravel.activity.StartActivity;
 import com.zzued.campustravel.activity.WalletCouponActivity;
-import com.zzued.campustravel.adapter.WalletCouponAdapter;
+
 import com.zzued.campustravel.util.ActivityCollector;
-import com.zzued.campustravel.view.CustomTitleBar;
+
+import static android.content.Context.MODE_PRIVATE;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,33 +40,45 @@ public class HomeRightFragment extends Fragment {
     public HomeRightFragment() {
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_right, container, false);
-        TextView coupon = view.findViewById(R.id.tv_home_right_coupon);
 
-        coupon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), WalletCouponActivity.class));
-            }
-        });
+
+        SharedPreferences fromLogin = getActivity().getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
+        String account= fromLogin.getString("emailAddress", "null");
 
         RelativeLayout rlMe = view.findViewById(R.id.rl_home_right_me);
         rlMe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 startActivity(new Intent(getContext(), SeeProfileActivity.class));
             }
         });
 
-        TextView modifyProfile = view.findViewById(R.id.tv_home_right_modify_profile);
-        modifyProfile.setOnClickListener(new View.OnClickListener() {
+        TextView tv_home_right_name = rlMe.findViewById(R.id.tv_home_right_name);
+        TextView tv_home_right_account = rlMe.findViewById(R.id.tv_home_right_account);
+        ImageView head = rlMe.findViewById(R.id.iv_home_right_me);
+
+        SharedPreferences headSP = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
+        String headId= headSP.getString("emailAddress", "null");
+        if(headId.equals("1")){
+            head.setImageResource(R.drawable.img_modify_profile_head_1);
+        }else if (head.equals("2")){
+            head.setImageResource(R.drawable.img_modify_profile_head_2);
+        }else if(head.equals("3")){
+            head.setImageResource(R.drawable.img_modify_profile_head_3);
+        }
+        tv_home_right_name.setText(account);
+        tv_home_right_account.setText(account);
+
+        TextView coupon = view.findViewById(R.id.tv_home_right_coupon);
+        coupon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ModifyProfileActivity.class));
+                startActivity(new Intent(getContext(), WalletCouponActivity.class));
             }
         });
 
@@ -69,6 +87,15 @@ public class HomeRightFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(getContext(), ModifyPasswordActivity.class));
+            }
+        });
+
+
+        TextView modifyProfile = view.findViewById(R.id.tv_home_right_modify_profile);
+        modifyProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), ModifyProfileActivity.class));
             }
         });
 
@@ -89,7 +116,9 @@ public class HomeRightFragment extends Fragment {
                             public void onClick(DialogInterface dialog, int which) {
                                 int sz = ActivityCollector.size();
                                 startActivity(new Intent(getContext(), StartActivity.class));
-                                //Todo 记得清除缓存的密码
+                                //清空数据
+                                SharedPreferences sp = getActivity().getSharedPreferences("AccountAndPassWord",MODE_PRIVATE);
+                                sp.edit().clear().commit();
                                 ActivityCollector.finishFromStart(sz);
                             }
                         })
@@ -99,5 +128,6 @@ public class HomeRightFragment extends Fragment {
 
         return view;
     }
+
 
 }

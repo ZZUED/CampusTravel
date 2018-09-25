@@ -10,6 +10,20 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs{
+        release{
+            storeFile file("d:\\campustravelkeystore\\campustravel.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+        debug{
+            storeFile file("d:\\campustravelkeystore\\campustraveldebug.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
@@ -45,4 +59,5 @@ dependencies {
     //implementation 'com.amap.api:3dmap:6.4.1'
     //定位功能
     implementation 'com.amap.api:location:4.2.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
 }

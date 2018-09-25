@@ -3,6 +3,8 @@ package com.zzued.campustravel.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.LayoutInflater;
@@ -16,11 +18,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.view.CustomTitleBar;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
+
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ModifyProfileActivity extends BaseActivity {
     private LinearLayout llHead;
@@ -38,6 +47,13 @@ public class ModifyProfileActivity extends BaseActivity {
 
     private CustomTitleBar titleBar;
 
+    private String emailContent_midofy;
+    private String passwordContent_midofy;
+    private String headContent_midofy;
+    private String accountContent_midofy;
+    private String sexContent_midofy;
+    private String birthdayContent_midofy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,13 +67,60 @@ public class ModifyProfileActivity extends BaseActivity {
         ivHead = findViewById(R.id.iv_modify_profile_head);
         tvName = findViewById(R.id.tv_modify_profile_name);
         tvBirth = findViewById(R.id.tv_modify_profile_birthday);
-        genderGroup = findViewById(R.id.rdgrp_modify_profile_gender);
 
         titleBar.setRightTextListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // todo send modified data
-                finish();
+                accountContent_midofy = tvName.getText().toString();
+                birthdayContent_midofy = tvBirth.getText().toString().replace("/","-");
+                SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
+                emailContent_midofy = fromLogin.getString("emailAddress", "null");
+                passwordContent_midofy = fromLogin.getString("password", "null");
+                if(accountContent_midofy!=null&&
+                        birthdayContent_midofy!=null&&
+                        sexContent_midofy!=null&&
+                        headContent_midofy!=null){
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                OkHttpClient client = new OkHttpClient();
+                                RequestBody requestBody = new FormBody.Builder()
+                                        .add("emailAddress",emailContent_midofy)
+                                        .add("password",passwordContent_midofy)
+                                        .add("headUrl",headContent_midofy)
+                                        .add("userName",accountContent_midofy)
+                                        .add("sex",sexContent_midofy)
+                                        .add("birthday",birthdayContent_midofy)
+                                        .build();
+                                Request request = new Request.Builder()
+                                        .url("http://maxerwinsmith.qicp.io:49291/updateUserByEmailAddressAndPassword")
+                                        .post(requestBody)
+                                        .build();
+                                Response response = client.newCall(request).execute();
+                                String sss = response.body().string();
+                                if(sss.equals("1")){
+                                    finish();
+                                }else{
+                                    Toast.makeText(ModifyProfileActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                                }
+                            }catch (Exception e){
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
+                }else{
+                    Toast.makeText(ModifyProfileActivity.this,"输入内容不完整",Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        genderGroup = findViewById(R.id.rdgrp_modify_profile_gender);
+        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                selectatRadio();
             }
         });
 
@@ -133,6 +196,11 @@ public class ModifyProfileActivity extends BaseActivity {
         });
     }
 
+    //获取RadioButton的内容
+    private void selectatRadio(){
+        int id = genderGroup.getCheckedRadioButtonId();
+        sexContent_midofy = String.valueOf(id == R.id.rdgrp_modify_profile_gender? 1: 0);
+    }
 
     public void setIvHead() {
 
@@ -149,6 +217,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_1);
+                headContent_midofy = "1";
                 dialog.dismiss();
             }
         });
@@ -158,6 +227,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_2);
+                headContent_midofy = "2";
                 dialog.dismiss();
             }
         });
@@ -167,6 +237,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_3);
+                headContent_midofy = "3";
                 dialog.dismiss();
             }
         });

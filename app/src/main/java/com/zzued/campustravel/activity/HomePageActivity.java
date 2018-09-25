@@ -1,7 +1,10 @@
 package com.zzued.campustravel.activity;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -12,13 +15,22 @@ import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.AMap;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.HomePagerAdapter;
+import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.util.MyApplication;
 import com.zzued.campustravel.util.PermissionHelper;
 import com.zzued.campustravel.view.CustomHomeBtmNavi;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class HomePageActivity extends BaseActivity {
     // 权限相关变量
@@ -45,6 +57,23 @@ public class HomePageActivity extends BaseActivity {
 
     private ArrayList<CustomHomeBtmNavi> btmNavis;
     private ViewPager viewPager;
+
+    private Handler handler = new Handler(new Handler.Callback() {
+
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what){
+                case 1:
+                    List<Spot> spots = (List<Spot>) msg.obj;
+                    HomePagerAdapter adapter = (HomePagerAdapter) viewPager.getAdapter();
+                    adapter.getLeftFragment().setData(spots);
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +110,9 @@ public class HomePageActivity extends BaseActivity {
                     Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Toast.makeText(HomePageActivity.this, "经纬度：" +
-                        amapLocation.getLatitude() + ", " + amapLocation.getLongitude(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onLocationChanged: lat: " + amapLocation.getLatitude());
                 setMyLocation(amapLocation);
+                sendMyLocation();
             }
         };
         //设置定位回调监听
@@ -185,4 +214,27 @@ public class HomePageActivity extends BaseActivity {
             startLocate();
     }
 
+    public void sendMyLocation(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try{
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url("http://maxerwinsmith.qicp.io:49291/map/requestMainInterfaceScenicSpotInfos?longitude="+
+                                    getMyLocation().getLongitude()+"&dimension="+getMyLocation().getLatitude())
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String spotDate = response.body().string();
+                    Gson gson = new Gson();
+                    Message message = new Message();
+                    message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>(){}.getType());
+                    message.what = 1;
+                    handler.sendMessage(message);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
 }

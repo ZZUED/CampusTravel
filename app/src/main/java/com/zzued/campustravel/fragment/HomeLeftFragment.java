@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +16,8 @@ import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.FlatMapActivity;
 import com.zzued.campustravel.activity.RouteRecommendActivity;
@@ -24,7 +27,13 @@ import com.zzued.campustravel.activity.ThermalMapActivity;
 import com.zzued.campustravel.activity.VoiceAssistActivity;
 import com.zzued.campustravel.activity.VoiceInteractActivity;
 import com.zzued.campustravel.adapter.SpotListAdapter;
+import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.view.CustomHomeLeftGridItem;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,18 +41,25 @@ import com.zzued.campustravel.view.CustomHomeLeftGridItem;
  */
 public class HomeLeftFragment extends Fragment {
 
+    private SpotListAdapter spotlistadapter;
+    private List<Spot> spotList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
         initListener(view);
 
-        // todo set data of rcv
+        spotlistadapter = new SpotListAdapter(getContext(), spotList);
         RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);
         rcvSpotList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
-        rcvSpotList.setAdapter(new SpotListAdapter(getContext()));
-
+        rcvSpotList.setAdapter(spotlistadapter);
         return view;
+    }
+
+    public void setData(List<Spot> spotList){
+        this.spotList = spotList;
+        spotlistadapter.notifyDataSetChanged();
+
     }
 
     /**
@@ -128,6 +144,14 @@ public class HomeLeftFragment extends Fragment {
                 startActivity(new Intent(getContext(), ScenicAreaIntroActivity.class));
             }
         });
+
+        //右上角定位信息
+        TextView tv_fragment_home_left_pos = view.findViewById(R.id.tv_fragment_home_left_pos);
+        tv_fragment_home_left_pos.setText("郑州大学");
+
+        TextView tv_home_left_loading = view.findViewById(R.id.tv_home_left_loading);
+        tv_home_left_loading.setVisibility(View.INVISIBLE);
+
     }
 
     /**
