@@ -75,7 +75,7 @@
     <!--route recommend-->
     <string name="travel_route_recommend">游览路线推荐</string>
     <string name="start_recommend">开始推荐</string>
-    <string name="click_and_pick_scenic_spot">点击勾选你想去的所有景点</string>
+    <string name="click_and_pick_scenic_spot">点击选择途径点</string>
     <string name="your_current_scenic_spot">您所处的景区为：</string>
     <string name="please_pick_scenic_spot">请勾选你想去的所有景点</string>
     <string name="ok">确定</string>

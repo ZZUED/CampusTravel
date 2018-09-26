@@ -10,13 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.ActivityCollector;
+import com.zzued.campustravel.util.MyApplication;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
@@ -33,6 +33,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class RegisterActivity extends BaseActivity {
+    private static final String TAG = "RegisterActivity";
 
     private TextView mTvBirth, mTvArticle;
     private EditText mEtAccount, mEtPassowrd, mEtCertifyCode, mEtPasswordConfirm;
@@ -64,38 +65,37 @@ public class RegisterActivity extends BaseActivity {
                 mEtCertifyCode = findViewById(R.id.et_reg_phone);
                 mEtPasswordConfirm = findViewById(R.id.et_reg_password_confirm);
                 mRgGender = findViewById(R.id.rg_reg_gender);
-                // todo check and register
                 mEtAccountContent = mEtAccount.getText().toString();
                 mEtCertifyCodeContent = mEtCertifyCode.getText().toString();
                 mEtPasswordContent = mEtPassowrd.getText().toString();
                 mEtPasswordConfirmContent = mEtPasswordConfirm.getText().toString();
-                mTvBirthContent = mTvBirth.getText().toString().replace("/","-");
+                mTvBirthContent = mTvBirth.getText().toString().replace("/", "-");
 
-                if (DEBUG){
+                if (MyApplication.DEBUG) {
                     int num = ActivityCollector.size();
                     startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                     ActivityCollector.finishFromStart(num);
-                    return;
-                }else {
-                    if (mEtAccountContent!= null &&
-                            mEtCertifyCodeContent!= null &&
-                            mEtPasswordContent!= null &&
-                            mEtPasswordConfirmContent!= null &&
-                            mTvBirthContent!= null&&
-                            radioButtonContent!=null) {
-                        if(isPasswordSame(mEtPassowrd.getText().toString(), mEtPasswordConfirm.getText().toString())){
+                    Log.e(TAG, "onClick: debugging now, no register");
+                } else {
+                    if (mEtAccountContent != null &&
+                            mEtCertifyCodeContent != null &&
+                            mEtPasswordContent != null &&
+                            mEtPasswordConfirmContent != null &&
+                            mTvBirthContent != null &&
+                            radioButtonContent != null) {
+                        if (isPasswordSame(mEtPassowrd.getText().toString(), mEtPasswordConfirm.getText().toString())) {
                             new Thread(new Runnable() {
                                 @Override
                                 public void run() {
                                     try {
                                         OkHttpClient client = new OkHttpClient();
                                         RequestBody requestBody = new FormBody.Builder()
-                                                .add("emailAddress",mEtAccountContent)
-                                                .add("password",mEtPasswordContent)
-                                                .add("confirmPassword",mEtPasswordConfirmContent)
-                                                .add("token",mEtCertifyCodeContent)
-                                                .add("birthday",mTvBirthContent)
-                                                .add("sex",radioButtonContent)
+                                                .add("emailAddress", mEtAccountContent)
+                                                .add("password", mEtPasswordContent)
+                                                .add("confirmPassword", mEtPasswordConfirmContent)
+                                                .add("token", mEtCertifyCodeContent)
+                                                .add("birthday", mTvBirthContent)
+                                                .add("sex", radioButtonContent)
                                                 .build();
                                         Request request = new Request.Builder()
                                                 .url("http://maxerwinsmith.qicp.io:49291/registerWithEmailAddress")
@@ -112,18 +112,18 @@ public class RegisterActivity extends BaseActivity {
                                         int num = ActivityCollector.size();
                                         startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                                         ActivityCollector.finishFromStart(num);
-                                    }catch (Exception e){
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
                                 }
                             }).start();
-                        }else{
-                            Toast.makeText(getApplicationContext(),"两个密码不一致",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "两个密码不一致", Toast.LENGTH_SHORT).show();
                             mEtPasswordConfirm.setText("");
                         }
 
-                    }else{
-                        Toast.makeText(getApplicationContext(),"有内容未填写",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "有内容未填写", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -173,7 +173,7 @@ public class RegisterActivity extends BaseActivity {
         mTvArticle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo show 协议条款 协议条款可以打开 web view 从服务器获取条款的网页
+                // 协议条款 协议条款可以打开 web view 从服务器获取条款的网页
             }
         });
 
@@ -187,27 +187,27 @@ public class RegisterActivity extends BaseActivity {
     }
 
     //获取RadioButton的内容
-    private void selectRadio(){
+    private void selectRadio() {
         int id = mRgGender.getCheckedRadioButtonId();
-        radioButtonContent = String.valueOf(id == R.id.radio_btn_female? 1: 0);
+        radioButtonContent = String.valueOf(id == R.id.radio_btn_female ? 1 : 0);
     }
 
     //正则表达式判断邮箱格式是否正确
-    public boolean isEmailAddressRight(String s){
+    public boolean isEmailAddressRight(String s) {
         Pattern p = Pattern.compile("^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\\.([a-zA-Z0-9_-])+)+$");
         Matcher m = p.matcher(s);
         boolean b = m.matches();
-        return  b;
+        return b;
     }
 
     //请求获得验证码
-    private void sendRequestToGetCertifyCode(){
+    private void sendRequestToGetCertifyCode() {
         final String Eaddress = mEtAccount.getText().toString();
-        if(isEmailAddressRight(Eaddress)){
+        if (isEmailAddressRight(Eaddress)) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    try{
+                    try {
                         OkHttpClient client = new OkHttpClient();
                         Request request = new Request.Builder()
                                 .url("http://maxerwinsmith.qicp.io:49291/sendEmailAndReturnState?emailAddress=" + Eaddress)
@@ -215,21 +215,21 @@ public class RegisterActivity extends BaseActivity {
                         Response response = client.newCall(request).execute();
                         String ss = response.body().string();
                         Toast.makeText(getApplicationContext(), "验证码已发送", Toast.LENGTH_SHORT).show();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }).start();
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "邮箱格式不正确", Toast.LENGTH_SHORT).show();
         }
     }
 
     //判断两次输入的密码是否一样
-    public boolean isPasswordSame(String p1,String p2){
+    public boolean isPasswordSame(String p1, String p2) {
         if (p1.equals(p2))
             return true;
-        else{
+        else {
             return false;
         }
     }

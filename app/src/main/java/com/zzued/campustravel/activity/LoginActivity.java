@@ -1,6 +1,5 @@
 package com.zzued.campustravel.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -8,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.ActivityCollector;
+import com.zzued.campustravel.util.MyApplication;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -24,8 +25,9 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginActivity extends BaseActivity {
+    private static final String TAG = "LoginActivity";
     private SharedPreferences pref;
-    private SharedPreferences.Editor editor ;
+    private SharedPreferences.Editor editor;
 
     private EditText etAccount;
     private EditText etPassword;
@@ -72,15 +74,14 @@ public class LoginActivity extends BaseActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (DEBUG){
+                if (MyApplication.DEBUG) {
                     int sz = ActivityCollector.size();
                     startActivity(new Intent(LoginActivity.this, HomePageActivity.class));
                     ActivityCollector.finishFromStart(sz);
-                    return;
-                }else {
+                    Log.e(TAG, "onClick: debugging now, no need to login");
+                } else {
                     final String account = etAccount.getText().toString();
                     final String password = etPassword.getText().toString();
-
 
                     new Thread(new Runnable() {
                         @Override

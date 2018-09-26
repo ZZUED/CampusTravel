@@ -10,8 +10,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.youth.banner.Banner;
-import com.youth.banner.loader.ImageLoader;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.SpotListAdapter;
 import com.zzued.campustravel.modelclass.Spot;

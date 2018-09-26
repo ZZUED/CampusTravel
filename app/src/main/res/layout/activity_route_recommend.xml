@@ -5,11 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.RouteRecommendActivity">
-    <TextView
+    <com.amap.api.maps.MapView
+        android:id="@+id/map_route_rec_map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="this is a map"/>
+        android:layout_height="match_parent"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -29,6 +28,7 @@
             android:padding="@dimen/small_margin"
             android:clickable="true"
             android:focusable="true"
+            android:visibility="gone"
             android:textColor="@android:color/white"
             android:text="@string/click_and_pick_scenic_spot"/>
     </LinearLayout>
@@ -43,6 +43,6 @@
         android:background="@drawable/ripple_start_button"
         android:textColor="@android:color/white"
         android:textSize="@dimen/common_text_size_middle"
-        android:text="@string/start_recommend"
+        android:text="@string/click_and_pick_scenic_spot"
         />
 </FrameLayout>

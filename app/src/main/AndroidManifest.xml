@@ -63,7 +63,7 @@
         <activity android:name=".activity.ThermalMapActivity" />
         <activity android:name=".activity.FlatMapActivity" />
         <activity android:name=".activity.RouteRecommendActivity" />
-        <activity android:name=".activity.VoiceInteractActivity" />
+        <activity android:name=".activity.VoiceIntroActivity" />
         <activity android:name=".activity.VoiceAssistActivity" />
         <activity android:name=".activity.ScenicAreaIntroActivity" />
         <activity android:name=".activity.ScenicSpotIntroActivity" />
