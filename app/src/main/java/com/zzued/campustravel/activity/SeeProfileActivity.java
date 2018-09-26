@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.User;
 import com.zzued.campustravel.util.ActivityCollector;
 
@@ -107,15 +108,17 @@ public class SeeProfileActivity extends BaseActivity {
                             .add("password",getPassword)
                             .build();
                     Request request = new Request.Builder()
-                            .url("http://maxerwinsmith.qicp.io:49291/findARecordByEmailAndPassword")
+                            .url(Constant.Url_SeeProfileActivity)
                             .post(requestBody)
                             .build();
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
-                    Message message = new Message();
-                    message.obj = data;
-                    message.what = 1;
-                    handler.sendMessage(message);
+                    if(data!=null){
+                        Message message = new Message();
+                        message.obj = data;
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    }
                 }catch (Exception e){
                     e.printStackTrace();
                 }

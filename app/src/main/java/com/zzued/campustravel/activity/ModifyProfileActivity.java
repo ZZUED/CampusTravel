@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.view.CustomTitleBar;
 
@@ -95,7 +96,7 @@ public class ModifyProfileActivity extends BaseActivity {
                                         .add("birthday",birthdayContent_midofy)
                                         .build();
                                 Request request = new Request.Builder()
-                                        .url("http://maxerwinsmith.qicp.io:49291/updateUserByEmailAddressAndPassword")
+                                        .url(Constant.Url_ModifyProfileActivity)
                                         .post(requestBody)
                                         .build();
                                 Response response = client.newCall(request).execute();

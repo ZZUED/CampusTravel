@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.util.MyApplication;
 
@@ -98,7 +99,7 @@ public class RegisterActivity extends BaseActivity {
                                                 .add("sex", radioButtonContent)
                                                 .build();
                                         Request request = new Request.Builder()
-                                                .url("http://maxerwinsmith.qicp.io:49291/registerWithEmailAddress")
+                                                .url(Constant.Url_RigisterActivity_two)
                                                 .post(requestBody)
                                                 .build();
                                         Response response = client.newCall(request).execute();
@@ -210,7 +211,7 @@ public class RegisterActivity extends BaseActivity {
                     try {
                         OkHttpClient client = new OkHttpClient();
                         Request request = new Request.Builder()
-                                .url("http://maxerwinsmith.qicp.io:49291/sendEmailAndReturnState?emailAddress=" + Eaddress)
+                                .url(Constant.Url_RigisterActivity_one + Eaddress)
                                 .build();
                         Response response = client.newCall(request).execute();
                         String ss = response.body().string();

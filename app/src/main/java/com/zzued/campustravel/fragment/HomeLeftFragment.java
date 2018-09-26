@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,7 @@ import java.util.List;
  * Left page inside viewpager in {@link com.zzued.campustravel.activity.HomePageActivity}
  */
 public class HomeLeftFragment extends Fragment {
+    private static final String TAG = "HomeLeftFragment";
 
     private SpotListAdapter spotlistadapter;
     private List<Spot> spotList = new ArrayList<>();
@@ -49,6 +51,7 @@ public class HomeLeftFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
         initListener(view);
 
+        Log.e(TAG, "onCreateView: on create");
         spotlistadapter = new SpotListAdapter(getContext(), spotList);
         RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);
         rcvSpotList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
@@ -57,9 +60,11 @@ public class HomeLeftFragment extends Fragment {
     }
 
     public void setData(List<Spot> spotList){
-        this.spotList = spotList;
+        this.spotList.clear();
+        this.spotList.addAll(spotList);
+        Log.e(TAG, "setData: adapter" + spotlistadapter);
+        Log.e(TAG, "setData: " + this.spotList.get(0));
         spotlistadapter.notifyDataSetChanged();
-
     }
 
     /**

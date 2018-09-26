@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -14,7 +13,6 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.amap.api.maps.AMap;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
@@ -31,6 +29,8 @@ import java.util.List;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.zzued.campustravel.constant.Constant.Url_HomePageActivity;
 
 public class HomePageActivity extends BaseActivity {
     // 权限相关变量
@@ -65,6 +65,7 @@ public class HomePageActivity extends BaseActivity {
             switch (msg.what){
                 case 1:
                     List<Spot> spots = (List<Spot>) msg.obj;
+                    Log.e(TAG, "handleMessage: " + spots.get(0));
                     HomePagerAdapter adapter = (HomePagerAdapter) viewPager.getAdapter();
                     adapter.getLeftFragment().setData(spots);
                     break;
@@ -110,7 +111,6 @@ public class HomePageActivity extends BaseActivity {
                     Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Log.e(TAG, "onLocationChanged: lat: " + amapLocation.getLatitude());
                 Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
                 if (MyApplication.DEBUG){
                     Log.e(TAG, "onLocationChanged: debugging now, send no location info");
@@ -226,11 +226,12 @@ public class HomePageActivity extends BaseActivity {
                 try{
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://maxerwinsmith.qicp.io:49291/map/requestMainInterfaceScenicSpotInfos?longitude="+
+                            .url(Constant.Url_HomePageActivity+"longitude="+
                                     getMyLocation().getLongitude()+"&dimension="+getMyLocation().getLatitude())
                             .build();
                     Response response = client.newCall(request).execute();
                     String spotDate = response.body().string();
+                    Log.e(TAG, "run: spotDate" + spotDate);
                     Gson gson = new Gson();
                     Message message = new Message();
                     message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>(){}.getType());

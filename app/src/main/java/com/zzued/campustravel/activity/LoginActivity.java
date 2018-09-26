@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.util.MyApplication;
 
@@ -93,7 +94,7 @@ public class LoginActivity extends BaseActivity {
                                         .add("password", password)
                                         .build();
                                 Request request = new Request.Builder()
-                                        .url("http://maxerwinsmith.qicp.io:49291/login")
+                                        .url(Constant.Url_LoginActivity)
                                         .post(requestBody)
                                         .build();
                                 Response response = client.newCall(request).execute();

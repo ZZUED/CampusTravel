@@ -7,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.view.CustomTitleBar;
 
 import okhttp3.FormBody;
@@ -63,7 +64,7 @@ public class ModifyPasswordActivity extends BaseActivity {
                                             .add("newPassword",newpw_e)
                                             .build();
                                     Request request = new Request.Builder()
-                                            .url("http://maxerwinsmith.qicp.io:49291/updatePassword")
+                                            .url(Constant.Url_ModifyPasswordActivity)
                                             .post(requestBody)
                                             .build();
                                     Response response = client.newCall(request).execute();

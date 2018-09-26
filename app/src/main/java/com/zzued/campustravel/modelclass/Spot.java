@@ -1,37 +1,42 @@
 package com.zzued.campustravel.modelclass;
 
 public class Spot {
-    private String SpotId;
-    private String SpotName;
-    private String SpotPictureUrl;
+    private int scenicSpotId;
+    private String scenicSpotName;
+    private String pictureUrl;
 
-    public Spot(String SpotId,String SpotName,String SpotPictureUrl){
-        this.SpotId = SpotId;
-        this.SpotName = SpotName;
-        this.SpotPictureUrl = SpotPictureUrl;
+    public Spot(int SpotId, String SpotName, String SpotPictureUrl){
+        this.scenicSpotId = SpotId;
+        this.scenicSpotName = SpotName;
+        this.pictureUrl = SpotPictureUrl;
     }
 
-    public String getSpotId() {
-        return SpotId;
+    public int getScenicSpotId() {
+        return scenicSpotId;
     }
 
-    public void setSpotId(String spotId) {
-        SpotId = spotId;
+    public void setScenicSpotId(int scenicSpotId) {
+        this.scenicSpotId = scenicSpotId;
     }
 
-    public String getSpotName() {
-        return SpotName;
+    public String getScenicSpotName() {
+        return scenicSpotName;
     }
 
-    public void setSpotName(String spotName) {
-        SpotName = spotName;
+    public void setScenicSpotName(String scenicSpotName) {
+        this.scenicSpotName = scenicSpotName;
     }
 
-    public String getSpotPictureUrl() {
-        return SpotPictureUrl;
+    public String getPictureUrl() {
+        return pictureUrl;
     }
 
-    public void setSpotPictureUrl(String spotPictureUrl) {
-        SpotPictureUrl = spotPictureUrl;
+    @Override
+    public String toString() {
+        return "spot: id=" + scenicSpotId + " name:" + scenicSpotName + " url:" + pictureUrl;
+    }
+
+    public void setPictureUrl(String pictureUrl) {
+        this.pictureUrl = pictureUrl;
     }
 }

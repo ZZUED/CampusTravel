@@ -33,6 +33,18 @@ android {
     }
     productFlavors {
     }
+    sourceSets{
+
+        main {
+
+            //jni库的调用会到资源文件夹下libs里面找so文件
+
+            jniLibs.srcDirs = ['libs']
+
+        }
+
+    }
+
 }
 
 dependencies {
@@ -50,4 +62,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.github.bumptech.glide:glide:3.5.2'
 }

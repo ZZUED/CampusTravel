@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 
 public class MyApplication extends Application {
-    public static boolean DEBUG = true;
+    public static boolean DEBUG = false;
 
     @SuppressLint("StaticFieldLeak")
     private static Context context;
