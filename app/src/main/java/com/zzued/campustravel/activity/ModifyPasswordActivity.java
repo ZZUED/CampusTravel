@@ -1,5 +1,6 @@
 package com.zzued.campustravel.activity;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -46,7 +47,6 @@ public class ModifyPasswordActivity extends BaseActivity {
         titleBar.setRightTextListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo send password data
                 account_e = etAccount.getText().toString();
                 oldpw_e = etOldPw.getText().toString();
                 newpw_e = etNewPw.getText().toString();
@@ -92,7 +92,9 @@ public class ModifyPasswordActivity extends BaseActivity {
         tvForget.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo ??? what should I do ???
+                new AlertDialog.Builder(ModifyPasswordActivity.this)
+                        .setMessage("相信你不会忘记的")
+                        .show();
             }
         });
     }

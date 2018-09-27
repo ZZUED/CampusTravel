@@ -13,8 +13,7 @@
             android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_zzu_lib"/>
+            android:scaleType="centerCrop"/>
 
         <ImageButton
             android:id="@+id/img_btn_scenic_area_spot_play"
@@ -35,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/middle_margin"
-        android:text="郑州大学"
+        android:text=""
         android:textColor="@android:color/black"
         android:textSize="@dimen/home_page_title_size_middle" />
 
@@ -53,7 +52,6 @@
             android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Zhengzhou University"
             android:textSize="@dimen/home_page_title_size_small" />
 
         <TextView
@@ -112,6 +110,5 @@
         android:layout_marginStart="@dimen/middle_margin"
         android:layout_marginTop="@dimen/middle_margin"
         android:lineSpacingExtra="@dimen/small_margin"
-        android:text="@string/zzu_intro"
         android:textSize="@dimen/common_text_size_large" />
 </LinearLayout>

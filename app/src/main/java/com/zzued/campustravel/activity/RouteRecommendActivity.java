@@ -14,7 +14,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.LatLng;
 import com.amap.api.navi.model.NaviLatLng;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.PermissionHelper;

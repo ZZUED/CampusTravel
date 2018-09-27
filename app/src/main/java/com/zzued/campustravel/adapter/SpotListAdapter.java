@@ -45,11 +45,13 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.ViewHo
         Glide.with(context).load(strURL).placeholder(R.mipmap.ic_launcher).into(holder.iv);
         holder.tv.setText(spot.getScenicSpotName());
 
+        final int tmp = spot.getScenicSpotId();
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo add spot info intent传递信息
-                context.startActivity(new Intent(context, ScenicSpotIntroActivity.class));
+                Intent intent = new Intent(context, ScenicSpotIntroActivity.class);
+                intent.putExtra("id", tmp);
+                context.startActivity(intent);
             }
         });
     }

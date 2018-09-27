@@ -12,14 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.Intro;
-import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.util.TextToSpeech;
-
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -79,7 +75,7 @@ public class VoiceIntroActivity extends BaseActivity {
                     stopPlay();
                     ((AnimationDrawable) ivSpeaker.getDrawable()).stop();
                     ivSpeaker.setImageResource(R.drawable.ic_voice_inter_speaker_gray);
-                    btnStopVoice.setText(getResources().getString(R.string.go_on_introducing));
+                    btnStopVoice.setText(getResources().getString(R.string.start_introducing));
                     tvTitle.setText(R.string.voice_introducing_paused);
                 } else {
 

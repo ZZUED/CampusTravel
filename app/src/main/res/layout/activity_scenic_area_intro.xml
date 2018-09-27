@@ -70,6 +70,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/small_margin"
                     android:text="@string/scenic_spot_list_in_area"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/home_page_title_size_small" />

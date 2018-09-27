@@ -14,9 +14,6 @@ import com.zzued.campustravel.util.ActivityCollector;
 public class SettingActivity extends BaseActivity {
     private TextView modifyProfile;
     private TextView modifyPassword;
-    private TextView notify;
-    private TextView help;
-    private TextView about;
     private Button exitLogin;
 
     @Override

@@ -1,19 +1,16 @@
 package com.zzued.campustravel.activity;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.User;
-import com.zzued.campustravel.util.ActivityCollector;
 
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
@@ -38,9 +35,9 @@ public class SeeProfileActivity extends BaseActivity {
     private String getEmail;
     private String getPassword;
 
-    private Handler handler = new Handler(){
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
-        public void handleMessage(Message msg) {
+        public boolean handleMessage(Message msg) {
             switch(msg.what){
                 case 1:
                     if(msg.obj!=null){
@@ -76,9 +73,9 @@ public class SeeProfileActivity extends BaseActivity {
                 default:
                     break;
             }
-
+            return true;
         }
-    };;
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

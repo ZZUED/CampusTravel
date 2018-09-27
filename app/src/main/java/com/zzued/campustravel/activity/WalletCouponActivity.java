@@ -15,7 +15,6 @@ import com.zzued.campustravel.modelclass.Coupon;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import okhttp3.OkHttpClient;

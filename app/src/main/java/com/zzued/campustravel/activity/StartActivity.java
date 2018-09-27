@@ -3,12 +3,9 @@ package com.zzued.campustravel.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.Button;
 
 import com.zzued.campustravel.R;
-
-import java.util.ArrayList;
 
 public class StartActivity extends BaseActivity {
 

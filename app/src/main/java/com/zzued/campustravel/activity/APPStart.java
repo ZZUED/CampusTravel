@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 
 public class APPStart extends BaseActivity{
@@ -26,7 +25,6 @@ public class APPStart extends BaseActivity{
         Boolean first_run = sharedPreferences.getBoolean("First",true);
         if (first_run){
             sharedPreferences.edit().putBoolean("First",false).commit();
-            Toast.makeText(this,"第一次", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(APPStart.this, APPGuide.class);
             startActivity(intent);
             this.finish();
@@ -38,12 +36,10 @@ public class APPStart extends BaseActivity{
 
             //如果读到了账号密码不是“null”，那么直接登录
             if ((!account.equals("null"))&&(!pass_word.equals("null"))){
-                Toast.makeText(this,"不是第一次使用APP，有账号密码", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(APPStart.this, HomePageActivity.class);
                 startActivity(intent);
                 this.finish();
             }else{
-                Toast.makeText(this,"不是第一次使用APP，无账号密码", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(APPStart.this, StartActivity.class);
                 startActivity(intent);
                 this.finish();

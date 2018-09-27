@@ -3,7 +3,6 @@ package com.zzued.campustravel.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -19,7 +18,6 @@ import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.constant.Constant;
-import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.view.CustomTitleBar;
 
 import java.util.Calendar;
@@ -121,14 +119,6 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 selectatRadio();
-            }
-        });
-
-
-        llHead.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // todo fire a dialog
             }
         });
 
