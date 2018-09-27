@@ -11,7 +11,7 @@ import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.TextToSpeech;
 
 public class VoiceIntroActivity extends BaseActivity {
-    private boolean btnTagPaused = false;
+    private boolean btnTagPaused = true;
     private Button btnStopVoice;
     private ImageView ivSpeaker;
     private TextView tvTitle;
@@ -25,23 +25,25 @@ public class VoiceIntroActivity extends BaseActivity {
 
         tvTitle = findViewById(R.id.tv_voice_inter_title);
         ivSpeaker = findViewById(R.id.iv_voice_inter_speaker);
-        ivSpeaker.setImageResource(R.drawable.anim_list_voice_inter_speaker);
-        ((AnimationDrawable) ivSpeaker.getDrawable()).start();
-
         btnStopVoice = findViewById(R.id.btn_voice_inter_stop);
+
+        ivSpeaker.setImageResource(R.drawable.ic_voice_inter_speaker_gray);
+
         btnStopVoice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 btnTagPaused = !btnTagPaused;
                 if (btnTagPaused){
                     stopPlay();
+
                     ((AnimationDrawable) ivSpeaker.getDrawable()).stop();
                     ivSpeaker.setImageResource(R.drawable.ic_voice_inter_speaker_gray);
-                    btnStopVoice.setText(getResources().getString(R.string.go_on_introducing));
+                    btnStopVoice.setText(getResources().getString(R.string.start_introducing));
                     tvTitle.setText(R.string.voice_introducing_paused);
                 }
                 else {
                     startPlay(getResources().getString(R.string.zzu_intro));
+
                     ivSpeaker.setImageResource(R.drawable.anim_list_voice_inter_speaker);
                     ((AnimationDrawable) ivSpeaker.getDrawable()).start();
                     btnStopVoice.setText(getResources().getString(R.string.stop_introducing));
@@ -53,7 +55,7 @@ public class VoiceIntroActivity extends BaseActivity {
     }
     private void init(){
         tts = new TextToSpeech(this, null);
-        startPlay(getResources().getString(R.string.zzu_intro));
+//        startPlay(getResources().getString(R.string.zzu_intro));
     }
     private void startPlay(String text){
         tts.start(text);

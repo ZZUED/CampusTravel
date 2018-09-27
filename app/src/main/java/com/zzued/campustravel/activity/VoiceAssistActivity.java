@@ -23,7 +23,7 @@ import org.json.JSONObject;
 
 public class VoiceAssistActivity extends BaseActivity {
     private static final String TAG = "VoiceAssistActivity";
-    private static final int LEVEL_INIT = 4000;
+    private static final int LEVEL_INIT = 5000;
 
     private Button btnSpeak;
     private Drawable micDrawable;
@@ -73,7 +73,7 @@ public class VoiceAssistActivity extends BaseActivity {
                 new StageListener() {
                     @Override
                     public void onVoiceVolume(int i) {
-                        micDrawable.setLevel(i * 60 + LEVEL_INIT);
+                        micDrawable.setLevel(i * 50 + LEVEL_INIT);
                     }
                 });
     }

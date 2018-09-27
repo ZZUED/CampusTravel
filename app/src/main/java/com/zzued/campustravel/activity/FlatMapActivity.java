@@ -1,6 +1,9 @@
 package com.zzued.campustravel.activity;
 
+import android.location.Location;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
@@ -23,9 +26,17 @@ public class FlatMapActivity extends BaseActivity {
         mapView = findViewById(R.id.map_flat_map);
         mapView.onCreate(savedInstanceState);
 
-        AMap aMap = mapView.getMap();
+        final AMap aMap = mapView.getMap();
 
         setLocationStyle(aMap);
+
+        findViewById(R.id.btn_flat_back_to_my_pos).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Location location = aMap.getMyLocation();
+                aMap.animateCamera(CameraUpdateFactory.newLatLng(new LatLng(location.getLatitude(), location.getLongitude())));
+            }
+        });
     }
 
     /**
