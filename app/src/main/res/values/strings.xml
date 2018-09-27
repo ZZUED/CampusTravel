@@ -108,7 +108,7 @@
     <string name="voice_introducing_now">正在进行语音讲解</string>
     <string name="voice_introduce_hint">请打开定位，调节音量至合适大小，并保持网络通畅</string>
     <string name="stop_introducing">停止讲解</string>
-    <string name="go_on_introducing">继续讲解</string>
+    <string name="start_introducing">开始讲解</string>
     <string name="voice_introducing_paused">已暂停语音讲解</string>
 
     <!--voice assistant-->

@@ -54,11 +54,6 @@ public class RouteShowHelper {
     private AMapNavi mAMapNavi;
     private AMap mAmap;
 
-    /**
-     * 地图对象
-     */
-    private MapView mRouteMapView;
-
     private List<NaviLatLng> startList = new ArrayList<>();
     private List<NaviLatLng> endList = new ArrayList<>();
     /**
@@ -71,7 +66,6 @@ public class RouteShowHelper {
     private Context context;
 
     public RouteShowHelper(Context context, MapView mRouteMapView) {
-        this.mRouteMapView = mRouteMapView;
         this.context = context;
 
         mAmap = mRouteMapView.getMap();
@@ -106,7 +100,7 @@ public class RouteShowHelper {
         // 设置定位点半径颜色
         myLocationStyle.radiusFillColor(context.getResources().getColor(R.color.colorBlueTransparent));
 
-        mAmap.setMapType(AMap.MAP_TYPE_NAVI);
+//        mAmap.setMapType(AMap.MAP_TYPE_NAVI);
         try {
             mAMapNavi = AMapNavi.getInstance(context.getApplicationContext());
             if (mAMapNavi != null) {

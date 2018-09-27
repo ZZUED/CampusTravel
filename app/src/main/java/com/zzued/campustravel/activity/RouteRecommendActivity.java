@@ -14,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.navi.model.NaviLatLng;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.util.PermissionHelper;
@@ -51,19 +52,25 @@ public class RouteRecommendActivity extends BaseActivity {
         init();
     }
 
-    private void init(){
+    private void init() {
         routeShowHelper = new RouteShowHelper(this, mapView);
         Button btnRec = findViewById(R.id.btn_route_rec_start);
         btnRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 buildDialog(new String[]{
-                        "郑州大学图书馆",
-                        "郑州大学荷园",
-                        "郑州大学核心教学区",
-                        "郑州大学柳园",
                         "郑州大学南门",
-                }, "郑州大学商业街");
+                        "郑州大学五星广场",
+                        "郑州大学樱花林",
+                        "郑州大学眉湖",
+                        "郑州大学本源体育场",
+                        "郑州大学核心教学区",
+                        "郑州大学钟楼",
+                        "郑州大学图书馆",
+                        "郑州大学杏坛广场",
+                        "郑州大学厚山",
+                        "郑州大学北门",
+                }, "郑州大学核心教学区");
             }
         });
     }
@@ -106,19 +113,45 @@ public class RouteRecommendActivity extends BaseActivity {
      * 构造推荐路线的景点选择对话框
      *
      * @param items 景点名称列表
-     * @param pos   位置
+     * @param myPos 位置
      */
-    private void buildDialog(String[] items, String pos) {
+    private void buildDialog(String[] items, String myPos) {
         if (items == null) {
             Log.e(TAG, "buildDialog: items null");
             return;
         }
+        String[] spotTitles = new String[]{
+                "郑州大学南门",
+                "郑州大学五星广场",
+                "郑州大学樱花林",
+                "郑州大学眉湖",
+                "郑州大学本源体育场",
+                "郑州大学核心教学区",
+                "郑州大学钟楼",
+                "郑州大学图书馆",
+                "郑州大学杏坛广场",
+                "郑州大学厚山",
+                "郑州大学北门",
+        };
+        final NaviLatLng[] spotLatlngs = new NaviLatLng[]{
+                new NaviLatLng(34.808438, 113.535633),
+                new NaviLatLng(34.810288, 113.535613),
+                new NaviLatLng(34.813847, 113.534651),
+                new NaviLatLng(34.816845, 113.534514),
+                new NaviLatLng(34.817211, 113.533605),
+                new NaviLatLng(34.817192, 113.536568),
+                new NaviLatLng(34.817113, 113.537345),
+                new NaviLatLng(34.817104, 113.538042),
+                new NaviLatLng(34.820634, 113.535076),
+                new NaviLatLng(34.822990, 113.536096),
+                new NaviLatLng(34.826655, 113.536272),
+        };
         View view = LayoutInflater.from(this).inflate(R.layout.grid_route_recommend_multi_pick, null);
         TextView tvPos = view.findViewById(R.id.tv_view_route_rec_dialog_location);
-        tvPos.setText(pos);
-        GridLayout gridLayout = view.findViewById(R.id.gl_view_route_rec_dialog_options);
+        tvPos.setText(myPos);
+        final GridLayout gridLayout = view.findViewById(R.id.gl_view_route_rec_dialog_options);
         // set layout parameters
-        for (String item : items) {
+        for (String item : spotTitles) {
             CheckBox box = new CheckBox(this);
             GridLayout.LayoutParams params = new GridLayout.LayoutParams();
             params.rowSpec = GridLayout.spec(GridLayout.UNDEFINED, 1.0f);
@@ -139,14 +172,15 @@ public class RouteRecommendActivity extends BaseActivity {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+
                         ArrayList<NaviLatLng> latLngs = new ArrayList<>();
-                        latLngs.add(new NaviLatLng(34.8088062916, 113.5347681273));
-                        latLngs.add(new NaviLatLng(34.8106362916, 113.5308061273));
-                        latLngs.add(new NaviLatLng(34.8121112916, 113.5344351273));
-                        latLngs.add(new NaviLatLng(34.8161042916, 113.5325041273));
-                        latLngs.add(new NaviLatLng(34.8170892916, 113.5378581273));
-                        latLngs.add(new NaviLatLng(34.8205498001, 113.5344626861));
-                        latLngs.add(new NaviLatLng(34.8265608001, 113.5363356861));
+                        for (int i = 0; i < gridLayout.getChildCount(); i++){
+                            CheckBox box = (CheckBox) gridLayout.getChildAt(i);
+                            if (box.isChecked()){
+                                latLngs.add(spotLatlngs[i]);
+                            }
+                        }
+
                         routeShowHelper.draw(latLngs);
                     }
                 })

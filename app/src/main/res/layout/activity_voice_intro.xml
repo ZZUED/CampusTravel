@@ -50,5 +50,5 @@
         android:layout_marginBottom="@dimen/middle_margin"
         android:background="@drawable/ripple_start_button"
         android:textColor="@android:color/white"
-        android:text="@string/stop_introducing"/>
+        android:text="@string/start_introducing"/>
 </LinearLayout>

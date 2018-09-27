@@ -8,8 +8,7 @@
     <com.amap.api.maps.MapView
         android:id="@+id/map_flat_map"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"/>
+        android:layout_height="match_parent"/>
     <com.zzued.campustravel.view.CustomTitleBar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

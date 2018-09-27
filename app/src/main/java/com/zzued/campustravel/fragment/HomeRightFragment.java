@@ -126,6 +126,16 @@ public class HomeRightFragment extends Fragment {
             }
         });
 
+        TextView aboutView = view.findViewById(R.id.tv_home_right_about);
+        aboutView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setView(R.layout.ll_home_right_about_dialog_view)
+                        .show();
+            }
+        });
+
         return view;
     }
 
