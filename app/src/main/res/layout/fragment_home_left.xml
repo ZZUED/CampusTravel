@@ -159,6 +159,7 @@
                 android:layout_marginBottom="@dimen/small_margin"
                 android:layout_marginStart="@dimen/middle_margin"
                 android:layout_marginTop="@dimen/large_margin"
+                android:visibility="gone"
                 android:background="@drawable/shape_home_bottom_scroll_gray_border"
                 android:gravity="center"
                 android:padding="@dimen/large_margin"

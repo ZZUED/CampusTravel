@@ -16,8 +16,7 @@
             android:contentDescription="@string/app_name"
             android:layout_width="match_parent"
             android:layout_height="170dp"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_boat_along_mei_lake"/>
+            android:scaleType="centerCrop"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/common_text_size_x_small"
-                android:text="郑州大学"/>
+                android:text=""/>
         </LinearLayout>
         <ImageButton
             android:id="@+id/img_btn_rcv_home_mid_play"
@@ -59,8 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/common_text_size_middle"
-        android:textColor="@android:color/black"
-        android:text="郑州大学图书馆"/>
+        android:textColor="@android:color/black"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

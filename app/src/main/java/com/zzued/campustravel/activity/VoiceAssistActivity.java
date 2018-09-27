@@ -63,6 +63,8 @@ public class VoiceAssistActivity extends BaseActivity {
                                 JSONObject jsonObject = new JSONObject(recognizedResult.asr_out);
                                 Toast.makeText(VoiceAssistActivity.this,
                                         jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+                                //jsonObject.getString是识别出来的文本
+                                //todo
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }

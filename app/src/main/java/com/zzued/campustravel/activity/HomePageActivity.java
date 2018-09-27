@@ -18,6 +18,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.HomePagerAdapter;
 import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.modelclass.Area;
 import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.util.MyApplication;
 import com.zzued.campustravel.util.PermissionHelper;
@@ -30,8 +31,6 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.zzued.campustravel.constant.Constant.Url_HomePageActivity;
-
 public class HomePageActivity extends BaseActivity {
     // 权限相关变量
     private boolean permissionLocation;
@@ -41,7 +40,7 @@ public class HomePageActivity extends BaseActivity {
      * 此对象为定位后的回调对象，通过 {@link #getMyLocation()} 方法访问
      * MY_LOCATION.getLatitude();//获取纬度
      * MY_LOCATION.getLongitude();//获取经度
-     *
+     * <p>
      * PS:需要与 fragment 以通信更新数据
      */
     private static AMapLocation MY_LOCATION;
@@ -62,10 +61,9 @@ public class HomePageActivity extends BaseActivity {
 
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
                     List<Spot> spots = (List<Spot>) msg.obj;
-                    Log.e(TAG, "handleMessage: " + spots.get(0));
                     HomePagerAdapter adapter = (HomePagerAdapter) viewPager.getAdapter();
                     adapter.getLeftFragment().setData(spots);
                     break;
@@ -75,6 +73,31 @@ public class HomePageActivity extends BaseActivity {
             return true;
         }
     });
+
+    private String spotName = null;
+    private String spotIntroduce = null;
+    private String spotPictureUrl = null;
+    private double long_;
+    private double alti_;
+
+    private Handler handlertwo = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    Gson gson = new Gson();
+                    Area area = gson.fromJson((String) msg.obj, Area.class);
+                    spotName = area.get_ScenicAreaName();
+                    spotIntroduce = area.get_SceniAreaIntro();
+                    spotPictureUrl = area.get_PictureUrl();
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+    });
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +135,7 @@ public class HomePageActivity extends BaseActivity {
                     return;
                 }
                 Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
-                if (MyApplication.DEBUG){
+                if (MyApplication.DEBUG) {
                     Log.e(TAG, "onLocationChanged: debugging now, send no location info");
                     return;
                 }
@@ -174,6 +197,7 @@ public class HomePageActivity extends BaseActivity {
 
     /**
      * 获取定位后的位置信息
+     *
      * @return 位置信息
      */
     public static AMapLocation getMyLocation() {
@@ -219,28 +243,74 @@ public class HomePageActivity extends BaseActivity {
             startLocate();
     }
 
-    public void sendMyLocation(){
+    public void sendMyLocation() {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                try{
+                try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url(Constant.Url_HomePageActivity+"longitude="+
-                                    getMyLocation().getLongitude()+"&dimension="+getMyLocation().getLatitude())
+                            .url(Constant.Url_HomePageActivity + "longitude=" +
+                                    getMyLocation().getLongitude() + "&dimension=" + getMyLocation().getLatitude())
                             .build();
                     Response response = client.newCall(request).execute();
                     String spotDate = response.body().string();
-                    Log.e(TAG, "run: spotDate" + spotDate);
                     Gson gson = new Gson();
                     Message message = new Message();
-                    message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>(){}.getType());
+                    message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>() {
+                    }.getType());
                     message.what = 1;
                     handler.sendMessage(message);
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         }).start();
+        long_ = getMyLocation().getLongitude();
+        alti_ = getMyLocation().getLatitude();
+    }
+
+    public void getAreaData() {
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(Constant.Url_HomeLeftFragment)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String areaDate = response.body().string();
+                    Log.e(TAG, "run: " + areaDate);
+                    Message message = new Message();
+                    message.obj = areaDate;
+                    message.what = 1;
+                    handlertwo.sendMessage(message);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    public String getSpotName_() {
+        return spotName;
+    }
+
+    public String getSpotIntroduce_() {
+        return spotIntroduce;
+    }
+
+    public String getSpotPictureUrl_() {
+        return spotPictureUrl;
+    }
+
+    public double getLong_() {
+        return long_;
+    }
+
+    public double getAlti_() {
+        return alti_;
     }
 }

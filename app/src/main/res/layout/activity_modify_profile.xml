@@ -108,7 +108,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/middle_margin"
             android:textColor="@color/colorAccent"
-            android:textSize="@dimen/common_text_size_middle" />
+            android:textSize="@dimen/common_text_size_middle"
+            android:text="点击修改"/>
     </LinearLayout>
 
     <View style="@style/SplitLineViewStyle" />

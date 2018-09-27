@@ -78,6 +78,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/middle_margin"
+                    android:visibility="gone"
                     android:text="@string/available_spot_num"
                     android:textSize="@dimen/common_text_size_middle" />
             </LinearLayout>
@@ -91,6 +92,7 @@
                 android:layout_marginStart="@dimen/middle_margin"
                 android:layout_marginTop="@dimen/large_margin"
                 android:layout_marginBottom="@dimen/small_margin"
+                android:visibility="gone"
                 android:background="@drawable/shape_home_bottom_scroll_gray_border"
                 android:text="正在加载" />
             <android.support.v7.widget.RecyclerView

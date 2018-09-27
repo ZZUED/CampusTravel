@@ -72,7 +72,6 @@ public class ModifyProfileActivity extends BaseActivity {
         titleBar.setRightTextListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // todo send modified data
                 accountContent_midofy = tvName.getText().toString();
                 birthdayContent_midofy = tvBirth.getText().toString().replace("/","-");
                 SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);

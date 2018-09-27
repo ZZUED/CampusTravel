@@ -5,10 +5,11 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,11 +17,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.FlatMapActivity;
+import com.zzued.campustravel.activity.HomePageActivity;
 import com.zzued.campustravel.activity.RouteRecommendActivity;
 import com.zzued.campustravel.activity.ScenicAreaIntroActivity;
 import com.zzued.campustravel.activity.SearchActivity;
@@ -28,12 +29,10 @@ import com.zzued.campustravel.activity.ThermalMapActivity;
 import com.zzued.campustravel.activity.VoiceAssistActivity;
 import com.zzued.campustravel.activity.VoiceIntroActivity;
 import com.zzued.campustravel.adapter.SpotListAdapter;
-import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.view.CustomHomeLeftGridItem;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -43,12 +42,14 @@ import java.util.List;
 public class HomeLeftFragment extends Fragment {
     private static final String TAG = "HomeLeftFragment";
 
+
     private SpotListAdapter spotlistadapter;
     private List<Spot> spotList = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_left, container, false);
+        //getAreaData();//获取景区数据
         initListener(view);
 
         Log.e(TAG, "onCreateView: on create");
@@ -62,9 +63,18 @@ public class HomeLeftFragment extends Fragment {
     public void setData(List<Spot> spotList){
         this.spotList.clear();
         this.spotList.addAll(spotList);
-        Log.e(TAG, "setData: adapter" + spotlistadapter);
-        Log.e(TAG, "setData: " + this.spotList.get(0));
-        spotlistadapter.notifyDataSetChanged();
+        if (spotlistadapter != null)
+            spotlistadapter.notifyDataSetChanged();
+        else
+            new CountDownTimer(1000, 100) {
+                @Override
+                public void onTick(long millisUntilFinished) {}
+
+                @Override
+                public void onFinish() {
+                    spotlistadapter.notifyDataSetChanged();
+                }
+            }.start();
     }
 
     /**
@@ -130,10 +140,13 @@ public class HomeLeftFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 if (which == 0) {
-                                    // start voice introduction
-                                    startActivity(new Intent(getContext(), VoiceIntroActivity.class));
+                                    HomePageActivity homePageActivity = (HomePageActivity ) getActivity();
+                                    homePageActivity.getAreaData();
+                                    Intent intent = new Intent(getActivity().getApplicationContext(), VoiceIntroActivity.class);
+                                    intent.putExtra("long", homePageActivity.getLong_());
+                                    intent.putExtra("alti", homePageActivity.getAlti_());
+                                    startActivity(intent);
                                 } else {
-                                    // start voice assist
                                     startActivity(new Intent(getContext(), VoiceAssistActivity.class));
                                 }
                             }
@@ -146,16 +159,26 @@ public class HomeLeftFragment extends Fragment {
         introItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getContext(), ScenicAreaIntroActivity.class));
+                HomePageActivity homePageActivity = (HomePageActivity ) getActivity();
+                homePageActivity.getAreaData();
+                Intent intent = new Intent(getActivity().getApplicationContext(), ScenicAreaIntroActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("AreaName", homePageActivity.getSpotName_());
+                bundle.putString("AreaIntroduce", homePageActivity.getSpotIntroduce_());
+                bundle.putString("AreaPicture",homePageActivity.getSpotPictureUrl_());
+                if (!TextUtils.isEmpty(homePageActivity.getSpotIntroduce_()) && !TextUtils.isEmpty(homePageActivity.getSpotName_())){
+                    intent.putExtras(bundle);
+                    getActivity().startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "数据未获取到，请稍后再点击", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
         //右上角定位信息
         TextView tv_fragment_home_left_pos = view.findViewById(R.id.tv_fragment_home_left_pos);
         tv_fragment_home_left_pos.setText("郑州大学");
-
-        TextView tv_home_left_loading = view.findViewById(R.id.tv_home_left_loading);
-        tv_home_left_loading.setVisibility(View.INVISIBLE);
 
     }
 

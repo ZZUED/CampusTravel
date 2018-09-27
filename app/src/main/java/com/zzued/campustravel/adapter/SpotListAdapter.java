@@ -42,7 +42,6 @@ public class SpotListAdapter extends RecyclerView.Adapter<SpotListAdapter.ViewHo
 
         String strURL = spot.getPictureUrl();
 
-        //showPicByVolleyImageLoader(context,strURL,holder.iv);
         Glide.with(context).load(strURL).placeholder(R.mipmap.ic_launcher).into(holder.iv);
         holder.tv.setText(spot.getScenicSpotName());
 
