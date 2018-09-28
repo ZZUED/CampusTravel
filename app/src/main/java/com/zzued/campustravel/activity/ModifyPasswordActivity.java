@@ -1,6 +1,7 @@
 package com.zzued.campustravel.activity;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +10,7 @@ import android.widget.Toast;
 
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.view.CustomTitleBar;
 
 import okhttp3.FormBody;
@@ -70,10 +72,22 @@ public class ModifyPasswordActivity extends BaseActivity {
                                     Response response = client.newCall(request).execute();
                                     String ss = response.body().string();
                                     if (ss.equals("1")) {
-                                        Toast.makeText(ModifyPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
-                                        finish();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(ModifyPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                        int sz = ActivityCollector.size();
+                                        startActivity(new Intent(ModifyPasswordActivity.this, LoginActivity.class));
+                                        ActivityCollector.finishFromStart(sz);
                                     } else {
-                                        Toast.makeText(ModifyPasswordActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                        runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(ModifyPasswordActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace();

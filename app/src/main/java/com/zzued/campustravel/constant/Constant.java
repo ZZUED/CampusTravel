@@ -2,8 +2,6 @@ package com.zzued.campustravel.constant;
 
 
 public class Constant {
-    public static String Spot;
-
     //    private static String MengLei = "http://maxerwinsmith.qicp.io:49291";
     private static String MengLei = "http://120.78.213.131:8080/guide_war";
 
@@ -22,10 +20,10 @@ public class Constant {
     public static String Url_SeeProfileActivity = MengLei + "/findARecordByEmailAndPassword";
     //查看个人信息
 
-    public static String Url_ModifyPasswordActivity = MengLei + "/guide_war/updatePassword";
+    public static String Url_ModifyPasswordActivity = MengLei + "/updatePassword";
     //修改密码接口
 
-    public static String Url_ModifyProfileActivity = MengLei + "/guide_war/updateUserByEmailAddressAndPassword";
+    public static String Url_ModifyProfileActivity = MengLei + "/updateUserByEmailAddressAndPassword";
     //修改个人信息
 
     public static String Url_HomeLeftFragment = MengLei + "/scenicArea/getScenicAreaInfoById?scenicAreaId=1";
@@ -45,8 +43,4 @@ public class Constant {
     public static String Url_HomeMiddleFragment = MengLei + "/map/requestSearchScenicSpotRandom";
 
     public static String Url_CouponActivity = MengLei + "/findAllRecord";
-
-    public static void addSpot(String newSpot) {
-        Spot = newSpot;
-    }
 }

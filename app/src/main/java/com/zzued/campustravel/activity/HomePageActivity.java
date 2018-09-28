@@ -300,6 +300,11 @@ public class HomePageActivity extends BaseActivity {
         }).start();
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     public String getSpotName_() {
         return spotName;
     }
