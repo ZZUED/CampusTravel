@@ -103,7 +103,7 @@ public class RegisterActivity extends BaseActivity {
                                                 .post(requestBody)
                                                 .build();
                                         Response response = client.newCall(request).execute();
-                                        String ss = response.body().string();
+                                        response.body().close();
                                         /*if(ss.equals("1")){
                                             SharedPreferences.Editor acc_flag = getSharedPreferences("name",
                                                     MODE_PRIVATE).edit();
@@ -214,8 +214,13 @@ public class RegisterActivity extends BaseActivity {
                                 .url(Constant.Url_RigisterActivity_one + Eaddress)
                                 .build();
                         Response response = client.newCall(request).execute();
-                        String ss = response.body().string();
-                        Toast.makeText(getApplicationContext(), "验证码已发送", Toast.LENGTH_SHORT).show();
+                        response.body().close();
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getApplicationContext(), "验证码已发送", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

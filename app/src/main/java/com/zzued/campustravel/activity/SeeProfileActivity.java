@@ -38,33 +38,33 @@ public class SeeProfileActivity extends BaseActivity {
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            switch(msg.what){
+            switch (msg.what) {
                 case 1:
-                    if(msg.obj!=null){
+                    if (msg.obj != null) {
                         Gson gson = new Gson();
-                        User user = gson.fromJson((String)msg.obj,User.class);
+                        User user = gson.fromJson((String) msg.obj, User.class);
                         head = user.getUserPictureUrl();
                         name = user.getUserName();
                         data = user.getUserBirthday();
                         email = user.getUserEmail();
                         sex = user.getUserSex();
-                        if(handler!=null){
+                        if (handler != null) {
                             see_name.setText(name);
                             see_data.setText(data);
                             see_email.setText(email);
 
 
-                            if (sex.equals("0")){
+                            if (sex.equals("0")) {
                                 see_sex.setText("男");
-                            }else{
+                            } else {
                                 see_sex.setText("女");
                             }
 
-                            if(head.equals("1")){
+                            if (head.equals("1")) {
                                 see_head.setImageResource(R.drawable.img_modify_profile_head_1);
-                            }else if (head.equals("2")){
+                            } else if (head.equals("2")) {
                                 see_head.setImageResource(R.drawable.img_modify_profile_head_2);
-                            }else{
+                            } else {
                                 see_head.setImageResource(R.drawable.img_modify_profile_head_3);
                             }
                         }
@@ -93,16 +93,16 @@ public class SeeProfileActivity extends BaseActivity {
 
     public void getProfileDate() {
         SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
-        getEmail= fromLogin.getString("emailAddress", "null");
-        getPassword= fromLogin.getString("password", "null");
+        getEmail = fromLogin.getString("emailAddress", "null");
+        getPassword = fromLogin.getString("password", "null");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("emailAddress",getEmail)
-                            .add("password",getPassword)
+                            .add("emailAddress", getEmail)
+                            .add("password", getPassword)
                             .build();
                     Request request = new Request.Builder()
                             .url(Constant.Url_SeeProfileActivity)
@@ -110,13 +110,13 @@ public class SeeProfileActivity extends BaseActivity {
                             .build();
                     Response response = client.newCall(request).execute();
                     String data = response.body().string();
-                    if(data!=null){
+                    if (data != null) {
                         Message message = new Message();
                         message.obj = data;
                         message.what = 1;
                         handler.sendMessage(message);
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }

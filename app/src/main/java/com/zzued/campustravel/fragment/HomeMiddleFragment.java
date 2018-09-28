@@ -7,6 +7,7 @@ import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.activity.HomePageActivity;
 import com.zzued.campustravel.adapter.HomeMidRcvAdapter;
 import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.Spot;
@@ -42,19 +44,16 @@ public class HomeMiddleFragment extends Fragment {
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
-            switch (msg.what){
+            switch (msg.what) {
                 case 1:
                     spots.clear();
-                    spots.addAll((ArrayList<Spot>)msg.obj);
+                    spots.addAll((ArrayList<Spot>) msg.obj);
                     adapter.notifyDataSetChanged();
                     break;
             }
             return true;
         }
     });
-
-    public HomeMiddleFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -74,11 +73,15 @@ public class HomeMiddleFragment extends Fragment {
         poiRcv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         poiRcv.setAdapter(adapter);
 
+        TextView tvCurPos = view.findViewById(R.id.tv_home_mid_location);
+        tvCurPos.setText("郑州大学");
+
         getDailyNews();
 
         return view;
     }
-    private void getDailyNews(){
+
+    private void getDailyNews() {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -87,10 +90,15 @@ public class HomeMiddleFragment extends Fragment {
                     Request request = new Request.Builder().url(Constant.Url_HomeMiddleFragment).build();
                     Response response = client.newCall(request).execute();
                     String res = response.body().string();
-                    Message message = new Message();
-                    message.what = 1;
-                    message.obj = new Gson().fromJson(res, new TypeToken<List<Spot>>(){}.getType());
-                    handler.sendMessage(message);
+                    try {
+                        Message message = new Message();
+                        message.what = 1;
+                        message.obj = new Gson().fromJson(res, new TypeToken<List<Spot>>() {
+                        }.getType());
+                        handler.sendMessage(message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

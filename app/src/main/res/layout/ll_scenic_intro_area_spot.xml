@@ -110,5 +110,6 @@
         android:layout_marginStart="@dimen/middle_margin"
         android:layout_marginTop="@dimen/middle_margin"
         android:lineSpacingExtra="@dimen/small_margin"
-        android:textSize="@dimen/common_text_size_large" />
+        android:textSize="@dimen/common_text_size_large"
+        android:text="没有数据"/>
 </LinearLayout>

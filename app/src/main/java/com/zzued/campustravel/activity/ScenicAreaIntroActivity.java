@@ -29,6 +29,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.zzued.campustravel.constant.Constant.Url_ScenicAreaIntroduceActivity;
 import static com.zzued.campustravel.util.MyApplication.getContext;
 
 public class ScenicAreaIntroActivity extends BaseActivity {
@@ -107,16 +108,20 @@ public class ScenicAreaIntroActivity extends BaseActivity {
                 try {
                     OkHttpClient client = new OkHttpClient();
                     Request request = new Request.Builder()
-                            .url("http://maxerwinsmith.qicp.io:49291/map/searchScenicSpotsByAreaId?areaId=1&start=10&length=30")
+                            .url(Url_ScenicAreaIntroduceActivity)
                             .build();
                     Response response = client.newCall(request).execute();
                     String spotDate = response.body().string();
-                    Gson gson = new Gson();
-                    Message message = new Message();
-                    message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>() {
-                    }.getType());
-                    message.what = 1;
-                    handlerthree.sendMessage(message);
+                    try{
+                        Gson gson = new Gson();
+                        Message message = new Message();
+                        message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>() {}.getType());
+                        message.what = 1;
+                        handlerthree.sendMessage(message);
+                    }
+                    catch (Exception e){
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

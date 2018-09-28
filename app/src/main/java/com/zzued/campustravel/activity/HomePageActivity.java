@@ -26,6 +26,7 @@ import com.zzued.campustravel.view.CustomHomeBtmNavi;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -40,7 +41,6 @@ public class HomePageActivity extends BaseActivity {
      * 此对象为定位后的回调对象，通过 {@link #getMyLocation()} 方法访问
      * MY_LOCATION.getLatitude();//获取纬度
      * MY_LOCATION.getLongitude();//获取经度
-     * <p>
      * PS:需要与 fragment 以通信更新数据
      */
     private static AMapLocation MY_LOCATION;
@@ -85,11 +85,15 @@ public class HomePageActivity extends BaseActivity {
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
                 case 1:
-                    Gson gson = new Gson();
-                    Area area = gson.fromJson((String) msg.obj, Area.class);
-                    spotName = area.get_ScenicAreaName();
-                    spotIntroduce = area.get_SceniAreaIntro();
-                    spotPictureUrl = area.get_PictureUrl();
+                    try {
+                        Gson gson = new Gson();
+                        Area area = gson.fromJson((String) msg.obj, Area.class);
+                        spotName = area.get_ScenicAreaName();
+                        spotIntroduce = area.get_SceniAreaIntro();
+                        spotPictureUrl = area.get_PictureUrl();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     break;
                 default:
                     break;
@@ -130,7 +134,6 @@ public class HomePageActivity extends BaseActivity {
             @Override
             public void onLocationChanged(AMapLocation amapLocation) {
                 if (amapLocation == null || amapLocation.getErrorCode() != 0) {
-                    Log.e(TAG, "onLocationChanged: " + (amapLocation != null ? amapLocation.getErrorCode() : "null"));
                     Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
                     return;
                 }
@@ -254,13 +257,17 @@ public class HomePageActivity extends BaseActivity {
                                     getMyLocation().getLongitude() + "&dimension=" + getMyLocation().getLatitude())
                             .build();
                     Response response = client.newCall(request).execute();
-                    String spotDate = response.body().string();
-                    Gson gson = new Gson();
-                    Message message = new Message();
-                    message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>() {
-                    }.getType());
-                    message.what = 1;
-                    handler.sendMessage(message);
+                    String spotDate = Objects.requireNonNull(response.body()).string();
+                    try {
+                        Gson gson = new Gson();
+                        Message message = new Message();
+                        message.obj = gson.fromJson(spotDate, new TypeToken<List<Spot>>() {
+                        }.getType());
+                        message.what = 1;
+                        handler.sendMessage(message);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -281,8 +288,7 @@ public class HomePageActivity extends BaseActivity {
                             .url(Constant.Url_HomeLeftFragment)
                             .build();
                     Response response = client.newCall(request).execute();
-                    String areaDate = response.body().string();
-                    Log.e(TAG, "run: " + areaDate);
+                    String areaDate = Objects.requireNonNull(response.body()).string();
                     Message message = new Message();
                     message.obj = areaDate;
                     message.what = 1;

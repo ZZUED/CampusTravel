@@ -50,7 +50,7 @@ public class ThermalMapActivity extends BaseActivity {
      * @param aMap 地图
      */
     private void setLocationStyle(AMap aMap) {
-//        aMap.setMaxZoomLevel(16);
+        aMap.setMaxZoomLevel(16);
         aMap.moveCamera(CameraUpdateFactory.zoomTo(14));
 
         aMap.getUiSettings().setMyLocationButtonEnabled(false);

@@ -41,6 +41,7 @@
             android:paddingBottom="@dimen/middle_margin"
             android:orientation="vertical">
             <TextView
+                android:id="@+id/tv_wallet_coupon_store_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/common_text_size_large"
@@ -51,10 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/middle_margin"
-                android:layout_marginStart="@dimen/middle_margin"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/common_text_size_middle"
-                android:text="天后到期"/>
+                android:text=""/>
         </LinearLayout>
     </LinearLayout>
     <TextView

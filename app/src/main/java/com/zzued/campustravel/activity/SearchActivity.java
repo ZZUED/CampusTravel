@@ -46,6 +46,8 @@ public class SearchActivity extends BaseActivity {
                     spots.clear();
                     spots.addAll((ArrayList<Spot>) msg.obj);
                     adapter.notifyDataSetChanged();
+                    if (spots.size() <= 0)
+                        Toast.makeText(SearchActivity.this, "未找到数据", Toast.LENGTH_SHORT).show();
                     break;
                 default:
                     break;

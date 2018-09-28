@@ -51,17 +51,17 @@ public class ModifyPasswordActivity extends BaseActivity {
                 oldpw_e = etOldPw.getText().toString();
                 newpw_e = etNewPw.getText().toString();
                 renewpw_e = etRepeatPw.getText().toString();
-                if(account_e!=null&&oldpw_e!=null&&newpw_e!=null&&renewpw_e!=null){
-                    if(newpw_e.equals(renewpw_e)){
+                if (account_e != null && oldpw_e != null && newpw_e != null && renewpw_e != null) {
+                    if (newpw_e.equals(renewpw_e)) {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 try {
                                     OkHttpClient client = new OkHttpClient();
                                     RequestBody requestBody = new FormBody.Builder()
-                                            .add("emailAddress",account_e)
-                                            .add("oldPassword",oldpw_e)
-                                            .add("newPassword",newpw_e)
+                                            .add("emailAddress", account_e)
+                                            .add("oldPassword", oldpw_e)
+                                            .add("newPassword", newpw_e)
                                             .build();
                                     Request request = new Request.Builder()
                                             .url(Constant.Url_ModifyPasswordActivity)
@@ -69,22 +69,22 @@ public class ModifyPasswordActivity extends BaseActivity {
                                             .build();
                                     Response response = client.newCall(request).execute();
                                     String ss = response.body().string();
-                                    if(ss.equals("1")){
-                                        Toast.makeText(ModifyPasswordActivity.this,"修改成功",Toast.LENGTH_SHORT).show();
+                                    if (ss.equals("1")) {
+                                        Toast.makeText(ModifyPasswordActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                                         finish();
-                                    }else{
-                                        Toast.makeText(ModifyPasswordActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(ModifyPasswordActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
                                     }
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                             }
                         }).start();
-                    }else{
-                        Toast.makeText(ModifyPasswordActivity.this,"两次填写的密码不一致",Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(ModifyPasswordActivity.this, "两次填写的密码不一致", Toast.LENGTH_SHORT).show();
                     }
-                }else{
-                    Toast.makeText(ModifyPasswordActivity.this,"请填写完整",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ModifyPasswordActivity.this, "请填写完整", Toast.LENGTH_SHORT).show();
                 }
             }
         });

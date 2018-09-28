@@ -6,6 +6,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -20,7 +21,6 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class ScenicSpotIntroActivity extends BaseActivity {
-    private static final String TAG = "ScenicSpotIntroActivity";
     private int spotId;
 
     private ImageView ivImg;
@@ -33,6 +33,10 @@ public class ScenicSpotIntroActivity extends BaseActivity {
             switch (msg.what){
                 case 1:
                     SpotForIntroduce spotForIntroduce = (SpotForIntroduce) msg.obj;
+                    if (spotForIntroduce == null){
+                        Toast.makeText(ScenicSpotIntroActivity.this, "数据获取失败", Toast.LENGTH_SHORT).show();
+                        break;
+                    }
                     Glide.with(ScenicSpotIntroActivity.this).load(spotForIntroduce._getPictureUrl()).placeholder(R.drawable.ic_launcher_background).into(ivImg);
                     tvIntro.setText(spotForIntroduce._getScenicSpotIntroduce());
                     tvName.setText(spotForIntroduce._getScenicSpotName());
@@ -62,7 +66,6 @@ public class ScenicSpotIntroActivity extends BaseActivity {
                         Request request = new Request.Builder().url(Constant.Url_ScenicSpotActivity + spotId).build();
                         Response response = client.newCall(request).execute();
                         String res = response.body().string();
-                        Log.e(TAG, "run: res: " + res);
                         Message message = new Message();
                         message.what = 1;
                         message.obj = new Gson().fromJson(res, SpotForIntroduce.class);

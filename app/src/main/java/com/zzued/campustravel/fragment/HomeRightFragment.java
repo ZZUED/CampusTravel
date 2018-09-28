@@ -41,7 +41,7 @@ public class HomeRightFragment extends Fragment {
 
 
         SharedPreferences fromLogin = getActivity().getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
-        String account= fromLogin.getString("emailAddress", "null");
+        String account = fromLogin.getString("emailAddress", "null");
 
         RelativeLayout rlMe = view.findViewById(R.id.rl_home_right_me);
         rlMe.setOnClickListener(new View.OnClickListener() {
@@ -57,13 +57,17 @@ public class HomeRightFragment extends Fragment {
         ImageView head = rlMe.findViewById(R.id.iv_home_right_me);
 
         SharedPreferences headSP = getActivity().getSharedPreferences("Profile", MODE_PRIVATE);
-        String headId= headSP.getString("emailAddress", "null");
-        if(headId.equals("1")){
-            head.setImageResource(R.drawable.img_modify_profile_head_1);
-        }else if (head.equals("2")){
-            head.setImageResource(R.drawable.img_modify_profile_head_2);
-        }else if(head.equals("3")){
-            head.setImageResource(R.drawable.img_modify_profile_head_3);
+        String headId = headSP.getString("emailAddress", "null");
+        switch (headId) {
+            case "1":
+                head.setImageResource(R.drawable.img_modify_profile_head_1);
+                break;
+            case "2":
+                head.setImageResource(R.drawable.img_modify_profile_head_2);
+                break;
+            case "3":
+                head.setImageResource(R.drawable.img_modify_profile_head_3);
+                break;
         }
         tv_home_right_name.setText(account);
         tv_home_right_account.setText(account);
@@ -111,8 +115,8 @@ public class HomeRightFragment extends Fragment {
                                 int sz = ActivityCollector.size();
                                 startActivity(new Intent(getContext(), StartActivity.class));
                                 //清空数据
-                                SharedPreferences sp = getActivity().getSharedPreferences("AccountAndPassWord",MODE_PRIVATE);
-                                sp.edit().clear().commit();
+                                SharedPreferences sp = getActivity().getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
+                                sp.edit().clear().apply();
                                 ActivityCollector.finishFromStart(sz);
                             }
                         })

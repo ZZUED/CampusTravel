@@ -71,26 +71,26 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 accountContent_midofy = tvName.getText().toString();
-                birthdayContent_midofy = tvBirth.getText().toString().replace("/","-");
+                birthdayContent_midofy = tvBirth.getText().toString().replace("/", "-");
                 SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
                 emailContent_midofy = fromLogin.getString("emailAddress", "null");
                 passwordContent_midofy = fromLogin.getString("password", "null");
-                if(accountContent_midofy!=null&&
-                        birthdayContent_midofy!=null&&
-                        sexContent_midofy!=null&&
-                        headContent_midofy!=null){
+                if (accountContent_midofy != null &&
+                        birthdayContent_midofy != null &&
+                        sexContent_midofy != null &&
+                        headContent_midofy != null) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 OkHttpClient client = new OkHttpClient();
                                 RequestBody requestBody = new FormBody.Builder()
-                                        .add("emailAddress",emailContent_midofy)
-                                        .add("password",passwordContent_midofy)
-                                        .add("headUrl",headContent_midofy)
-                                        .add("userName",accountContent_midofy)
-                                        .add("sex",sexContent_midofy)
-                                        .add("birthday",birthdayContent_midofy)
+                                        .add("emailAddress", emailContent_midofy)
+                                        .add("password", passwordContent_midofy)
+                                        .add("headUrl", headContent_midofy)
+                                        .add("userName", accountContent_midofy)
+                                        .add("sex", sexContent_midofy)
+                                        .add("birthday", birthdayContent_midofy)
                                         .build();
                                 Request request = new Request.Builder()
                                         .url(Constant.Url_ModifyProfileActivity)
@@ -98,18 +98,23 @@ public class ModifyProfileActivity extends BaseActivity {
                                         .build();
                                 Response response = client.newCall(request).execute();
                                 String sss = response.body().string();
-                                if(sss.equals("1")){
+                                if (sss.equals("1")) {
                                     finish();
-                                }else{
-                                    Toast.makeText(ModifyProfileActivity.this,"修改失败",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(ModifyProfileActivity.this, "修改失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
                                 }
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         }
                     }).start();
-                }else{
-                    Toast.makeText(ModifyProfileActivity.this,"输入内容不完整",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(ModifyProfileActivity.this, "输入内容不完整", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -187,9 +192,9 @@ public class ModifyProfileActivity extends BaseActivity {
     }
 
     //获取RadioButton的内容
-    private void selectatRadio(){
+    private void selectatRadio() {
         int id = genderGroup.getCheckedRadioButtonId();
-        sexContent_midofy = String.valueOf(id == R.id.rdgrp_modify_profile_gender? 1: 0);
+        sexContent_midofy = String.valueOf(id == R.id.rdgrp_modify_profile_gender ? 1 : 0);
     }
 
     public void setIvHead() {

@@ -42,7 +42,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/middle_margin"
             android:layout_toEndOf="@id/iv_home_right_me"
-            android:text="ericjeffrey"
             android:textColor="@android:color/black"
             android:textSize="@dimen/common_text_size_middle"
             tools:ignore="RelativeOverlap" />

@@ -40,7 +40,6 @@ import java.util.List;
  * Left page inside viewpager in {@link com.zzued.campustravel.activity.HomePageActivity}
  */
 public class HomeLeftFragment extends Fragment {
-    private static final String TAG = "HomeLeftFragment";
 
 
     private SpotListAdapter spotlistadapter;
@@ -52,7 +51,6 @@ public class HomeLeftFragment extends Fragment {
         //getAreaData();//获取景区数据
         initListener(view);
 
-        Log.e(TAG, "onCreateView: on create");
         spotlistadapter = new SpotListAdapter(getContext(), spotList);
         RecyclerView rcvSpotList = view.findViewById(R.id.rcv_home_left_spot);
         rcvSpotList.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayout.HORIZONTAL, false));
@@ -65,16 +63,6 @@ public class HomeLeftFragment extends Fragment {
         this.spotList.addAll(spotList);
         if (spotlistadapter != null)
             spotlistadapter.notifyDataSetChanged();
-        else
-            new CountDownTimer(1000, 100) {
-                @Override
-                public void onTick(long millisUntilFinished) {}
-
-                @Override
-                public void onFinish() {
-                    spotlistadapter.notifyDataSetChanged();
-                }
-            }.start();
     }
 
     /**

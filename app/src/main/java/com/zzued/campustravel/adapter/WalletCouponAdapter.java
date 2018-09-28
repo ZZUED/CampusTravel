@@ -38,6 +38,7 @@ public class WalletCouponAdapter extends RecyclerView.Adapter<WalletCouponAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvDiscount.setText(String.format("￥%s", coupons.get(position).getStoreDiscount()));
         holder.tvDeadline.setText(String.format(Locale.CHINA, "%d天后到期", coupons.get(position).getDeadline()));
+        holder.tvStoreName.setText(coupons.get(position).getStoreName());
     }
 
     @Override
@@ -48,11 +49,13 @@ public class WalletCouponAdapter extends RecyclerView.Adapter<WalletCouponAdapte
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView tvDiscount;
         TextView tvDeadline;
+        TextView tvStoreName;
 
         ViewHolder(View itemView) {
             super(itemView);
             tvDiscount = itemView.findViewById(R.id.tv_wallet_coupon_discount);
             tvDeadline = itemView.findViewById(R.id.tv_wallet_coupon_deadline);
+            tvStoreName = itemView.findViewById(R.id.tv_wallet_coupon_store_name);
         }
     }
 }
