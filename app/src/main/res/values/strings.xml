@@ -113,7 +113,7 @@
 
     <!--voice assistant-->
     <string name="anything_i_can_do">有什么我能为您效劳的</string>
-    <string name="voice_assist_hint">请打开麦克风设备，并保持网络通畅</string>
+    <string name="voice_assist_hint">请说出具体地点名称</string>
     <string name="click_and_speak">点击说话</string>
     <string name="click_to_stop">点击停止</string>
 

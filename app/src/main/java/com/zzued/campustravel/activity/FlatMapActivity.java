@@ -122,10 +122,9 @@ public class FlatMapActivity extends BaseActivity {
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81938934, 113.5348434)).title("眉湖九博（凤台荷香）"));
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81338882, 113.5351868)).title("樱花林"));
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81491852, 113.5304413)).title("丁老头奶酪（郑大店）"));
-        aMap.addMarker(new MarkerOptions().position(new LatLng(34.81732178, 113.5358047)).title("京东便利店（原校园风超市）"));
+        aMap.addMarker(new MarkerOptions().position(new LatLng(34.81483100, 113.5335500)).title("京东便利店（原校园风超市）"));
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81381989, 113.5337143)).title("蜜雪冰城（荷园商业街南侧）"));
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81282425, 113.5339355)).title("沁园春超市"));
-        aMap.addMarker(new MarkerOptions().position(new LatLng(34.81491852, 113.5304413)).title("匆匆那年餐厅"));
         aMap.addMarker(new MarkerOptions().position(new LatLng(34.81658554, 113.5357437)).title("信息工程学院"));
     }
 

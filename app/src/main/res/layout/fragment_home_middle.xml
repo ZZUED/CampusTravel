@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginStart="@dimen/middle_margin"
-        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:layout_marginBottom="@dimen/middle_margin"
         android:gravity="center_vertical"
         tools:ignore="UseCompoundDrawables">
         <ImageView
@@ -59,10 +60,15 @@
             android:textSize="@dimen/common_text_size_large"
             android:textColor="@android:color/white" />
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_home_mid_poi"
-        android:layout_marginTop="@dimen/middle_margin"
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srf_home_mid_poi"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/white"/>
+        android:layout_height="wrap_content">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_home_mid_poi"
+            android:layout_marginTop="@dimen/middle_margin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

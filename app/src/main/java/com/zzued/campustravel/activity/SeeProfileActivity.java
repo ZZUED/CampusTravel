@@ -60,12 +60,16 @@ public class SeeProfileActivity extends BaseActivity {
                                 see_sex.setText("女");
                             }
 
-                            if (head.equals("1")) {
-                                see_head.setImageResource(R.drawable.img_modify_profile_head_1);
-                            } else if (head.equals("2")) {
-                                see_head.setImageResource(R.drawable.img_modify_profile_head_2);
-                            } else {
-                                see_head.setImageResource(R.drawable.img_modify_profile_head_3);
+                            switch (head) {
+                                case "1":
+                                    see_head.setImageResource(R.drawable.img_modify_profile_head_1);
+                                    break;
+                                case "2":
+                                    see_head.setImageResource(R.drawable.img_modify_profile_head_2);
+                                    break;
+                                default:
+                                    see_head.setImageResource(R.drawable.img_modify_profile_head_3);
+                                    break;
                             }
                         }
                     }

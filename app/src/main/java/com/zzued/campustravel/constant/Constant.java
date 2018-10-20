@@ -40,6 +40,9 @@ public class Constant {
     public static String Url_ScenicSpotActivity = MengLei + "/map/requestScenicSpotIntroduceInfo?scenicSpotId=";
     //景点介绍
 
+    public static String Url_GetThermalMapData = MengLei + "/map/getHotMapPoints";
+    //热力图数据
+
     public static String Url_HomeMiddleFragment = MengLei + "/map/requestSearchScenicSpotRandom";
 
     public static String Url_CouponActivity = MengLei + "/findAllRecord";

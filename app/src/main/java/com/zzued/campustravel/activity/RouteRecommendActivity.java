@@ -54,6 +54,10 @@ public class RouteRecommendActivity extends BaseActivity {
     private void init() {
         routeShowHelper = new RouteShowHelper(this, mapView);
         Button btnRec = findViewById(R.id.btn_route_rec_start);
+        String pos = HomePageActivity.getSpotName_();
+        if (pos == null)
+            pos = "郑州大学核心教学区";
+        final String finalPos = pos;
         btnRec.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,7 +73,7 @@ public class RouteRecommendActivity extends BaseActivity {
                         "郑州大学杏坛广场",
                         "郑州大学厚山",
                         "郑州大学北门",
-                }, "郑州大学核心教学区");
+                }, finalPos);
             }
         });
     }
@@ -121,28 +125,28 @@ public class RouteRecommendActivity extends BaseActivity {
         }
         String[] spotTitles = new String[]{
                 "郑州大学南门",
-                "郑州大学五星广场",
-                "郑州大学樱花林",
-                "郑州大学眉湖",
-                "郑州大学本源体育场",
-                "郑州大学核心教学区",
-                "郑州大学钟楼",
-                "郑州大学图书馆",
-                "郑州大学杏坛广场",
-                "郑州大学厚山",
+                "行政楼",
+                "启明广场",
+                "体育馆",
+                "图书馆",
+                "五星广场",
+                "钟楼",
+                "博雅湖（眉湖）",
+                "厚山",
+                "樱花林",
                 "郑州大学北门",
         };
         final NaviLatLng[] spotLatlngs = new NaviLatLng[]{
                 new NaviLatLng(34.808438, 113.535633),
-                new NaviLatLng(34.810288, 113.535613),
-                new NaviLatLng(34.813847, 113.534651),
-                new NaviLatLng(34.816845, 113.534514),
-                new NaviLatLng(34.817211, 113.533605),
-                new NaviLatLng(34.817192, 113.536568),
-                new NaviLatLng(34.817113, 113.537345),
-                new NaviLatLng(34.817104, 113.538042),
-                new NaviLatLng(34.820634, 113.535076),
-                new NaviLatLng(34.822990, 113.536096),
+                new NaviLatLng(34.81114197, 113.5356674),
+                new NaviLatLng(34.81678009, 113.5406418),
+                new NaviLatLng(34.81741333, 113.5323486),
+                new NaviLatLng(34.81713486, 113.5387192),
+                new NaviLatLng(34.80902481, 113.5355911),
+                new NaviLatLng(34.81728363, 113.5372925),
+                new NaviLatLng(34.81735992, 113.5343552),
+                new NaviLatLng(34.82260132, 113.5360260),
+                new NaviLatLng(34.81338882, 113.5351868),
                 new NaviLatLng(34.826655, 113.536272),
         };
         View view = LayoutInflater.from(this).inflate(R.layout.grid_route_recommend_multi_pick, null);
@@ -173,13 +177,12 @@ public class RouteRecommendActivity extends BaseActivity {
                         dialog.dismiss();
 
                         ArrayList<NaviLatLng> latLngs = new ArrayList<>();
-                        for (int i = 0; i < gridLayout.getChildCount(); i++){
+                        for (int i = 0; i < gridLayout.getChildCount(); i++) {
                             CheckBox box = (CheckBox) gridLayout.getChildAt(i);
-                            if (box.isChecked()){
+                            if (box.isChecked()) {
                                 latLngs.add(spotLatlngs[i]);
                             }
                         }
-
                         routeShowHelper.draw(latLngs);
                     }
                 })

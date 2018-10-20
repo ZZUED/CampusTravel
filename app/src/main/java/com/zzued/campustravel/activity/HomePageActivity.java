@@ -74,11 +74,11 @@ public class HomePageActivity extends BaseActivity {
         }
     });
 
-    private String spotName = null;
-    private String spotIntroduce = null;
-    private String spotPictureUrl = null;
-    private double long_;
-    private double alti_;
+    private static String spotName = null;
+    private static String spotIntroduce = null;
+    private static String spotPictureUrl = null;
+    private static double long_;
+    private static double alti_;
 
     private Handler handlertwo = new Handler(new Handler.Callback() {
         @Override
@@ -137,8 +137,8 @@ public class HomePageActivity extends BaseActivity {
                     Toast.makeText(HomePageActivity.this, "请打开网络与定位开关", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
                 if (MyApplication.DEBUG) {
+                    Log.e(TAG, "onLocationChanged: 经纬度: " + amapLocation.getLatitude() + ", " + amapLocation.getLongitude());
                     Log.e(TAG, "onLocationChanged: debugging now, send no location info");
                     return;
                 }
@@ -300,28 +300,23 @@ public class HomePageActivity extends BaseActivity {
         }).start();
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-    }
-
-    public String getSpotName_() {
+    public static String getSpotName_() {
         return spotName;
     }
 
-    public String getSpotIntroduce_() {
+    public static String getSpotIntroduce_() {
         return spotIntroduce;
     }
 
-    public String getSpotPictureUrl_() {
+    public static String getSpotPictureUrl_() {
         return spotPictureUrl;
     }
 
-    public double getLong_() {
+    public static double getLong_() {
         return long_;
     }
 
-    public double getAlti_() {
+    public static double getAlti_() {
         return alti_;
     }
 }

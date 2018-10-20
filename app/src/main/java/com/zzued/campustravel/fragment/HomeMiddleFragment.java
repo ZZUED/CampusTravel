@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -41,6 +42,8 @@ public class HomeMiddleFragment extends Fragment {
     private HomeMidRcvAdapter adapter;
     private ArrayList<Spot> spots;
 
+    private SwipeRefreshLayout refreshLayout;
+
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -49,6 +52,8 @@ public class HomeMiddleFragment extends Fragment {
                     spots.clear();
                     spots.addAll((ArrayList<Spot>) msg.obj);
                     adapter.notifyDataSetChanged();
+                    if (refreshLayout.isRefreshing())
+                        refreshLayout.setRefreshing(false);
                     break;
             }
             return true;
@@ -65,13 +70,21 @@ public class HomeMiddleFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home_middle, container, false);
         TextView dateView = view.findViewById(R.id.tv_home_mid_date);
-        dateView.setText(String.format(Locale.CHINA, "%4d年%2d月%2d日", year, month, day));
+        dateView.setText(String.format(Locale.CHINA, "%4d年%02d月%02d日", year, month, day));
 
         spots = new ArrayList<>();
         adapter = new HomeMidRcvAdapter(getContext(), spots);
         RecyclerView poiRcv = view.findViewById(R.id.rcv_home_mid_poi);
         poiRcv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         poiRcv.setAdapter(adapter);
+
+        refreshLayout = view.findViewById(R.id.srf_home_mid_poi);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getDailyNews();
+            }
+        });
 
         TextView tvCurPos = view.findViewById(R.id.tv_home_mid_location);
         tvCurPos.setText("郑州大学");
@@ -81,6 +94,9 @@ public class HomeMiddleFragment extends Fragment {
         return view;
     }
 
+    /**
+     * 获取每日推荐
+     */
     private void getDailyNews() {
         new Thread(new Runnable() {
             @Override

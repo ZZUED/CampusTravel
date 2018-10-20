@@ -24,7 +24,7 @@ public class APPStart extends BaseActivity{
         SharedPreferences sharedPreferences = getSharedPreferences("FirstRun",0);
         Boolean first_run = sharedPreferences.getBoolean("First",true);
         if (first_run){
-            sharedPreferences.edit().putBoolean("First",false).commit();
+            sharedPreferences.edit().putBoolean("First",false).apply();
             Intent intent = new Intent(APPStart.this, APPGuide.class);
             startActivity(intent);
             this.finish();
