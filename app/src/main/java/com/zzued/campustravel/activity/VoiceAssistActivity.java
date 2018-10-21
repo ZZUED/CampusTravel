@@ -2,8 +2,11 @@ package com.zzued.campustravel.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -16,10 +19,17 @@ import android.widget.Toast;
 import com.alibaba.idst.nls.NlsListener;
 import com.alibaba.idst.nls.StageListener;
 import com.zzued.campustravel.R;
+import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.modelclass.Intro;
 import com.zzued.campustravel.util.AudioSoundRecognizer;
+import com.zzued.campustravel.util.TextToSpeech;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public class VoiceAssistActivity extends BaseActivity {
     private static final String TAG = "VoiceAssistActivity";
@@ -27,9 +37,25 @@ public class VoiceAssistActivity extends BaseActivity {
 
     private Button btnSpeak;
     private Drawable micDrawable;
+    private TextToSpeech a_paly;
 
     private boolean recording = false;
     private AudioSoundRecognizer recognizer;
+
+    private Handler handler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message msg) {
+            switch (msg.what) {
+                case 1:
+                    String str = (String)msg.obj;
+                    startPlay(str);
+                    break;
+                default:
+                    break;
+            }
+            return true;
+        }
+    });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +64,9 @@ public class VoiceAssistActivity extends BaseActivity {
         setStatusBarColor(getResources().getColor(R.color.colorAccent));
 
         micDrawable = ((ImageView) findViewById(R.id.iv_voice_assist_micro_phone)).getDrawable();
+
+        a_paly = new TextToSpeech(this, null);//实例化语音播放
+
         btnSpeak = findViewById(R.id.btn_voice_assist_speak);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +90,10 @@ public class VoiceAssistActivity extends BaseActivity {
                         if (i == 0)
                             try {
                                 JSONObject jsonObject = new JSONObject(recognizedResult.asr_out);
-                                Toast.makeText(VoiceAssistActivity.this,
-                                        jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(VoiceAssistActivity.this,
+//                                        jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
+                                sendRecorder(jsonObject.getString("result"));
+
                                 //jsonObject.getString是识别出来的文本
                                 //todo
                             } catch (JSONException e) {
@@ -78,6 +109,35 @@ public class VoiceAssistActivity extends BaseActivity {
                         micDrawable.setLevel(i * 50 + LEVEL_INIT);
                     }
                 });
+    }
+
+    //用于发送识别出来的文本
+    public void sendRecorder(String recorder){
+        final String recorder_now = recorder;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    OkHttpClient client = new OkHttpClient();
+                    Request request = new Request.Builder()
+                            .url(Constant.Url_VoiceAssistActivity + recorder_now)
+                            .build();
+                    Response response = client.newCall(request).execute();
+                    String result = response.body().string();
+                    Message msg = new Message();
+                    msg.obj = result;
+                    msg.what = 1;
+                    handler.sendMessage(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    //播放
+    private void startPlay(String text) {
+        a_paly.start(text);
     }
 
     @Override

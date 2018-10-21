@@ -34,6 +34,8 @@ public class Constant {
 
     public static String Url_VoiceIntroActivity = MengLei + "/voice/requestVoiceExplain?";
 
+    public static String Url_VoiceAssistActivity = MengLei + "/voice/requestIntroduceVoiceHelper?voiceHelper=";
+
     public static String Url_SearchActivity = MengLei + "/map/requestSearchScenicSpotByName?name=";
     //搜索
 
