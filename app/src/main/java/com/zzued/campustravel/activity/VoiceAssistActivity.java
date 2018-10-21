@@ -36,6 +36,7 @@ public class VoiceAssistActivity extends BaseActivity {
     private static final int LEVEL_INIT = 5000;
 
     private Button btnSpeak;
+    private Button btnStopPlay;
     private Drawable micDrawable;
     private TextToSpeech a_paly;
 
@@ -67,6 +68,14 @@ public class VoiceAssistActivity extends BaseActivity {
 
         a_paly = new TextToSpeech(this, null);//实例化语音播放
 
+        btnStopPlay = findViewById(R.id.btn_voice_assist_stop_play);
+        btnStopPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                stopPlay();
+            }
+        });
+
         btnSpeak = findViewById(R.id.btn_voice_assist_speak);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,9 +102,6 @@ public class VoiceAssistActivity extends BaseActivity {
 //                                Toast.makeText(VoiceAssistActivity.this,
 //                                        jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
                                 sendRecorder(jsonObject.getString("result"));
-
-                                //jsonObject.getString是识别出来的文本
-                                //todo
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -109,6 +115,8 @@ public class VoiceAssistActivity extends BaseActivity {
                         micDrawable.setLevel(i * 50 + LEVEL_INIT);
                     }
                 });
+
+
     }
 
     //用于发送识别出来的文本
@@ -138,6 +146,13 @@ public class VoiceAssistActivity extends BaseActivity {
     //播放
     private void startPlay(String text) {
         a_paly.start(text);
+        btnStopPlay.setVisibility(View.VISIBLE);
+    }
+
+    //停止介绍
+    private void stopPlay() {
+        a_paly.stop();
+        btnStopPlay.setVisibility(View.GONE);
     }
 
     @Override

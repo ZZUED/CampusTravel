@@ -28,6 +28,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 
 public class ThermalMapActivity extends BaseActivity {
+    private static final String TAG = "ThermalMapActivity";
+
     private MapView mapView;
     private AMap aMap;
 
@@ -112,83 +114,28 @@ public class ThermalMapActivity extends BaseActivity {
      * 生成热力图
      */
     private void generateThermalMap(List<ThermalData> data) {
-//        final int TIMES = 5;
-//        ArrayList<Pair<LatLng, Integer>> pairs = new ArrayList<>();
-//        // 厚山
-//        pairs.add(new Pair<>(new LatLng(34.822601, 113.536028), TIMES));
-//        // 河源
-//        pairs.add(new Pair<>(new LatLng(34.815086, 113.534720), TIMES));
-//        // 问鼎
-//        pairs.add(new Pair<>(new LatLng(34.815639, 113.534805), TIMES));
-//        // 博弈
-//        pairs.add(new Pair<>(new LatLng(34.816216, 113.534716), TIMES));
-//        // 禅趣
-//        pairs.add(new Pair<>(new LatLng(34.816396, 113.534653), TIMES));
-//        // 太和柱（和天烛）
-//        pairs.add(new Pair<>(new LatLng(34.817234, 113.534908), TIMES));
-//        // 观星测影
-//        pairs.add(new Pair<>(new LatLng(34.817787, 113.534657), TIMES));
-//        // 大道通渠
-//        pairs.add(new Pair<>(new LatLng(34.818450, 113.534923), TIMES));
-//        // 凤台荷香
-//        pairs.add(new Pair<>(new LatLng(34.819388, 113.534840), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.813387, 113.535184), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.814164, 113.534875), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.814238, 113.535077), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.814194, 113.535337), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.813850, 113.535744), TIMES));
-//        // 樱花林
-//        pairs.add(new Pair<>(new LatLng(34.814245, 113.534643), TIMES));
-//        // 丁老头
-//        pairs.add(new Pair<>(new LatLng(34.814919, 113.530445), TIMES));
-//        // 京东便利店
-//        pairs.add(new Pair<>(new LatLng(34.817320, 113.535807), TIMES));
-//        // 蜜雪冰城
-//        pairs.add(new Pair<>(new LatLng(34.813821, 113.533713), TIMES));
-//        // 沁春园超市
-//        pairs.add(new Pair<>(new LatLng(34.812823, 113.533937), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.816860, 113.534546), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.817066, 113.537370), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.817127, 113.538201), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.817018, 113.540264), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.814059, 113.530733), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.815098, 113.530762), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.819332, 113.532523), TIMES));
-//        pairs.add(new Pair<>(new LatLng(34.820759, 113.531608), TIMES));
-//
-//        ArrayList<LatLng> latLngs = new ArrayList<>();
-//
-//        for (Pair<LatLng, Integer> tmp: pairs){
-//            for (int i = 0; i < tmp.second; i++){
-//                double dif = 0.000005;
-//                if ((i & 1) == 1)
-//                    latLngs.add(new LatLng(tmp.first.latitude + dif, tmp.first.longitude - dif));
-//                else
-//                    latLngs.add(new LatLng(tmp.first.latitude - dif, tmp.first.longitude + dif));
-//            }
-//        }
-
         ArrayList<LatLng> latLngs = new ArrayList<>();
-        final double dif = 0.000005;
         for (ThermalData tmp : data) {
-            for (int i = 0; i < tmp.getViews(); i++) {
-                switch (i % 4) {
+            tmp.setViews(tmp.getViews() / 10);
+        }
+        final double dif = 0.00000001;
+        for (ThermalData tmp : data) {
+            int k = 0;
+            for (int i = 0; i < tmp.getViews(); i++, k++) {
+                double idif = i * dif;
+                if (k == 4) k = 0;
+                switch (k) {
                     case 0:
-                        latLngs.add(new LatLng(tmp.getLat() + dif, tmp.getLng()));
+                        latLngs.add(new LatLng(tmp.getLat() + idif, tmp.getLng()));
                         break;
                     case 1:
-                        latLngs.add(new LatLng(tmp.getLat(), tmp.getLng() + dif));
+                        latLngs.add(new LatLng(tmp.getLat(), tmp.getLng() + idif));
                         break;
                     case 2:
-                        latLngs.add(new LatLng(tmp.getLat() - dif, tmp.getLng()));
+                        latLngs.add(new LatLng(tmp.getLat() - idif, tmp.getLng()));
                         break;
                     case 3:
-                        latLngs.add(new LatLng(tmp.getLat(), tmp.getLng() - dif));
+                        latLngs.add(new LatLng(tmp.getLat(), tmp.getLng() - idif));
                         break;
                 }
             }
@@ -220,6 +167,7 @@ public class ThermalMapActivity extends BaseActivity {
                             .url(Constant.Url_GetThermalMapData)
                             .get()
                             .build()).execute().body().string();
+
                     ArrayList<ThermalData> data = new Gson().fromJson(res, new TypeToken<ArrayList<ThermalData>>() {
                     }.getType());
                     Message message = new Message();
