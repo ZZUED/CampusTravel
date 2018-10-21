@@ -36,12 +36,13 @@ public class VoiceAssistActivity extends BaseActivity {
     private static final int LEVEL_INIT = 5000;
 
     private Button btnSpeak;
-    private Button btnStopPlay;
     private Drawable micDrawable;
     private TextToSpeech a_paly;
 
     private boolean recording = false;
     private AudioSoundRecognizer recognizer;
+
+    private boolean playing = false;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -68,14 +69,6 @@ public class VoiceAssistActivity extends BaseActivity {
 
         a_paly = new TextToSpeech(this, null);//实例化语音播放
 
-        btnStopPlay = findViewById(R.id.btn_voice_assist_stop_play);
-        btnStopPlay.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                stopPlay();
-            }
-        });
-
         btnSpeak = findViewById(R.id.btn_voice_assist_speak);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,7 +77,9 @@ public class VoiceAssistActivity extends BaseActivity {
                     ActivityCompat.requestPermissions(VoiceAssistActivity.this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
                     return;
                 }
-                if (!recording)
+                if (playing)
+                    stopPlay();
+                else if (!recording)
                     startRecorder();
                 else
                     stopRecorder();
@@ -119,7 +114,11 @@ public class VoiceAssistActivity extends BaseActivity {
 
     }
 
-    //用于发送识别出来的文本
+    /**
+     * 用于发送识别出来的文本
+     *
+     * @param recorder 识别出来的文本
+     */
     public void sendRecorder(String recorder){
         final String recorder_now = recorder;
         new Thread(new Runnable() {
@@ -146,13 +145,15 @@ public class VoiceAssistActivity extends BaseActivity {
     //播放
     private void startPlay(String text) {
         a_paly.start(text);
-        btnStopPlay.setVisibility(View.VISIBLE);
+        playing = true;
+        btnSpeak.setText(R.string.stop_introducing);
     }
 
     //停止介绍
     private void stopPlay() {
         a_paly.stop();
-        btnStopPlay.setVisibility(View.GONE);
+        playing = false;
+        btnSpeak.setText(R.string.click_and_speak);
     }
 
     @Override
@@ -174,7 +175,6 @@ public class VoiceAssistActivity extends BaseActivity {
         btnSpeak.setText(getResources().getString(R.string.click_to_stop));
         recording = !recording;
         micDrawable.setLevel(LEVEL_INIT);
-
         recognizer.startRecognize();
     }
 
@@ -182,9 +182,22 @@ public class VoiceAssistActivity extends BaseActivity {
         btnSpeak.setText(getResources().getString(R.string.click_and_speak));
         recording = !recording;
         micDrawable.setLevel(0);
-
         recognizer.stopRecognize();
     }
 
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (playing)
+            stopPlay();
+        if (recording)
+            stopRecorder();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        a_paly.onDestroy();
+    }
 }

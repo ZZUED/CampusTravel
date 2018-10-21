@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.DatePicker;
@@ -31,27 +32,21 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ModifyProfileActivity extends BaseActivity {
-    private LinearLayout llHead;
-    private LinearLayout llName;
-    private LinearLayout llBirth;
-    private LinearLayout llPhone;
+    private static final String TAG = "ModifyProfileActivity";
 
     private ImageView ivHead;
 
     private TextView tvName;
-    private TextView tvPhone;
     private TextView tvBirth;
 
     private RadioGroup genderGroup;
 
-    private CustomTitleBar titleBar;
-
-    private String emailContent_midofy;
-    private String passwordContent_midofy;
-    private String headContent_midofy;
-    private String accountContent_midofy;
-    private String sexContent_midofy;
-    private String birthdayContent_midofy;
+    private String emailContent_modify;
+    private String passwordContent_modify;
+    private String headContent_modify;
+    private String accountContent_modify;
+    private String sexContent_modify;
+    private String birthdayContent_modify;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,10 +54,10 @@ public class ModifyProfileActivity extends BaseActivity {
         setContentView(R.layout.activity_modify_profile);
         setStatusBarColor(getResources().getColor(R.color.colorAccent));
 
-        titleBar = findViewById(R.id.title_modify_profile);
-        llHead = findViewById(R.id.ll_modify_profile_head);
-        llName = findViewById(R.id.ll_modify_profile_user_name);
-        llBirth = findViewById(R.id.ll_modify_profile_birthday);
+        CustomTitleBar titleBar = findViewById(R.id.title_modify_profile);
+        LinearLayout llHead = findViewById(R.id.ll_modify_profile_head);
+        LinearLayout llName = findViewById(R.id.ll_modify_profile_user_name);
+        LinearLayout llBirth = findViewById(R.id.ll_modify_profile_birthday);
         ivHead = findViewById(R.id.iv_modify_profile_head);
         tvName = findViewById(R.id.tv_modify_profile_name);
         tvBirth = findViewById(R.id.tv_modify_profile_birthday);
@@ -70,27 +65,29 @@ public class ModifyProfileActivity extends BaseActivity {
         titleBar.setRightTextListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                accountContent_midofy = tvName.getText().toString();
-                birthdayContent_midofy = tvBirth.getText().toString().replace("/", "-");
+                selectatRadio();
+                accountContent_modify = tvName.getText().toString();
+                Log.e(TAG, "onClick: name " + accountContent_modify);
+                birthdayContent_modify = tvBirth.getText().toString().replace("/", "-");
                 SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
-                emailContent_midofy = fromLogin.getString("emailAddress", "null");
-                passwordContent_midofy = fromLogin.getString("password", "null");
-                if (accountContent_midofy != null &&
-                        birthdayContent_midofy != null &&
-                        sexContent_midofy != null &&
-                        headContent_midofy != null) {
+                emailContent_modify = fromLogin.getString("emailAddress", "null");
+                passwordContent_modify = fromLogin.getString("password", "null");
+                if (accountContent_modify != null &&
+                        birthdayContent_modify != null &&
+                        sexContent_modify != null &&
+                        headContent_modify != null) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {
                             try {
                                 OkHttpClient client = new OkHttpClient();
                                 RequestBody requestBody = new FormBody.Builder()
-                                        .add("emailAddress", emailContent_midofy)
-                                        .add("password", passwordContent_midofy)
-                                        .add("headUrl", headContent_midofy)
-                                        .add("userName", accountContent_midofy)
-                                        .add("sex", sexContent_midofy)
-                                        .add("birthday", birthdayContent_midofy)
+                                        .add("emailAddress", emailContent_modify)
+                                        .add("password", passwordContent_modify)
+                                        .add("headUrl", headContent_modify)
+                                        .add("userName", accountContent_modify)
+                                        .add("sex", sexContent_modify)
+                                        .add("birthday", birthdayContent_modify)
                                         .build();
                                 Request request = new Request.Builder()
                                         .url(Constant.Url_ModifyProfileActivity)
@@ -194,7 +191,7 @@ public class ModifyProfileActivity extends BaseActivity {
     //获取RadioButton的内容
     private void selectatRadio() {
         int id = genderGroup.getCheckedRadioButtonId();
-        sexContent_midofy = String.valueOf(id == R.id.rdgrp_modify_profile_gender ? 1 : 0);
+        sexContent_modify = String.valueOf(id == R.id.rdgrp_modify_profile_gender ? 1 : 0);
     }
 
     public void setIvHead() {
@@ -212,7 +209,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_1);
-                headContent_midofy = "1";
+                headContent_modify = "1";
                 dialog.dismiss();
             }
         });
@@ -222,7 +219,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_2);
-                headContent_midofy = "2";
+                headContent_modify = "2";
                 dialog.dismiss();
             }
         });
@@ -232,7 +229,7 @@ public class ModifyProfileActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 ivHead.setImageResource(R.drawable.img_modify_profile_head_3);
-                headContent_midofy = "3";
+                headContent_modify = "3";
                 dialog.dismiss();
             }
         });

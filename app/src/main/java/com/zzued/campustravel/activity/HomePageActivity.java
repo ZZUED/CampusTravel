@@ -78,7 +78,7 @@ public class HomePageActivity extends BaseActivity {
     private static String spotIntroduce = null;
     private static String spotPictureUrl = null;
     private static double long_;
-    private static double alti_;
+    private static double lat;
 
     private Handler handlertwo = new Handler(new Handler.Callback() {
         @Override
@@ -274,7 +274,7 @@ public class HomePageActivity extends BaseActivity {
             }
         }).start();
         long_ = getMyLocation().getLongitude();
-        alti_ = getMyLocation().getLatitude();
+        lat = getMyLocation().getLatitude();
     }
 
     public void getAreaData() {
@@ -316,7 +316,7 @@ public class HomePageActivity extends BaseActivity {
         return long_;
     }
 
-    public static double getAlti_() {
-        return alti_;
+    public static double getLat() {
+        return lat;
     }
 }

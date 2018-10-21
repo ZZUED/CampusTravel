@@ -4,6 +4,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,21 +18,20 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class SeeProfileActivity extends BaseActivity {
-
-    private ImageView see_head;
-    private TextView see_name;
-    private TextView see_data;
-    private TextView see_email;
-    private TextView see_sex;
-
+    private static final String TAG = "SeeProfileActivity";
     public String head;
     public String name;
     public String data;
     public String email;
     public String sex;
-
+    private ImageView see_head;
+    private TextView see_name;
+    private TextView see_data;
+    private TextView see_email;
+    private TextView see_sex;
     private String getEmail;
     private String getPassword;
 
@@ -52,14 +52,10 @@ public class SeeProfileActivity extends BaseActivity {
                             see_name.setText(name);
                             see_data.setText(data);
                             see_email.setText(email);
-
-
-                            if (sex.equals("0")) {
+                            if (sex.equals("0"))
                                 see_sex.setText("男");
-                            } else {
+                            else
                                 see_sex.setText("女");
-                            }
-
                             switch (head) {
                                 case "1":
                                     see_head.setImageResource(R.drawable.img_modify_profile_head_1);
@@ -113,8 +109,11 @@ public class SeeProfileActivity extends BaseActivity {
                             .post(requestBody)
                             .build();
                     Response response = client.newCall(request).execute();
-                    String data = response.body().string();
-                    if (data != null) {
+                    ResponseBody body = response.body();
+                    String data = null;
+                    if (body != null)
+                        data = body.string();
+                    if (data != null && data.length() > 0) {
                         Message message = new Message();
                         message.obj = data;
                         message.what = 1;

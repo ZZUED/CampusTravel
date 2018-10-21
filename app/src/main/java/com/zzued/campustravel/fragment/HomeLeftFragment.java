@@ -5,12 +5,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -131,8 +129,8 @@ public class HomeLeftFragment extends Fragment {
                                     HomePageActivity homePageActivity = (HomePageActivity ) getActivity();
                                     homePageActivity.getAreaData();
                                     Intent intent = new Intent(getActivity().getApplicationContext(), VoiceIntroActivity.class);
-                                    intent.putExtra("long", homePageActivity.getLong_());
-                                    intent.putExtra("alti", homePageActivity.getAlti_());
+                                    intent.putExtra("long", HomePageActivity.getLong_());
+                                    intent.putExtra("alti", HomePageActivity.getLat());
                                     startActivity(intent);
                                 } else {
                                     startActivity(new Intent(getContext(), VoiceAssistActivity.class));
@@ -151,10 +149,10 @@ public class HomeLeftFragment extends Fragment {
                 homePageActivity.getAreaData();
                 Intent intent = new Intent(getActivity().getApplicationContext(), ScenicAreaIntroActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putString("AreaName", homePageActivity.getSpotName_());
-                bundle.putString("AreaIntroduce", homePageActivity.getSpotIntroduce_());
-                bundle.putString("AreaPicture",homePageActivity.getSpotPictureUrl_());
-                if (!TextUtils.isEmpty(homePageActivity.getSpotIntroduce_()) && !TextUtils.isEmpty(homePageActivity.getSpotName_())){
+                bundle.putString("AreaName", HomePageActivity.getSpotName_());
+                bundle.putString("AreaIntroduce", HomePageActivity.getSpotIntroduce_());
+                bundle.putString("AreaPicture", HomePageActivity.getSpotPictureUrl_());
+                if (!TextUtils.isEmpty(HomePageActivity.getSpotIntroduce_()) && !TextUtils.isEmpty(HomePageActivity.getSpotName_())){
                     intent.putExtras(bundle);
                     getActivity().startActivity(intent);
                 } else {

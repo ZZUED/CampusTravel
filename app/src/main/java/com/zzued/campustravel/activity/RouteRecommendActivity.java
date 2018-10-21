@@ -174,16 +174,16 @@ public class RouteRecommendActivity extends BaseActivity {
                 .setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-
                         ArrayList<NaviLatLng> latLngs = new ArrayList<>();
                         for (int i = 0; i < gridLayout.getChildCount(); i++) {
                             CheckBox box = (CheckBox) gridLayout.getChildAt(i);
-                            if (box.isChecked()) {
+                            if (box.isChecked())
                                 latLngs.add(spotLatlngs[i]);
-                            }
                         }
-                        routeShowHelper.draw(latLngs);
+                        if (latLngs.size() > 1)
+                            routeShowHelper.draw(latLngs);
+                        else
+                            Toast.makeText(RouteRecommendActivity.this, "请点击两个以上地点", Toast.LENGTH_SHORT).show();
                     }
                 })
                 .show();

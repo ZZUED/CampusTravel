@@ -5,7 +5,6 @@ import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -34,8 +33,7 @@ public class VoiceIntroActivity extends BaseActivity {
 
     private String text;
 
-    private Handler handlerfour = new Handler(new Handler.Callback() {
-
+    private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
@@ -103,17 +101,18 @@ public class VoiceIntroActivity extends BaseActivity {
 
     private void stopPlay() {
         tts.stop();
+        isPlaying = false;
         ((AnimationDrawable) ivSpeaker.getDrawable()).stop();
         ivSpeaker.setImageResource(R.drawable.ic_voice_inter_speaker_gray);
         btnStopVoice.setText(getResources().getString(R.string.start_introducing));
         tvTitle.setText(R.string.voice_introducing_paused);
-        isPlaying = false;
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        tts.onDestroy();
+        if (isPlaying)
+            stopPlay();
     }
 
     @Override
@@ -145,7 +144,7 @@ public class VoiceIntroActivity extends BaseActivity {
                         Message message = new Message();
                         message.obj = gson.fromJson(spotDate, Intro.class);
                         message.what = 1;
-                        handlerfour.sendMessage(message);
+                        handler.sendMessage(message);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

@@ -31,7 +31,7 @@ public class TextToSpeech {
 
     private Context context;
 
-    private NlsListener nlsListener;
+    private NlsListener mNlsListener;
     private NlsClient mNlsClient;
     private NlsRequest mNlsRequest;
     private static int iMinBufSize = AudioTrack.getMinBufferSize(
@@ -74,9 +74,9 @@ public class TextToSpeech {
         NlsClient.openLog(true);
         NlsClient.configure(context.getApplicationContext()); //全局配置
         if (listener != null)
-            this.nlsListener = listener;
+            this.mNlsListener = listener;
         else
-            this.nlsListener = new NlsListener() {
+            this.mNlsListener = new NlsListener() {
                 @Override
                 public void onTtsResult(int status, byte[] ttsResult) {
                     switch (status) {
@@ -114,7 +114,7 @@ public class TextToSpeech {
             Log.e(TAG, "start: audio is running, not able to start client again");
             return;
         }
-        mNlsClient = NlsClient.newInstance(context, nlsListener, null, mNlsRequest);
+        mNlsClient = NlsClient.newInstance(context, mNlsListener, null, mNlsRequest);
 
         mNlsRequest.authorize(id, secret);      //请替换为用户申请到的数加认证key和密钥
         mNlsRequest.setTtsEncodeType("pcm");    //返回语音数据格式，支持pcm,wav.alaw
@@ -131,16 +131,19 @@ public class TextToSpeech {
      * 执行此操作之后再向播放器写入数据将不会有任何效果
      */
     public void stop() {
-        stopAudioTrack(false);
+        stopAudioTrack();
+        isPlaying = false;
         mNlsClient.cancel();
         mNlsClient.stop();
-        isPlaying = false;
+        Log.e(TAG, "stop: nls client stop here.");
     }
 
     /**
      * 释放 audioTrack
      */
     public void onDestroy() {
+        if (isPlaying)
+            stop();
         audioTrack.release();
     }
 
@@ -149,7 +152,7 @@ public class TextToSpeech {
      * 此方法数据流开始以及数据传输时调用，用以
      */
     private void startAudioTrack() {
-        if (isPlaying)
+        if (isPlaying || audioTrack.getState() != AudioTrack.STATE_INITIALIZED)
             return;
         audioTrack.play();
         isPlaying = true;
@@ -186,17 +189,12 @@ public class TextToSpeech {
 
     /**
      * 停止播放器
-     *
-     * @param isPause 是否为暂停
-     *                true：下次可以继续播放未播放的内容
-     *                false：再次启动无法播放未播放内容
      */
-    private void stopAudioTrack(boolean isPause) {
+    private void stopAudioTrack() {
         if (isPlaying) {
             isPlaying = false;
             audioTrack.pause();
-            if (!isPause)
-                audioTrack.flush();
+            audioTrack.flush();
             synchronized (data) {
                 data.clear();
             }
