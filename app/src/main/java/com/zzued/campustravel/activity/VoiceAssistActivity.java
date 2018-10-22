@@ -2,7 +2,6 @@ package com.zzued.campustravel.activity;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.AnimationDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -14,13 +13,13 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.idst.nls.NlsListener;
 import com.alibaba.idst.nls.StageListener;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.constant.Constant;
-import com.zzued.campustravel.modelclass.Intro;
 import com.zzued.campustravel.util.AudioSoundRecognizer;
 import com.zzued.campustravel.util.TextToSpeech;
 
@@ -37,7 +36,8 @@ public class VoiceAssistActivity extends BaseActivity {
 
     private Button btnSpeak;
     private Drawable micDrawable;
-    private TextToSpeech a_paly;
+    private TextToSpeech a_play;
+    private TextView tvIntroContent;
 
     private boolean recording = false;
     private AudioSoundRecognizer recognizer;
@@ -66,8 +66,9 @@ public class VoiceAssistActivity extends BaseActivity {
         setStatusBarColor(getResources().getColor(R.color.colorAccent));
 
         micDrawable = ((ImageView) findViewById(R.id.iv_voice_assist_micro_phone)).getDrawable();
+        tvIntroContent = findViewById(R.id.tv_voice_assist_content);
 
-        a_paly = new TextToSpeech(this, null);//实例化语音播放
+        a_play = new TextToSpeech(this, null);//实例化语音播放
 
         btnSpeak = findViewById(R.id.btn_voice_assist_speak);
         btnSpeak.setOnClickListener(new View.OnClickListener() {
@@ -144,14 +145,17 @@ public class VoiceAssistActivity extends BaseActivity {
 
     //播放
     private void startPlay(String text) {
-        a_paly.start(text);
+        a_play.start(text);
         playing = true;
         btnSpeak.setText(R.string.stop_introducing);
+        if (tvIntroContent.getVisibility() != View.VISIBLE)
+            tvIntroContent.setVisibility(View.VISIBLE);
+        tvIntroContent.setText(text);
     }
 
     //停止介绍
     private void stopPlay() {
-        a_paly.stop();
+        a_play.stop();
         playing = false;
         btnSpeak.setText(R.string.click_and_speak);
     }
@@ -198,6 +202,6 @@ public class VoiceAssistActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        a_paly.onDestroy();
+        a_play.onDestroy();
     }
 }

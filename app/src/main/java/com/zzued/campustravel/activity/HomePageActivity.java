@@ -246,6 +246,12 @@ public class HomePageActivity extends BaseActivity {
             startLocate();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mLocationClient.onDestroy();
+    }
+
     public void sendMyLocation() {
         new Thread(new Runnable() {
             @Override
@@ -275,6 +281,11 @@ public class HomePageActivity extends BaseActivity {
         }).start();
         long_ = getMyLocation().getLongitude();
         lat = getMyLocation().getLatitude();
+    }
+
+    @Override
+    public void onBackPressed() {
+        finish();
     }
 
     public void getAreaData() {
