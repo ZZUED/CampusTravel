@@ -17,28 +17,27 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/home_page_title_size_large"
-        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginTop="@dimen/middle_margin"
         android:singleLine="true"
         android:ellipsize="end"
         android:textColor="@android:color/black"
         android:text="@string/voice_assist_hint"/>
     <TextView
+        android:id="@+id/tv_voice_assist_recognized_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginEnd="@dimen/large_margin"
         android:layout_marginTop="@dimen/small_margin"
-        android:visibility="gone"
         android:gravity="center"
-        android:textSize="@dimen/common_text_size_middle"
-        android:text="@string/voice_assist_hint"/>
+        android:textSize="@dimen/common_text_size_middle"/>
     <LinearLayout
         android:animateLayoutChanges="true"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:gravity="center"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/large_margin"
+        android:layout_marginTop="@dimen/middle_margin"
         android:layout_marginStart="@dimen/large_margin"
         android:layout_marginEnd="@dimen/large_margin"
         android:layout_height="0dp">

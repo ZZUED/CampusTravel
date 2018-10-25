@@ -74,6 +74,7 @@ public class HomePageActivity extends BaseActivity {
         }
     });
 
+    private static boolean posSent = false;
     private static String spotName = null;
     private static String spotIntroduce = null;
     private static String spotPictureUrl = null;
@@ -143,7 +144,10 @@ public class HomePageActivity extends BaseActivity {
                     return;
                 }
                 setMyLocation(amapLocation);
+                if (posSent)
+                    return;
                 sendMyLocation();
+                posSent = true;
             }
         };
         //设置定位回调监听

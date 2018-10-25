@@ -32,12 +32,13 @@ import okhttp3.Response;
 
 public class VoiceAssistActivity extends BaseActivity {
     private static final String TAG = "VoiceAssistActivity";
-    private static final int LEVEL_INIT = 5000;
+    private static final int LEVEL_INIT = 4000;
 
     private Button btnSpeak;
     private Drawable micDrawable;
     private TextToSpeech a_play;
     private TextView tvIntroContent;
+    private TextView recognizedText;
 
     private boolean recording = false;
     private AudioSoundRecognizer recognizer;
@@ -67,6 +68,7 @@ public class VoiceAssistActivity extends BaseActivity {
 
         micDrawable = ((ImageView) findViewById(R.id.iv_voice_assist_micro_phone)).getDrawable();
         tvIntroContent = findViewById(R.id.tv_voice_assist_content);
+        recognizedText = findViewById(R.id.tv_voice_assist_recognized_text);
 
         a_play = new TextToSpeech(this, null);//实例化语音播放
 
@@ -95,20 +97,22 @@ public class VoiceAssistActivity extends BaseActivity {
                         if (i == 0)
                             try {
                                 JSONObject jsonObject = new JSONObject(recognizedResult.asr_out);
-//                                Toast.makeText(VoiceAssistActivity.this,
-//                                        jsonObject.getString("result"), Toast.LENGTH_SHORT).show();
-                                sendRecorder(jsonObject.getString("result"));
+                                String tmp = jsonObject.getString("result");
+                                recognizedText.setText(tmp);
+                                sendRecorder(tmp);
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-                        else
+                        else{
                             Log.e(TAG, "onRecognizingResult: error: " + i);
+                            recognizedText.setText("识别出错");
+                        }
                     }
                 },
                 new StageListener() {
                     @Override
                     public void onVoiceVolume(int i) {
-                        micDrawable.setLevel(i * 50 + LEVEL_INIT);
+                        micDrawable.setLevel(i * (100 - LEVEL_INIT / 100) + LEVEL_INIT);
                     }
                 });
 
