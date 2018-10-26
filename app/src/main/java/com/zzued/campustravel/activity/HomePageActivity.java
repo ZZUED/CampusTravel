@@ -78,7 +78,7 @@ public class HomePageActivity extends BaseActivity {
         }
     });
 
-    private static boolean posSent = false;
+    private static boolean posSent;
     private static String spotName = null;
     private static String spotIntroduce = null;
     private static String spotPictureUrl = null;
@@ -122,6 +122,8 @@ public class HomePageActivity extends BaseActivity {
         permissionStorage = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_STORAGE);
         if (!permissionStorage)
             return;
+
+        posSent = false;
 
         WeatherHelper helper = new WeatherHelper();
         helper.sendWeatherNotify(this, new WeatherHelper.OnWeatherGotListener() {
@@ -308,7 +310,14 @@ public class HomePageActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
-        finish();
+        posSent = false;
+        super.onBackPressed();
+    }
+
+    @Override
+    protected void onStop() {
+        posSent = false;
+        super.onStop();
     }
 
     public void getAreaData() {

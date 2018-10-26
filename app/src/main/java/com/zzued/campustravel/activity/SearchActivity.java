@@ -36,6 +36,8 @@ public class SearchActivity extends BaseActivity {
     private HomeMidRcvAdapter adapter;
     private ArrayList<Spot> spots;
 
+    private TextView tvNoData;
+
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -45,7 +47,9 @@ public class SearchActivity extends BaseActivity {
                     spots.addAll((ArrayList<Spot>) msg.obj);
                     adapter.notifyDataSetChanged();
                     if (spots.size() <= 0)
-                        Toast.makeText(SearchActivity.this, "未找到数据", Toast.LENGTH_SHORT).show();
+                        tvNoData.setVisibility(View.VISIBLE);
+                    else
+                        tvNoData.setVisibility(View.GONE);
                     break;
                 default:
                     break;
@@ -69,6 +73,7 @@ public class SearchActivity extends BaseActivity {
         });
 
         etSearch = findViewById(R.id.et_search_search);
+        tvNoData = findViewById(R.id.tv_search_no_data);
 
         RecyclerView rcv = findViewById(R.id.rcv_search_result);
         rcv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
