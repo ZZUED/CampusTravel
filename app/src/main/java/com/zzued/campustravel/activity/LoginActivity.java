@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.util.MyApplication;
 

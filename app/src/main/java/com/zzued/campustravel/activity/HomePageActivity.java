@@ -1,5 +1,8 @@
 package com.zzued.campustravel.activity;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,11 +20,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.HomePagerAdapter;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.modelclass.Area;
 import com.zzued.campustravel.modelclass.Spot;
 import com.zzued.campustravel.util.MyApplication;
 import com.zzued.campustravel.util.PermissionHelper;
+import com.zzued.campustravel.util.WeatherHelper;
 import com.zzued.campustravel.view.CustomHomeBtmNavi;
 
 import java.util.ArrayList;
@@ -118,6 +122,21 @@ public class HomePageActivity extends BaseActivity {
         permissionStorage = PermissionHelper.requestPermission(this, PermissionHelper.REQUEST_CODE_STORAGE);
         if (!permissionStorage)
             return;
+
+        WeatherHelper helper = new WeatherHelper();
+        helper.sendWeatherNotify(this, new WeatherHelper.OnWeatherGotListener() {
+            @Override
+            public void onWeatherGot(String weatherDesc, String voiceDesc) {
+                NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+                Notification notification = new Notification.Builder(HomePageActivity.this)
+                        .setContentTitle("今日天气")
+                        .setContentText(weatherDesc)
+                        .setWhen(System.currentTimeMillis())
+                        .setSmallIcon(R.drawable.icon_home_mid_weather)
+                        .build();
+                Objects.requireNonNull(manager).notify(1, notification);
+            }
+        });
 
         startLocate();
     }

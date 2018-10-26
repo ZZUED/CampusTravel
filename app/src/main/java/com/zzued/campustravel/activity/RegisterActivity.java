@@ -2,7 +2,6 @@ package com.zzued.campustravel.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,15 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.util.ActivityCollector;
 import com.zzued.campustravel.util.MyApplication;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
-import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

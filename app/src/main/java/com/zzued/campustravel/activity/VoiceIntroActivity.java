@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.modelclass.Intro;
 import com.zzued.campustravel.util.TextToSpeech;
 

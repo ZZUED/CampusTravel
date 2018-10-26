@@ -49,7 +49,7 @@
     <string name="voice_assistance">语音助手</string>
 
     <!--second home page-->
-    <string name="daily_poi_recommend">每日兴趣点推荐</string>
+    <string name="daily_poi_recommend">每日推送</string>
     <string name="today_is">今天是： </string>
     <string name="your_current_pos">您目前所处的位置为：</string>
     <string name="open_time_table">开放时间 </string>

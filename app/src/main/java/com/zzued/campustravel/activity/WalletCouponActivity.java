@@ -10,7 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.WalletCouponAdapter;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.modelclass.Coupon;
 
 import java.io.IOException;

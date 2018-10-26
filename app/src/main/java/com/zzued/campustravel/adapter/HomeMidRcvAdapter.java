@@ -12,7 +12,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.activity.ScenicSpotIntroActivity;
-import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.Spot;
 
 import java.util.ArrayList;

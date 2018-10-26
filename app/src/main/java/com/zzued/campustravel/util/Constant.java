@@ -1,4 +1,4 @@
-package com.zzued.campustravel.constant;
+package com.zzued.campustravel.util;
 
 
 public class Constant {
@@ -46,6 +46,8 @@ public class Constant {
     //热力图数据
 
     public static String Url_HomeMiddleFragment = MengLei + "/map/requestSearchScenicSpotRandom";
+    //每日推荐
 
     public static String Url_CouponActivity = MengLei + "/findAllRecord";
+    //优惠券
 }

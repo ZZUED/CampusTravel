@@ -8,20 +8,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
-import com.zzued.campustravel.activity.HomePageActivity;
 import com.zzued.campustravel.adapter.HomeMidRcvAdapter;
-import com.zzued.campustravel.constant.Constant;
+import com.zzued.campustravel.util.Constant;
 import com.zzued.campustravel.modelclass.Spot;
+import com.zzued.campustravel.util.WeatherHelper;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -43,6 +41,8 @@ public class HomeMiddleFragment extends Fragment {
     private ArrayList<Spot> spots;
 
     private SwipeRefreshLayout refreshLayout;
+
+    private TextView tvWeather;
 
     private Handler handler = new Handler(new Handler.Callback() {
         @Override
@@ -70,7 +70,9 @@ public class HomeMiddleFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home_middle, container, false);
         TextView dateView = view.findViewById(R.id.tv_home_mid_date);
-        dateView.setText(String.format(Locale.CHINA, "%4d年%02d月%02d日", year, month, day));
+        dateView.setText(String.format(Locale.CHINA, "%4d/%02d/%02d", year, month, day));
+
+        tvWeather = view.findViewById(R.id.tv_home_mid_weather);
 
         spots = new ArrayList<>();
         adapter = new HomeMidRcvAdapter(getContext(), spots);
@@ -88,6 +90,13 @@ public class HomeMiddleFragment extends Fragment {
 
         TextView tvCurPos = view.findViewById(R.id.tv_home_mid_location);
         tvCurPos.setText("郑州大学");
+
+        new WeatherHelper().getWeatherDesc(new WeatherHelper.OnWeatherGotListener(){
+            @Override
+            public void onWeatherGot(String weatherDesc, String voiceDesc) {
+                tvWeather.setText(weatherDesc);
+            }
+        });
 
         getDailyNews();
 

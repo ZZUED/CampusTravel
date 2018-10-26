@@ -28,10 +28,20 @@
             android:layout_marginStart="@dimen/small_margin"
             android:gravity="center_vertical"
             android:drawableStart="@drawable/ic_home_mid_calendar_small"
-            android:text="2018/05/25"
             android:textSize="@dimen/common_text_size_small"
             android:textColor="@android:color/white"/>
     </LinearLayout>
+    <TextView
+        android:id="@+id/tv_home_mid_weather"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/middle_margin"
+        android:layout_marginTop="@dimen/middle_margin"
+        android:layout_marginBottom="@dimen/middle_margin"
+        android:drawableStart="@drawable/icon_home_mid_weather_white"
+        android:drawablePadding="@dimen/small_margin"
+        android:textSize="@dimen/common_text_size_large"
+        android:textColor="@android:color/white"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,6 +50,7 @@
         android:layout_marginTop="@dimen/middle_margin"
         android:layout_marginBottom="@dimen/middle_margin"
         android:gravity="center_vertical"
+        android:visibility="gone"
         tools:ignore="UseCompoundDrawables">
         <ImageView
             android:contentDescription="@string/app_name"

@@ -1,14 +1,11 @@
 package com.zzued.campustravel.activity;
 
-import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,9 +15,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zzued.campustravel.R;
 import com.zzued.campustravel.adapter.SpotListAdapter;
-import com.zzued.campustravel.constant.Constant;
 import com.zzued.campustravel.modelclass.Spot;
-import com.zzued.campustravel.modelclass.SpotForIntroduce;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +24,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.zzued.campustravel.constant.Constant.Url_ScenicAreaIntroduceActivity;
+import static com.zzued.campustravel.util.Constant.Url_ScenicAreaIntroduceActivity;
 import static com.zzued.campustravel.util.MyApplication.getContext;
 
 public class ScenicAreaIntroActivity extends BaseActivity {
