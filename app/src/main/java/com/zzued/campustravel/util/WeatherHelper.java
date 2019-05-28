@@ -25,7 +25,7 @@ import okhttp3.ResponseBody;
 
 public class WeatherHelper {
     //天气URL
-    private static final String WEATHER_URL = "http://t.weather.sojson.com/api/weather/city/101180101";
+    private static final String WEATHER_URL = "http://t.weather.itboy.net/api/weather/city/101180101";
 
     private static final String SP_NAME = "day_weather_notify";
     private static final String SP_KEY_DAY = "day";

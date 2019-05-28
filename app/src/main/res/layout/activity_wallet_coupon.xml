@@ -44,8 +44,18 @@
             android:textColor="@drawable/selector_wallet_coupon_black_white"
             android:text="@string/search"/>
     </LinearLayout>
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rcv_wallet_coupon_items"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/middle_margin"
+            android:textAlignment="center"
+            android:text="暂无优惠券"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rcv_wallet_coupon_items"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </FrameLayout>
 </LinearLayout>

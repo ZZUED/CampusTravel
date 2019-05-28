@@ -3,7 +3,7 @@ package com.zzued.campustravel.util;
 
 public class Constant {
     //    private static String MengLei = "http://maxerwinsmith.qicp.io:49291";
-    private static String MengLei = "http://120.78.213.131:8080/guide_war";
+    private static String MengLei = "http://119.23.224.182:11291/guide";
 
     public static String Url_HomePageActivity = MengLei + "/map/requestMainInterfaceScenicSpotInfos?";
     //发送经纬度，获取homepage下面recycleview的内容

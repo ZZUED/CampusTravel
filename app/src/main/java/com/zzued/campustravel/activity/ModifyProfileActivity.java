@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -67,15 +68,20 @@ public class ModifyProfileActivity extends BaseActivity {
             public void onClick(View v) {
                 selectatRadio();
                 accountContent_modify = tvName.getText().toString();
-                Log.e(TAG, "onClick: name " + accountContent_modify);
-                birthdayContent_modify = tvBirth.getText().toString().replace("/", "-");
+                birthdayContent_modify = tvBirth.getText().toString();
+                if (!TextUtils.equals(birthdayContent_modify, "点击修改"))
+                    birthdayContent_modify = birthdayContent_modify.replace("/", "-");
+                else birthdayContent_modify = null;
                 SharedPreferences fromLogin = getSharedPreferences("AccountAndPassWord", MODE_PRIVATE);
-                emailContent_modify = fromLogin.getString("emailAddress", "null");
-                passwordContent_modify = fromLogin.getString("password", "null");
-                if (accountContent_modify != null &&
-                        birthdayContent_modify != null &&
-                        sexContent_modify != null &&
-                        headContent_modify != null) {
+                emailContent_modify = fromLogin.getString("emailAddress", null);
+                passwordContent_modify = fromLogin.getString("password", null);
+                if (!TextUtils.isEmpty(accountContent_modify) &&
+                        !TextUtils.isEmpty(emailContent_modify) &&
+                        !TextUtils.isEmpty(passwordContent_modify) &&
+                        !TextUtils.isEmpty(headContent_modify) &&
+                        !TextUtils.isEmpty(accountContent_modify) &&
+                        !TextUtils.isEmpty(sexContent_modify) &&
+                        !TextUtils.isEmpty(birthdayContent_modify)) {
                     new Thread(new Runnable() {
                         @Override
                         public void run() {

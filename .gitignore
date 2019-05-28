@@ -9,3 +9,6 @@
 /captures
 .externalNativeBuild
 *.apk
+build/
+./.idea/
+app/
